@@ -493,6 +493,15 @@
 
       .agent-pick.selected { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold) inset; }
       .invite-status { font-weight: 700; }
+
+      /* Real duels: duel codes and result codes */
+      .duel-code-big { font-family: "Marcellus", Georgia, serif; font-size: clamp(1.9rem, 9vw, 2.6rem); letter-spacing: 0.18em; text-align: center; margin: 12px 0 6px; overflow-wrap: anywhere; }
+      .result-code-card { display: none; margin-top: 16px; background: radial-gradient(120% 160% at 50% 0%, var(--stage2) 0%, var(--stage) 62%); color: var(--stage-ink); border: 2px solid var(--gold); border-radius: 18px; padding: 22px 18px; text-align: center; }
+      .result-code-card.active { display: block; }
+      .result-code-card .sc-game { font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-soft); font-size: 0.85rem; margin: 0; }
+      .result-code-card .duel-code-big { color: var(--gold); }
+      .result-code-card .sc-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+      @media (max-width: 380px) { .result-code-card .sc-actions { grid-template-columns: 1fr; } }
     </style>
   </head>
   <body>
@@ -510,6 +519,7 @@
           <button type="button" class="nav-link" data-page="home">Home</button>
           <button type="button" class="nav-link" data-page="play">Play</button>
           <button type="button" class="nav-link" data-page="daily">Daily Challenge</button>
+          <button type="button" class="nav-link" data-page="duel">Duels</button>
           <button type="button" class="nav-link" data-page="invite">Invite to Duel</button>
           <button type="button" class="nav-link" data-page="board">Leaderboard</button>
           <button type="button" class="nav-link" data-page="how">How to play</button>
@@ -656,11 +666,15 @@
           <h3>Generations</h3>
           <p>Every three wins move your agent up one generation, up to generation 9. Sign up with your email and your balance, wins and generation are saved under your email on this device, ready for you when you sign in again. If you play as a guest, your progress is kept on this device only.</p>
           <h3>Duels</h3>
-          <p>Tap Duel next to an agent on the leaderboard to challenge that agent. You both stake 100 Ladder Coins and answer the same fifteen questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins. If you tie, you both get your stake back. Lose and you lose your 100 stake.</p>
+          <p>Duels come in two kinds. Practice duels are against the agents on the leaderboard: tap Practice duel next to an agent, or pick an agent on the Duels page. Real duels are against another person, and the Duels page is where you start them. In every duel both players stake 100 Ladder Coins and answer the same fifteen questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins. If you tie, you both get your stake back. Lose and you lose your 100 stake.</p>
+          <h3>Pass and play duels</h3>
+          <p>On the Duels page, choose Duel a friend on this device and enter both players names. Player 1 stakes 100 Ladder Coins and answers the fifteen questions, then passes the device to Player 2, who stakes 100 and answers the same fifteen questions in the same order. The running score for both players shows as the duel goes on. At the end the winner is announced and a share card shows both names and both scores.</p>
+          <h3>Duels by code</h3>
+          <p>Create a duel code on the Duels page and share it with a friend. The code fixes the fifteen questions, so the same code always means the same fifteen questions in the same order. Your friend taps Join a duel, enters the code, and plays the same questions on their own device. When they finish they get a short result code to share back. Enter that result code on the Duels page and the game shows who won and settles the stakes.</p>
           <h3>Daily Challenge</h3>
           <p>The Daily Challenge page sets five questions drawn only from the hard and very hard questions. Everyone gets the same five questions on the same day. You get one attempt per day and there is no retry: fail one question and the challenge is over for the day. Answer all five correctly and you earn a bonus of 500 Ladder Coins and a place on the daily leaderboard.</p>
           <h3>Invite to Duel</h3>
-          <p>The Invite to Duel page lets you invite another player to a duel. Pick a player from the leaderboard or type their agent name, then send the invite. The invite states the stakes: both players stake 100 Ladder Coins and answer the same fifteen questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins. If you tie, you both get your stake back. The other player accepts or declines, and if they accept, the duel runs.</p>
+          <p>The Invite to Duel page lets you invite another player to a real duel. Pick a player from the leaderboard or type their agent name, then send the invite. If they are with you, start a pass and play duel on this device. If they are not with you, create a duel code on that page and share it with them. Both players stake 100 Ladder Coins and answer the same fifteen questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins. If you tie, you both get your stake back.</p>
           <h3>Share your score</h3>
           <p>After a run, a duel or the Daily Challenge, a score card appears with your score big and bold and your agent name on the card, or Guest if you are playing as a guest. Use the Share on X button to post it, or the Copy button to copy the words and paste them anywhere.</p>
           <h3>The leaderboard</h3>
@@ -730,14 +744,91 @@
               <button class="btn btn-ghost" id="btn-invite-share" type="button">Share on X</button>
             </div>
             <p class="note" id="invite-copy-msg" aria-live="polite"></p>
-            <div id="invite-response" hidden>
-              <p id="invite-response-text"></p>
+            <div id="invite-real" hidden>
+              <h3>Start the real duel</h3>
+              <p id="invite-real-text"></p>
               <div class="row-actions">
-                <button class="btn btn-gold" id="btn-invite-accept" type="button">Accept the duel</button>
-                <button class="btn btn-ghost" id="btn-invite-decline" type="button">Decline</button>
+                <button class="btn btn-gold" id="btn-invite-pass" type="button">Play on this device</button>
+                <button class="btn btn-navy" id="btn-invite-code" type="button">Create a duel code</button>
+              </div>
+              <div id="invite-code-area" hidden>
+                <p>Share this duel code with <span id="invite-code-name"></span>. The code fixes the fifteen questions, so you both answer the same questions in the same order.</p>
+                <p class="duel-code-big" id="invite-code-value"></p>
+                <div class="row-actions">
+                  <button class="btn btn-navy" id="btn-invite-code-copy" type="button">Copy duel code</button>
+                  <button class="btn btn-ghost" id="btn-invite-code-share" type="button">Share on X</button>
+                </div>
+                <p class="note" id="invite-code-copy-msg" aria-live="polite"></p>
+                <div class="actions" style="margin-top:12px;">
+                  <button class="btn btn-gold" id="btn-invite-code-play" type="button">Play this duel now</button>
+                </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- DUELS -->
+      <section id="screen-duel" class="screen" aria-label="Duels">
+        <div class="topbar">
+          <button class="btn btn-ghost back-btn" type="button" data-nav="home">Back</button>
+          <h2>Duels</h2>
+        </div>
+        <div class="card">
+          <h2>Duel a real player</h2>
+          <p>Real duels are between two people. Both players stake 100 Ladder Coins and answer the same fifteen questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins. A tie returns both stakes.</p>
+          <h3>Duel a friend on this device</h3>
+          <p>Enter both players names. Player 1 stakes 100 Ladder Coins and answers the fifteen questions, then passes the device to Player 2, who stakes 100 and answers the same fifteen questions in the same order. The wallet on this device needs 200 Ladder Coins in all, 100 for each player.</p>
+          <label class="field-label" for="pp-name1">Player 1 name</label>
+          <input class="field" id="pp-name1" type="text" autocomplete="off" maxlength="20" placeholder="For example, Amara" />
+          <label class="field-label" for="pp-name2">Player 2 name</label>
+          <input class="field" id="pp-name2" type="text" autocomplete="off" maxlength="20" placeholder="For example, Bola" />
+          <p class="form-error" id="pp-error" role="alert"></p>
+          <div class="actions" style="margin-top:14px;">
+            <button class="btn btn-gold" id="btn-pp-start" type="button">Start pass and play duel</button>
+          </div>
+          <h3>Duel by code</h3>
+          <p>Create a duel code and share it with a friend on another device. The code fixes the fifteen questions, so the same code always means the same fifteen questions in the same order. Play the duel yourself, then your friend plays it on their device and sends back a short result code. Enter their result code below and the game shows who won.</p>
+          <div class="actions" style="margin-top:14px;">
+            <button class="btn btn-navy" id="btn-code-create" type="button">Create a duel code</button>
+          </div>
+          <div id="code-created" hidden>
+            <p class="duel-code-big" id="code-value"></p>
+            <div class="row-actions">
+              <button class="btn btn-navy" id="btn-code-copy" type="button">Copy duel code</button>
+              <button class="btn btn-ghost" id="btn-code-share" type="button">Share on X</button>
+            </div>
+            <p class="note" id="code-copy-msg" aria-live="polite"></p>
+            <label class="field-label" for="code-name">Your name</label>
+            <input class="field" id="code-name" type="text" autocomplete="off" maxlength="20" placeholder="For example, Amara" />
+            <p class="form-error" id="code-error" role="alert"></p>
+            <div class="actions" style="margin-top:12px;">
+              <button class="btn btn-gold" id="btn-code-play" type="button">Play this duel now</button>
+            </div>
+          </div>
+          <h3>Join a duel</h3>
+          <p>Has a friend sent you a duel code? Enter it here and play the same fifteen questions on this device. You stake 100 Ladder Coins. When you finish, you get a result code to send back.</p>
+          <label class="field-label" for="join-code">Duel code</label>
+          <input class="field" id="join-code" type="text" autocomplete="off" maxlength="10" placeholder="Six characters" style="text-transform:uppercase;" />
+          <label class="field-label" for="join-name">Your name</label>
+          <input class="field" id="join-name" type="text" autocomplete="off" maxlength="20" placeholder="For example, Bola" />
+          <p class="form-error" id="join-error" role="alert"></p>
+          <div class="actions" style="margin-top:14px;">
+            <button class="btn btn-gold" id="btn-join-start" type="button">Join and play</button>
+          </div>
+          <h3>Enter a result code</h3>
+          <p>When your friend finishes a duel you created, they send you a result code. Enter it here to see who won and settle the stakes.</p>
+          <label class="field-label" for="result-code-input">Result code</label>
+          <input class="field" id="result-code-input" type="text" autocomplete="off" maxlength="12" placeholder="Eight characters" style="text-transform:uppercase;" />
+          <div class="actions" style="margin-top:14px;">
+            <button class="btn btn-navy" id="btn-result-check" type="button">See who won</button>
+          </div>
+          <p class="invite-status" id="result-status" aria-live="polite" style="margin-top:12px;"></p>
+        </div>
+        <div class="card">
+          <h2>Duel an agent</h2>
+          <p>Practice duels are against the agents from the leaderboard, played on this device. They are for practice: no other person takes part, and the agent answers on this device too. Stakes and scoring work the same way. Tap an agent to start a practice duel.</p>
+          <div id="practice-agents"></div>
         </div>
       </section>
 
@@ -814,6 +905,17 @@
                 <button class="btn btn-stage" id="btn-share-copy" type="button">Copy score</button>
               </div>
               <p class="note" id="share-copy-msg" aria-live="polite" style="color:var(--stage-muted);"></p>
+            </div>
+
+            <div class="result-code-card" id="duel-result-block">
+              <p class="sc-game">Your result code</p>
+              <p class="duel-code-big" id="duel-result-code"></p>
+              <p class="note" id="duel-result-note" style="color:var(--stage-muted);">Send this code back to the player who made the duel code. They enter it on the Duels page to see who won.</p>
+              <div class="sc-actions">
+                <button class="btn btn-gold" id="btn-dresult-copy" type="button">Copy result code</button>
+                <button class="btn btn-stage" id="btn-dresult-share" type="button">Share on X</button>
+              </div>
+              <p class="note" id="duel-result-copy-msg" aria-live="polite" style="color:var(--stage-muted);"></p>
             </div>
 
             <p style="margin-top:16px;"><button class="btn btn-ghost" id="btn-quit" type="button">End run and go home</button></p>
@@ -14190,6 +14292,7 @@
         var q = currentQuestion();
         var letters = ["A", "B", "C", "D"];
         var parts = ["Question " + run.level + "."];
+        if (run.mode === "realduel" && run.kind === "pass") parts = [(run.turn === 1 ? run.p1Name : run.p2Name) + ". Question " + run.level + "."];
         if (run.mode === "ladder") parts.push("This question worth " + fmt(LADDER[run.level - 1]) + " coins.");
         parts.push(q.q);
         for (var i = 0; i < 4; i++) parts.push(letters[i] + ". " + q.opts[i]);
@@ -14390,11 +14493,11 @@
       function clearReadyTimer() { if (readyTimerId) { clearTimeout(readyTimerId); readyTimerId = null; } }
 
       function showScreen(name) {
-        var screens = ["home", "how", "board", "game", "signup", "signin", "daily", "invite"];
+        var screens = ["home", "how", "board", "game", "signup", "signin", "daily", "invite", "duel"];
         for (var i = 0; i < screens.length; i++) {
           el("screen-" + screens[i]).classList.toggle("active", screens[i] === name);
         }
-        var pageFor = { home: "home", game: "play", daily: "daily", invite: "invite", board: "board", how: "how", signup: "home", signin: "home" };
+        var pageFor = { home: "home", game: "play", daily: "daily", invite: "invite", duel: "duel", board: "board", how: "how", signup: "home", signin: "home" };
         var links = document.querySelectorAll(".nav-link");
         for (var n = 0; n < links.length; n++) {
           links[n].classList.toggle("active", links[n].getAttribute("data-page") === pageFor[name]);
@@ -14421,6 +14524,10 @@
         if (name === "invite") {
           renderInviteAgents();
           speakText("Invite to Duel. Pick a player from the list or type their agent name, then send the invite. Both players stake 100 Ladder Coins and answer the same fifteen questions.");
+        }
+        if (name === "duel") {
+          renderPracticeAgents();
+          speakText("Duels. Duel a real player on this device or by code, or practice against an agent.");
         }
         window.scrollTo(0, 0);
       }
@@ -14511,7 +14618,7 @@
         for (var r = 0; r < rows.length; r++) {
           var prize = r < 3 ? "<span class=\"bprize\">" + (r === 0 ? "First" : r === 1 ? "Second" : "Third") + " place prize " + fmt(SEASON_PRIZES[r]) + " Ladder Coins</span>" : "";
           var badge = rows[r].streak >= 3 ? "<span class=\"streak-badge\">Streak badge: " + rows[r].streak + " wins in a row</span>" : "";
-          html += "<div class=\"board-row" + (rows[r].me ? " me" : "") + "\"><div class=\"rank\">" + (r + 1) + "</div><div><div class=\"bname\">" + escHtml(rows[r].name) + badge + "</div><div class=\"bmeta\">" + rows[r].meta + "</div>" + prize + "</div><div class=\"bcoins\">" + fmt(rows[r].earned) + "<small>Ladder Coins earned</small>" + (rows[r].agentIdx >= 0 ? "<button type=\"button\" class=\"btn btn-navy duel-btn\" data-duel=\"" + rows[r].agentIdx + "\">Duel</button>" : "") + "</div></div>";
+          html += "<div class=\"board-row" + (rows[r].me ? " me" : "") + "\"><div class=\"rank\">" + (r + 1) + "</div><div><div class=\"bname\">" + escHtml(rows[r].name) + badge + "</div><div class=\"bmeta\">" + rows[r].meta + "</div>" + prize + "</div><div class=\"bcoins\">" + fmt(rows[r].earned) + "<small>Ladder Coins earned</small>" + (rows[r].agentIdx >= 0 ? "<button type=\"button\" class=\"btn btn-navy duel-btn\" data-duel=\"" + rows[r].agentIdx + "\">Practice duel</button>" : "") + "</div></div>";
         }
         el("board-rows").innerHTML = html;
         var duelBtns = el("board-rows").querySelectorAll(".duel-btn");
@@ -14591,7 +14698,9 @@
          shows and speaks the not enough coins line and offers the
          faucet instead of starting. */
       function showStakeGate(kind) {
-        var msg = kind === "duel"
+        var msg = kind === "pass"
+          ? "Not enough coins for a pass and play duel. Each player stakes 100 Ladder Coins, so the wallet needs 200 in all. Claim the faucet to get more."
+          : kind === "duel"
           ? "Not enough coins to duel. Claim the faucet to get more."
           : "Not enough coins to play. Claim the faucet to get more.";
         var html = "<h3 id=\"panel-title\">" + msg + "</h3>" +
@@ -14610,11 +14719,11 @@
         el("gate-close").addEventListener("click", function () { closePanel(); });
       }
 
-      function newRunState(mode) {
+      function newRunState(mode, presetQuestions) {
         return {
           mode: mode,
           level: 1,
-          questions: mode === "duel" ? pickDuelQuestions() : (mode === "daily" ? [] : pickQuestions()),
+          questions: presetQuestions || (mode === "duel" ? pickDuelQuestions() : (mode === "daily" ? [] : pickQuestions())),
           bankedLevel: 0,
           stake: STAKE,
           state: "answering",
@@ -14628,7 +14737,15 @@
           oppName: null,
           playerScore: 0,
           oppScore: 0,
-          oppResults: []
+          oppResults: [],
+          kind: null,
+          turn: 1,
+          p1Name: "",
+          p2Name: "",
+          p1Score: 0,
+          p2Score: 0,
+          code: "",
+          role: ""
         };
       }
 
@@ -14647,6 +14764,7 @@
         el("run-end").classList.remove("active");
         el("decision").classList.remove("active");
         hideShareCard();
+        hideDuelResult();
         showScreen("game");
         renderQuestion();
         showBanner("Staked: 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins.", "goldb");
@@ -14677,10 +14795,11 @@
         el("run-end").classList.remove("active");
         el("decision").classList.remove("active");
         hideShareCard();
+        hideDuelResult();
         showScreen("game");
         renderQuestion();
-        showBanner("Duel against " + duelOppName() + ". Staked: 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins.", "goldb");
-        speakQueued("Duel against " + duelOppName() + ". You staked 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins. Fifteen questions. Whoever answers more correctly takes both stakes.");
+        showBanner("Practice duel against " + duelOppName() + ". Staked: 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins.", "goldb");
+        speakQueued("Practice duel against " + duelOppName() + ". This is a practice duel against an agent on this device. You staked 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins. Fifteen questions. Whoever answers more correctly takes both stakes.");
       }
       function safeAmountFor(levelBanked) {
         if (levelBanked >= 10) return 500;
@@ -14707,7 +14826,12 @@
         if (contReset) contReset.style.display = "none";
         el("game-banner").textContent = "";
         el("game-banner").className = "banner";
-        el("hud-q").textContent = run.mode === "duel" ? "Duel Q" + run.level + " of 15" : (run.mode === "daily" ? "Daily Q" + run.level + " of 5" : "Q" + run.level + " of 15");
+        var hudQ;
+        if (run.mode === "duel") hudQ = "Duel Q" + run.level + " of 15";
+        else if (run.mode === "daily") hudQ = "Daily Q" + run.level + " of 5";
+        else if (run.mode === "realduel") hudQ = run.kind === "pass" ? shortName(run.turn === 1 ? run.p1Name : run.p2Name) + ", question " + run.level + " of 15" : "Duel Q" + run.level + " of 15";
+        else hudQ = "Q" + run.level + " of 15";
+        el("hud-q").textContent = hudQ;
         el("q-cat").textContent = q.cat;
         el("q-text").textContent = q.q;
         renderHud();
@@ -14727,6 +14851,18 @@
           el("hud-pot").textContent = run.playerScore + " correct";
           el("hud-safe-label").textContent = "Bonus";
           el("hud-safe").textContent = "500";
+        } else if (run.mode === "realduel") {
+          if (run.kind === "pass") {
+            el("hud-pot-label").textContent = shortName(run.p1Name);
+            el("hud-pot").textContent = run.p1Score + " correct";
+            el("hud-safe-label").textContent = shortName(run.p2Name);
+            el("hud-safe").textContent = run.p2Score + " correct";
+          } else {
+            el("hud-pot-label").textContent = "Your score";
+            el("hud-pot").textContent = run.p1Score + " correct";
+            el("hud-safe-label").textContent = "Duel code";
+            el("hud-safe").textContent = run.code;
+          }
         } else if (run.mode === "duel") {
           el("hud-pot-label").textContent = "Your score";
           el("hud-pot").textContent = run.playerScore + " correct";
@@ -15013,6 +15149,31 @@
           }, 1500);
           return;
         }
+        if (run.mode === "realduel") {
+          var rCorrect = idx === q.correct;
+          if (run.kind === "pass") {
+            if (run.turn === 1) { if (rCorrect) run.p1Score += 1; }
+            else if (rCorrect) run.p2Score += 1;
+          } else if (rCorrect) run.p1Score += 1;
+          renderHud();
+          var rLine;
+          if (run.kind === "pass") rLine = "The score is " + run.p1Name + " " + run.p1Score + ", " + run.p2Name + " " + run.p2Score + ".";
+          else rLine = "You have " + run.p1Score + " of 15 correct.";
+          playSfx(rCorrect ? "correct" : "wrong");
+          if (rCorrect) {
+            showRevealBanner("Correct!", rLine, "good");
+            speakText("Correct! " + rLine);
+          } else {
+            showRevealBanner("Wrong answer.", "The correct answer was " + letters[q.correct] + ". " + q.opts[q.correct] + ". " + rLine, "bad");
+            speakText("Wrong answer. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ". " + rLine);
+          }
+          setTimeout(function () {
+            if (!run || run.state !== "revealing") return;
+            if (run.level >= 15) { advanceRealDuel(); }
+            else { run.level += 1; renderQuestion(); }
+          }, 1500);
+          return;
+        }
         if (run.mode === "duel") {
           var dCorrect = idx === q.correct;
           if (dCorrect) run.playerScore += 1;
@@ -15136,6 +15297,20 @@
           showRevealBanner("Wrong answer.", "Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ". " + q.opts[q.correct] + ".", "bad");
           speakText("Wrong answer. Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ".");
           setTimeout(function () { endDaily(false); }, 1600);
+          return;
+        }
+        if (run.mode === "realduel") {
+          renderHud();
+          var tLine;
+          if (run.kind === "pass") tLine = "The score is " + run.p1Name + " " + run.p1Score + ", " + run.p2Name + " " + run.p2Score + ".";
+          else tLine = "You have " + run.p1Score + " of 15 correct.";
+          showRevealBanner("Wrong answer.", "Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ". " + q.opts[q.correct] + ". " + tLine, "bad");
+          speakText("Wrong answer. Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ". " + tLine);
+          setTimeout(function () {
+            if (!run || run.state !== "revealing") return;
+            if (run.level >= 15) { advanceRealDuel(); }
+            else { run.level += 1; renderQuestion(); }
+          }, 1600);
           return;
         }
         if (run.mode === "duel") {
@@ -15273,19 +15448,19 @@
         var title, mainLine;
         if (forfeit) {
           title = "Duel over";
-          mainLine = "You left the duel against " + name + " early. You lost your 100 stake. Your balance is " + fmt(player.balance) + " Ladder Coins.";
+          mainLine = "You left the practice duel against " + name + " early. You lost your 100 stake. Your balance is " + fmt(player.balance) + " Ladder Coins.";
         } else if (ps > os) {
           player.balance += 200;
           player.totalEarned += 200;
-          title = "You won the duel";
-          mainLine = "You won the duel, " + ps + " to " + os + ". You take 200 coins. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+          title = "You won the practice duel";
+          mainLine = "You won the practice duel, " + ps + " to " + os + ". You take 200 coins. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
         } else if (ps < os) {
-          title = "You lost the duel";
-          mainLine = "You lost the duel, " + ps + " to " + os + ". You lost your 100 stake. Your balance is " + fmt(player.balance) + " Ladder Coins.";
+          title = "You lost the practice duel";
+          mainLine = "You lost the practice duel, " + ps + " to " + os + ". You lost your 100 stake. Your balance is " + fmt(player.balance) + " Ladder Coins.";
         } else {
           player.balance += STAKE;
-          title = "Duel tied";
-          mainLine = "The duel is tied, " + ps + " to " + os + ". You both get your stake back. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+          title = "Practice duel tied";
+          mainLine = "The practice duel is tied, " + ps + " to " + os + ". You both get your stake back. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
         }
         saveProgress();
         el("run-end").classList.add("active");
@@ -15293,12 +15468,12 @@
         el("end-title").textContent = title;
         el("end-text").textContent = mainLine;
         if (!forfeit) {
-          showShareCard(String(ps), "correct answers out of 15 \u00b7 Duel against " + name + " \u00b7 " + (ps > os ? "Won 200 Ladder Coins" : (ps < os ? "Lost the duel" : "Duel tied, stake returned")));
+          showShareCard(String(ps), "correct answers out of 15 \u00b7 Practice duel against " + name + " \u00b7 " + (ps > os ? "Won 200 Ladder Coins" : (ps < os ? "Lost the practice duel" : "Practice duel tied, stake returned")));
         }
         speakQueued(mainLine);
         if (!forfeit && ps > os) {
           playSfx("win");
-          showBanner("Duel complete. You take both stakes.", "goldb");
+          showBanner("Practice duel complete. You take both stakes.", "goldb");
         }
         renderHud();
         renderLifelines();
@@ -15428,15 +15603,15 @@
          words; Copy puts the same words on the clipboard. */
       var lastShareText = "";
       function playerCardName() { return currentUser ? currentUser.name : "Guest"; }
-      function showShareCard(scoreText, detailText) {
+      function showShareCard(scoreText, detailText, nameText) {
         var card = el("share-card");
         if (!card) return;
-        el("sc-name").textContent = playerCardName();
+        el("sc-name").textContent = nameText || playerCardName();
         el("sc-score").textContent = scoreText;
         el("sc-detail").textContent = detailText;
         el("share-copy-msg").textContent = "";
         card.classList.add("active");
-        lastShareText = "Agent's Ladder: " + playerCardName() + " scored " + scoreText + ". " + detailText;
+        lastShareText = "Agent's Ladder: " + (nameText || playerCardName()) + " scored " + scoreText + ". " + detailText;
       }
       function hideShareCard() {
         var card = el("share-card");
@@ -15579,6 +15754,7 @@
         el("run-end").classList.remove("active");
         el("decision").classList.remove("active");
         hideShareCard();
+        hideDuelResult();
         showScreen("game");
         renderQuestion();
         showBanner("Daily Challenge. Five hard questions. One attempt today.", "goldb");
@@ -15620,12 +15796,353 @@
         renderLifelines();
       }
 
+      /* ---- Real duels ----
+         Two real people duel each other, fully on device. Pass and
+         play: both players take turns on this device over one shared
+         set of fifteen questions, Player 1 first, then Player 2 over
+         the same questions in the same order. Duel by code: a short
+         code fixes the fifteen questions through the seeded picker,
+         so the same code always gives the same questions in the same
+         order on any device. The second player sends back a short
+         result code carrying their score, and entering it here
+         settles the stakes. Both players stake 100 Ladder Coins;
+         most correct answers takes 200; a tie returns both stakes.
+         Duel records live in memory for this session only. */
+      var CODE_SEED_MIN = 60466176; /* 36^5, so every code is six characters */
+      var CODE_SEED_MAX = 2176782336; /* 36^6 */
+      var CODE_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      var myDuelCodes = {};
+      var createdDuelCode = "";
+      var inviteDuelCode = "";
+      var lastResultCode = "";
+
+      function makeDuelCode() {
+        var seed = CODE_SEED_MIN + Math.floor(Math.random() * (CODE_SEED_MAX - CODE_SEED_MIN));
+        return seed.toString(36).toUpperCase();
+      }
+      function seedFromCode(code) {
+        var c = String(code || "").toUpperCase().replace(/[^0-9A-Z]/g, "");
+        if (c.length !== 6) return -1;
+        var seed = parseInt(c, 36);
+        if (!(seed >= CODE_SEED_MIN && seed < CODE_SEED_MAX)) return -1;
+        if (seed.toString(36).toUpperCase() !== c) return -1;
+        return seed;
+      }
+      /* The fifteen questions a duel code stands for. The seeded
+         picker walks the same bands as a normal run and shuffles the
+         answer order with the same stream, so two devices given the
+         same code build the identical duel. */
+      function duelQuestionsFromSeed(seed) {
+        var rng = seededRng(seed >>> 0);
+        var usedByBand = {};
+        var chosen = [];
+        for (var lvl = 1; lvl <= 15; lvl++) {
+          var band = BAND_FOR_LEVEL[lvl];
+          var pool = LADDER_BANK[band];
+          var used = usedByBand[band];
+          if (!used) { used = {}; usedByBand[band] = used; }
+          var idx = Math.floor(rng() * pool.length);
+          while (used[idx]) { idx = Math.floor(rng() * pool.length); }
+          used[idx] = true;
+          var raw = pool[idx];
+          var order = [0, 1, 2, 3];
+          for (var x = 3; x > 0; x--) {
+            var y = Math.floor(rng() * (x + 1));
+            var t = order[x]; order[x] = order[y]; order[y] = t;
+          }
+          var opts = [];
+          for (var k = 0; k < 4; k++) opts.push(raw.a[order[k]]);
+          chosen.push({ cat: capCat(raw.cat), q: raw.q, opts: opts, correct: order.indexOf(raw.c) });
+        }
+        return chosen;
+      }
+      /* A result code is the duel code, the score as one character,
+         and one check character, so a mistyped code is caught. */
+      function resultCodeFor(code, score) {
+        var seed = seedFromCode(code);
+        var check = CODE_CHARS.charAt((seed * 31 + score * 17 + 11) % 36);
+        return code + CODE_CHARS.charAt(score) + check;
+      }
+      function parseResultCode(raw) {
+        var c = String(raw || "").toUpperCase().replace(/[^0-9A-Z]/g, "");
+        if (c.length !== 8) return null;
+        var code = c.slice(0, 6);
+        var seed = seedFromCode(code);
+        if (seed < 0) return null;
+        var score = parseInt(c.charAt(6), 36);
+        if (!(score >= 0 && score <= 15)) return null;
+        var check = CODE_CHARS.charAt((seed * 31 + score * 17 + 11) % 36);
+        if (c.charAt(7) !== check) return null;
+        return { code: code, score: score };
+      }
+      function shortName(name) {
+        var s = String(name || "");
+        return s.length > 12 ? s.slice(0, 12) + "\u2026" : s;
+      }
+      function hideDuelResult() {
+        var block = el("duel-result-block");
+        if (block) block.classList.remove("active");
+      }
+      function showDuelResult(code, score, role) {
+        lastResultCode = resultCodeFor(code, score);
+        el("duel-result-code").textContent = lastResultCode;
+        el("duel-result-note").textContent = role === "creator"
+          ? "This is your result code. If your friend wants to settle this duel on their own device as well, send them this code to enter on the Duels page."
+          : "Send this code back to the player who made the duel code. They enter it on the Duels page to see who won.";
+        el("duel-result-copy-msg").textContent = "";
+        el("duel-result-block").classList.add("active");
+      }
+      function duelCodeShareText(code) {
+        return "Duel me on Agent's Ladder. My duel code is " + code + ". Open the Duels page, tap Join a duel, and enter the code. We both stake 100 Ladder Coins and answer the same fifteen questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins.";
+      }
+      function resultCodeShareText(rc) {
+        return "My Agent's Ladder duel result code is " + rc + ". Enter it on the Duels page to see who won our duel.";
+      }
+      function renderPracticeAgents() {
+        var wrap = el("practice-agents");
+        if (!wrap) return;
+        var html = "";
+        for (var i = 0; i < AGENTS.length; i++) {
+          var a = AGENTS[i];
+          html += "<button type=\"button\" class=\"agent-pick\" data-practice=\"" + i + "\"><span class=\"aname\">" + agentDisplay(a.id) + "</span><span class=\"ameta\" style=\"display:block;\">Generation " + a.gen + " · Wins " + a.wins + " · " + a.status + " · Tap to start a practice duel</span></button>";
+        }
+        wrap.innerHTML = html;
+        var picks = wrap.querySelectorAll(".agent-pick");
+        for (var p = 0; p < picks.length; p++) {
+          picks[p].addEventListener("click", function () { startDuel(parseInt(this.getAttribute("data-practice"), 10)); });
+        }
+      }
+
+      function beginRealDuel(kind, questions, p1Name, p2Name, code, role) {
+        run = newRunState("realduel", questions);
+        run.kind = kind;
+        run.p1Name = p1Name;
+        run.p2Name = p2Name;
+        run.code = code || "";
+        run.role = role || "";
+        run.turn = 1;
+        el("screen-game").classList.remove("daily-mode");
+        el("screen-game").classList.add("duel-mode");
+        el("btn-again").textContent = "Back to Duels";
+        el("btn-quit").textContent = "Leave the duel";
+        el("run-end").classList.remove("active");
+        el("decision").classList.remove("active");
+        hideShareCard();
+        hideDuelResult();
+        showScreen("game");
+        renderQuestion();
+      }
+      function startPassDuel(p1Name, p2Name) {
+        ensureAudio();
+        if (player.balance < STAKE * 2) { showStakeGate("pass"); return; }
+        stopTimer();
+        clearReadyTimer();
+        player.balance -= STAKE;
+        walletDeposit = null;
+        beginRealDuel("pass", pickQuestions(), p1Name, p2Name, "", "");
+        showBanner("Pass and play duel. " + p1Name + " plays first and staked 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins.", "goldb");
+        speakQueued("Pass and play duel. " + p1Name + " plays first and staked 100 Ladder Coins. " + p2Name + " answers the same fifteen questions after. Whoever answers more correctly takes both stakes, 200 Ladder Coins.");
+      }
+      function startCodeDuel(code, myName, role) {
+        ensureAudio();
+        if (player.balance < STAKE) { showStakeGate("duel"); return; }
+        stopTimer();
+        clearReadyTimer();
+        player.balance -= STAKE;
+        walletDeposit = null;
+        var rec = myDuelCodes[code];
+        if (!rec) { rec = { myScore: null, settled: false, oppScore: null }; myDuelCodes[code] = rec; }
+        rec.role = role;
+        beginRealDuel("code", duelQuestionsFromSeed(seedFromCode(code)), myName, "", code, role);
+        showBanner("Duel code " + code + ". You staked 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins.", "goldb");
+        speakQueued("Duel by code. You staked 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins. Fifteen questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins.");
+      }
+      /* Player 1 has answered all fifteen: the device changes hands.
+         Player 2 stakes now and faces the same questions array, in
+         the same order, with the same answer order. */
+      function showHandoff() {
+        run.state = "handoff";
+        stopTimer();
+        var p1 = run.p1Name, p2 = run.p2Name;
+        var text = p1 + " finished with " + run.p1Score + " correct out of 15. Now pass the device to " + p2 + ". " + p2 + " stakes 100 Ladder Coins and answers the same fifteen questions in the same order.";
+        var html = "<h3 id=\"panel-title\">Pass the device to " + escHtml(p2) + "</h3>" +
+          "<p>" + escHtml(text) + "</p>" +
+          "<div class=\"confirm-actions\">" +
+          "<button class=\"btn btn-gold\" type=\"button\" id=\"btn-handoff\">" + escHtml(p2) + ", start your turn</button>" +
+          "</div>";
+        openPanel(html);
+        speakText(text);
+        el("btn-handoff").addEventListener("click", function () {
+          closePanel();
+          if (!run || run.mode !== "realduel" || run.kind !== "pass") return;
+          player.balance -= STAKE;
+          run.turn = 2;
+          run.level = 1;
+          renderQuestion();
+          showBanner(p2 + " to play. " + p2 + " staked 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins.", "goldb");
+          speakQueued(p2 + " to play. The same fifteen questions, in the same order.");
+        });
+      }
+      function advanceRealDuel() {
+        if (!run || run.mode !== "realduel") return;
+        if (run.kind === "pass" && run.turn === 1) { showHandoff(); return; }
+        endRealDuel(false);
+      }
+      function endRealDuel(forfeit) {
+        if (!run || run.mode !== "realduel" || run.state === "ended") return;
+        clearReadyTimer();
+        run.state = "ended";
+        stopTimer();
+        stopRecognizer();
+        closePanel();
+        var title, mainLine;
+        if (run.kind === "pass") {
+          var p1 = run.p1Name, p2 = run.p2Name;
+          var s1 = run.p1Score, s2 = run.p2Score;
+          if (forfeit) {
+            title = "Duel over";
+            mainLine = "The duel between " + p1 + " and " + p2 + " was left early, so the stakes paid so far are lost. Your balance is " + fmt(player.balance) + " Ladder Coins.";
+          } else {
+            /* Both stakes came out of this wallet, so the winner
+               taking both stakes returns 200 to it in all outcomes:
+               the winner takes 200, or a tie returns 100 to each. */
+            player.balance += 200;
+            if (s1 > s2) {
+              title = p1 + " wins the duel";
+              mainLine = p1 + " wins the duel, " + s1 + " to " + s2 + ". " + p1 + " takes both stakes, 200 Ladder Coins. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+            } else if (s2 > s1) {
+              title = p2 + " wins the duel";
+              mainLine = p2 + " wins the duel, " + s2 + " to " + s1 + ". " + p2 + " takes both stakes, 200 Ladder Coins. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+            } else {
+              title = "The duel is tied";
+              mainLine = "The duel is tied, " + s1 + " to " + s2 + ". Both players get their stake back. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+            }
+            saveProgress();
+          }
+          el("run-end").classList.add("active");
+          el("decision").classList.remove("active");
+          el("end-title").textContent = title;
+          el("end-text").textContent = mainLine;
+          if (!forfeit) {
+            showShareCard(s1 + " to " + s2, "Pass and play duel · " + (s1 === s2 ? "Duel tied, both stakes returned" : (s1 > s2 ? p1 : p2) + " won 200 Ladder Coins"), p1 + " vs " + p2);
+            playSfx("win");
+          }
+          speakQueued(mainLine);
+          renderHud();
+          renderLifelines();
+          return;
+        }
+        /* Duel by code: this player has finished their side of it. */
+        var myScore = run.p1Score;
+        if (forfeit) {
+          title = "Duel over";
+          mainLine = "You left the duel for code " + run.code + " early. You lost your 100 stake. Your balance is " + fmt(player.balance) + " Ladder Coins.";
+        } else {
+          var rec = myDuelCodes[run.code];
+          if (!rec) { rec = { myScore: null, settled: false, oppScore: null }; myDuelCodes[run.code] = rec; }
+          if (!rec.settled) rec.myScore = myScore;
+          if (run.role === "joiner") {
+            title = "Duel finished";
+            mainLine = "You answered " + myScore + " of 15 correctly. Your result code is ready below. Send it back to the player who made the duel code, and they will enter it to see who won.";
+          } else {
+            title = "Duel finished";
+            mainLine = "You answered " + myScore + " of 15 correctly on duel code " + run.code + ". When your friend finishes, they will send you a result code. Enter it on the Duels page to see who won and settle the stakes.";
+          }
+        }
+        el("run-end").classList.add("active");
+        el("decision").classList.remove("active");
+        el("end-title").textContent = title;
+        el("end-text").textContent = mainLine;
+        if (!forfeit) showDuelResult(run.code, myScore, run.role);
+        speakQueued(mainLine);
+        renderHud();
+        renderLifelines();
+      }
+
+      /* The Duels page actions. */
+      function startPassFromPage() {
+        var n1 = el("pp-name1").value.trim();
+        var n2 = el("pp-name2").value.trim();
+        var err = el("pp-error");
+        if (!n1 || !n2) { err.textContent = "Enter both players names, then start the duel."; return; }
+        err.textContent = "";
+        startPassDuel(n1, n2);
+      }
+      function createDuelCode() {
+        ensureAudio();
+        createdDuelCode = makeDuelCode();
+        el("code-value").textContent = createdDuelCode;
+        el("code-created").hidden = false;
+        el("code-copy-msg").textContent = "";
+        el("code-error").textContent = "";
+        if (!el("code-name").value.trim() && currentUser) el("code-name").value = currentUser.name;
+        speakText("Your duel code is " + createdDuelCode.split("").join(" ") + ". Share it with your friend, then play the duel.");
+      }
+      function playCreatedCode() {
+        if (!createdDuelCode) return;
+        var name = el("code-name").value.trim();
+        var err = el("code-error");
+        if (!name) { err.textContent = "Enter your name, then play the duel."; return; }
+        err.textContent = "";
+        startCodeDuel(createdDuelCode, name, "creator");
+      }
+      function joinDuel() {
+        var code = el("join-code").value.toUpperCase().replace(/[^0-9A-Z]/g, "");
+        var name = el("join-name").value.trim();
+        var err = el("join-error");
+        if (seedFromCode(code) < 0) { err.textContent = "That duel code does not look right. A duel code has six characters. Check it and try again."; return; }
+        if (!name) { err.textContent = "Enter your name, then join the duel."; return; }
+        err.textContent = "";
+        startCodeDuel(code, name, "joiner");
+      }
+      function checkResultCode() {
+        var status = el("result-status");
+        var parsed = parseResultCode(el("result-code-input").value);
+        if (!parsed) {
+          var bad = "That result code does not look right. A result code has eight characters. Check it and try again.";
+          status.textContent = bad;
+          speakText(bad);
+          return;
+        }
+        var rec = myDuelCodes[parsed.code];
+        if (!rec || rec.myScore === null || rec.myScore === undefined) {
+          var msg1 = "You have not finished the duel for code " + parsed.code + " on this device yet. Play that duel first, then enter the result code again.";
+          status.textContent = msg1;
+          speakText(msg1);
+          return;
+        }
+        if (rec.settled) {
+          var msg2 = "This duel is already settled. You scored " + rec.myScore + " and your friend scored " + rec.oppScore + ".";
+          status.textContent = msg2;
+          speakText(msg2);
+          return;
+        }
+        rec.settled = true;
+        rec.oppScore = parsed.score;
+        var mine = rec.myScore, theirs = parsed.score, msg;
+        if (mine > theirs) {
+          player.balance += 200;
+          player.totalEarned += 200;
+          msg = "You win the duel, " + mine + " to " + theirs + ". You take both stakes, 200 Ladder Coins. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+          playSfx("win");
+        } else if (mine < theirs) {
+          msg = "Your friend wins the duel, " + theirs + " to " + mine + ". You lost your 100 stake. Your balance is " + fmt(player.balance) + " Ladder Coins.";
+        } else {
+          player.balance += STAKE;
+          msg = "The duel is tied, " + mine + " to " + theirs + ". Both players get their stake back. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+        }
+        saveProgress();
+        status.textContent = msg;
+        speakText(msg);
+      }
+
       /* ---- Invite to Duel ----
          The invite lives on its own page, away from the leaderboard.
          Pick a player from the list or type any agent name, send the
-         invite, and the page shows the invite and its status: sent,
-         accepted or declined, in text and aloud. The invite words
-         can be copied or shared on X. Accepting starts the duel. */
+         invite, and the page shows the invite and its status, in
+         text and aloud. The invite words can be copied or shared on
+         X. From the invite you start a real duel: pass and play on
+         this device, or a duel code to share with the other player. */
       var pendingInvite = null;
       var selectedInviteAgent = -1;
       function renderInviteAgents() {
@@ -15647,7 +16164,7 @@
       }
       function inviteText() {
         if (!pendingInvite) return "";
-        return "I challenge you to a duel on Agent's Ladder, " + pendingInvite.name + ". Both players stake 100 Ladder Coins and answer the same fifteen questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins. A tie returns both stakes. Do you accept?";
+        return "I challenge you to a duel on Agent's Ladder, " + pendingInvite.name + ". Both players stake 100 Ladder Coins and answer the same fifteen questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins. A tie returns both stakes. We can play on one device together, or with a duel code on two devices.";
       }
       function sendInvite() {
         ensureAudio();
@@ -15659,30 +16176,36 @@
         }
         el("invite-error").textContent = "";
         pendingInvite = { name: name, agentIdx: typed ? -1 : selectedInviteAgent, status: "sent" };
+        inviteDuelCode = "";
         el("invite-live").hidden = false;
-        el("invite-response").hidden = false;
+        el("invite-real").hidden = false;
+        el("invite-code-area").hidden = true;
         el("invite-copy-msg").textContent = "";
-        el("invite-status").textContent = "Invite sent to " + name + ". Waiting for their answer.";
+        el("invite-status").textContent = "Invite ready for " + name + ". Start the real duel below, on this device or by code.";
         el("invite-text").textContent = inviteText();
-        el("invite-response-text").textContent = name + " has the invite. When they answer, the duel starts at once if they accept.";
-        speakText("Invite sent to " + name + ". Both players stake 100 Ladder Coins and answer the same fifteen questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins. A tie returns both stakes.");
+        el("invite-real-text").textContent = "If " + name + " is with you, play the duel now on this device: you play as Player 1 and " + name + " plays as Player 2. If " + name + " is somewhere else, create a duel code and share it with them instead.";
+        speakText("Invite ready for " + name + ". Play the duel on this device if they are with you, or create a duel code if they are not. Both players stake 100 Ladder Coins and answer the same fifteen questions.");
       }
-      function acceptInvite() {
-        if (!pendingInvite || pendingInvite.status !== "sent") return;
-        pendingInvite.status = "accepted";
-        el("invite-status").textContent = pendingInvite.name + " accepted the duel. The duel starts now.";
-        el("invite-response").hidden = true;
-        speakText(pendingInvite.name + " accepted the duel. The duel starts now.");
-        var idx = pendingInvite.agentIdx >= 0 ? pendingInvite.agentIdx : 0;
-        var nm = pendingInvite.agentIdx >= 0 ? null : pendingInvite.name;
-        setTimeout(function () { startDuel(idx, nm); }, 900);
+      /* Inviting by name starts a real duel: pass and play when the
+         other player is here, or a duel by code when they are not. */
+      function startInvitePass() {
+        if (!pendingInvite) return;
+        var p1 = currentUser ? currentUser.name : "Player 1";
+        startPassDuel(p1, pendingInvite.name);
       }
-      function declineInvite() {
-        if (!pendingInvite || pendingInvite.status !== "sent") return;
-        pendingInvite.status = "declined";
-        el("invite-status").textContent = pendingInvite.name + " declined the duel invite. No coins were staked.";
-        el("invite-response").hidden = true;
-        speakText(pendingInvite.name + " declined the duel invite. No coins were staked.");
+      function createInviteCode() {
+        if (!pendingInvite) return;
+        inviteDuelCode = makeDuelCode();
+        el("invite-code-value").textContent = inviteDuelCode;
+        el("invite-code-name").textContent = pendingInvite.name;
+        el("invite-code-area").hidden = false;
+        el("invite-code-copy-msg").textContent = "";
+        speakText("Your duel code is " + inviteDuelCode.split("").join(" ") + ". Share it with " + pendingInvite.name + ", then play the duel.");
+      }
+      function playInviteCode() {
+        if (!pendingInvite || !inviteDuelCode) return;
+        var p1 = currentUser ? currentUser.name : "Player 1";
+        startCodeDuel(inviteDuelCode, p1, "creator");
       }
 
       /* Wiring for the navigation header and the new pages. */
@@ -15709,8 +16232,32 @@
         el("btn-invite-share").addEventListener("click", function () {
           if (pendingInvite) window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(inviteText()), "_blank");
         });
-        el("btn-invite-accept").addEventListener("click", acceptInvite);
-        el("btn-invite-decline").addEventListener("click", declineInvite);
+        el("btn-invite-pass").addEventListener("click", startInvitePass);
+        el("btn-invite-code").addEventListener("click", createInviteCode);
+        el("btn-invite-code-copy").addEventListener("click", function () {
+          if (inviteDuelCode) copyTextToClipboard(duelCodeShareText(inviteDuelCode), el("invite-code-copy-msg"), "Duel code copied. Paste it anywhere to send it.");
+        });
+        el("btn-invite-code-share").addEventListener("click", function () {
+          if (inviteDuelCode) window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(duelCodeShareText(inviteDuelCode)), "_blank");
+        });
+        el("btn-invite-code-play").addEventListener("click", playInviteCode);
+        el("btn-pp-start").addEventListener("click", startPassFromPage);
+        el("btn-code-create").addEventListener("click", createDuelCode);
+        el("btn-code-copy").addEventListener("click", function () {
+          if (createdDuelCode) copyTextToClipboard(duelCodeShareText(createdDuelCode), el("code-copy-msg"), "Duel code copied. Paste it anywhere to send it.");
+        });
+        el("btn-code-share").addEventListener("click", function () {
+          if (createdDuelCode) window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(duelCodeShareText(createdDuelCode)), "_blank");
+        });
+        el("btn-code-play").addEventListener("click", playCreatedCode);
+        el("btn-join-start").addEventListener("click", joinDuel);
+        el("btn-result-check").addEventListener("click", checkResultCode);
+        el("btn-dresult-copy").addEventListener("click", function () {
+          if (lastResultCode) copyTextToClipboard(resultCodeShareText(lastResultCode), el("duel-result-copy-msg"), "Result code copied. Paste it anywhere to send it.");
+        });
+        el("btn-dresult-share").addEventListener("click", function () {
+          if (lastResultCode) window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(resultCodeShareText(lastResultCode)), "_blank");
+        });
         el("btn-share-x").addEventListener("click", function () {
           if (lastShareText) window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(lastShareText), "_blank");
         });
@@ -15767,7 +16314,8 @@
           renderQuestion();
         });
         el("btn-again").addEventListener("click", function () {
-          if (run && run.mode === "duel") { startDuel(run.duelAgent, run.oppName); }
+          if (run && run.mode === "realduel") { showScreen("duel"); }
+          else if (run && run.mode === "duel") { startDuel(run.duelAgent, run.oppName); }
           else if (run && run.mode === "daily") { showScreen("daily"); }
           else { startRun(); }
         });
@@ -15777,14 +16325,16 @@
         el("btn-game-back").addEventListener("click", function () {
           if (!run || run.state === "ended") { showScreen("home"); return; }
           stopSpeaking();
-          if (run.mode === "duel") { endDuel(true); }
+          if (run.mode === "realduel") { endRealDuel(true); }
+          else if (run.mode === "duel") { endDuel(true); }
           else if (run.mode === "daily") { endDaily(false); }
           else { endRun(false, "quit"); }
         });
         el("btn-quit").addEventListener("click", function () {
           if (!run || run.state === "ended") { showScreen("home"); return; }
           stopSpeaking();
-          if (run.mode === "duel") { endDuel(true); }
+          if (run.mode === "realduel") { endRealDuel(true); }
+          else if (run.mode === "duel") { endDuel(true); }
           else if (run.mode === "daily") { endDaily(false); }
           else { endRun(false, "quit"); }
         });
