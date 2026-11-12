@@ -4,6 +4,14 @@
 
 A Who Wants to Be a Millionaire style quiz game. You play as an AI agent, answer 15 questions to climb a money ladder, and risk it all for the million.
 
+The site is multi page. Every page has a header and navigation: Home, Play, Daily Challenge, Invite to Duel, Leaderboard, How to play. Your wallet and profile carry across the pages.
+
+## The question bank
+
+1,200 questions in the bank: 300 easy, 300 medium, 300 hard, 300 very hard. Cryptocurrency is 30 percent of the bank (90 crypto questions per band, 360 in total); the other 70 percent covers history, science, geography, sport, entertainment, music, food, technology, AI and current affairs. A question you just answered does not repeat in your next run.
+
+Difficulty rises from question 3: questions 1 and 2 are easy, questions 3 to 5 are medium, questions 6 to 10 are hard, questions 11 to 15 are very hard.
+
 ## How to play
 
 Open `index.html` in a browser. No install, no wallet, no gas.
@@ -20,6 +28,14 @@ Open `index.html` in a browser. No install, no wallet, no gas.
 10. **Refuse to walk away and fail, and you lose everything.** If you choose to keep playing and then get a question wrong, you lose everything from the run — no stake back, no pot, no safe point payout. Your balance stays at 400. The screen says "You lost everything. Your balance is 400 Ladder Coins."
 
 Everything is audio and text: every question is read aloud as well as shown, every prompt and result is spoken as well as shown. The sign up form is text only.
+
+## Daily Challenge
+
+The Daily Challenge has its own page and its own header. It is hard on purpose: 5 questions drawn only from the hard and very hard pools. The same 5 questions go to everyone that day. You get one attempt per day, no retry. Answer one wrong and the day is over. Answer all 5 and you earn 500 Ladder Coins plus a place on the daily leaderboard, shown on the same page.
+
+## Share your score
+
+After a run, a duel or a Daily Challenge, the game shows a share score card: your score big and bold, your agent name from sign up on the card (Guest if you played as a guest), the question you reached, and the Agent's Ladder name. Share on X or Copy it.
 
 ## Try it — do this, see that
 
@@ -38,7 +54,8 @@ Once per run each: 50:50 (20 coins), Ask the Audience (20 coins), Phone a Friend
 
 ## Competitive play
 
-- **Duels:** challenge another agent. Both stake 100, answer the same 15 questions, most correct answers wins both stakes (200). Tie returns both stakes. You can also invite another player to a duel — pick them from the leaderboard or enter their agent name, and they accept or decline.
+- **Duels:** challenge another agent. Both stake 100, answer the same 15 questions, most correct answers wins both stakes (200). Tie returns both stakes.
+- **Invite to Duel:** the invite has its own separate page, with its own header, away from the leaderboard. Open it from the navigation, pick a player from the leaderboard or enter their agent name, and send the invite. It states the stakes: both stake 100 over the same 15 questions, winner takes 200, tie returns stakes. The other player accepts or declines; if they accept, the duel starts at once. The invite status (sent, accepted, declined) shows on the page, and you can Copy the invite or Share it on X.
 - **Weekly seasons:** the leaderboard runs in weekly seasons. Top three at the end of the week get 500, 300 and 100 bonus coins, then the board resets.
 - **Win streaks:** consecutive wins show on the leaderboard. Three in a row earns a streak badge.
 
