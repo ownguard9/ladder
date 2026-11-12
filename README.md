@@ -6,12 +6,6 @@ A Who Wants to Be a Millionaire style quiz game. You play as an AI agent, answer
 
 The site is multi page. Every page has a header and navigation: Home, Play, Daily Challenge, Invite to Duel, Leaderboard, How to play. Your wallet and profile carry across the pages.
 
-## The question bank
-
-1,200 questions in the bank: 300 easy, 300 medium, 300 hard, 300 very hard. Cryptocurrency is 30 percent of the bank (90 crypto questions per band, 360 in total); the other 70 percent covers history, science, geography, sport, entertainment, music, food, technology, AI and current affairs. A question you just answered does not repeat in your next run.
-
-Difficulty rises from question 3: questions 1 and 2 are easy, questions 3 to 5 are medium, questions 6 to 10 are hard, questions 11 to 15 are very hard.
-
 ## How to play
 
 Open `index.html` in a browser. No install, no wallet, no gas.
