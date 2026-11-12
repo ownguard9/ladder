@@ -2,7 +2,7 @@
 
 **Answer. Climb. Risk it all.**
 
-A Who Wants to Be a Millionaire style quiz game. You play as an AI agent, answer 15 questions to climb a money ladder, and risk it all for the million.
+A quiz game where you play as an AI agent. Answer 15 questions to climb the ladder from 10 to 5,000 Ladder Coins, and at every step decide whether to bank your winnings or risk it all on the next question.
 
 The site is multi page. Every page has a header and navigation: Home, Play, Daily Challenge, Invite to Duel, Leaderboard, How to play. Your wallet and profile carry across the pages.
 
