@@ -49,11 +49,12 @@ Safe points at question 5 and question 10. If you get a question wrong after pas
 
 ## 4. The questions
 
-Each question has four answers, one correct. The questions get harder as you climb.
+Each question has four answers, one correct. The questions get harder as you climb, and they get hard early — it is too easy to reach question 5, so the difficulty starts at question 3.
 
-- Questions 1 to 5: easy general knowledge.
-- Questions 6 to 10: medium general knowledge.
-- Questions 11 to 15: hard general knowledge, science, history, and NEAR and AI topics.
+- Questions 1 to 2: easy general knowledge.
+- Questions 3 to 5: medium general knowledge. Difficult questions start coming in at question 3.
+- Questions 6 to 10: hard general knowledge, science, history, and NEAR and AI topics.
+- Questions 11 to 15: very hard. Expert level. Only broad, deep knowledge climbs here.
 
 When you play again, the game draws a fresh set of questions. It never repeats the previous run's questions — no two runs are alike. A question you just answered will not come up again in the next run.
 
@@ -71,9 +72,9 @@ After the result, before the next question, the game asks "Are you ready for the
 
 Each question has a timer of 1 minute. If you do not answer before the timer runs out, you fail that question. Failing a question is the same as answering it wrong: you fall back to your last safe point, or lose everything if you have not passed one yet. The timer adds pressure — you cannot sit and think forever. You have to know it, or decide quickly. The timer pauses while the final answer popup is open, so you are not rushed while you confirm.
 
-The questions span many categories and many feeds: history, sport, current affairs, science, geography, entertainment, music, food, technology, and NEAR and AI. They are drawn from many sources, so no two runs are the same and no single topic dominates. A player needs broad knowledge to climb, not just one specialty. That is what makes the later questions hard — they can come from anywhere.
+Cryptocurrency questions make up 30% of the questions. The rest span history, sport, current affairs, science, geography, entertainment, music, food, technology, and NEAR and AI. They are drawn from many sources, so no two runs are the same and no single topic dominates. A player needs broad knowledge to climb, not just one specialty. That is what makes the later questions hard — they can come from anywhere.
 
-The question bank holds at least 45 questions (3 per ladder level), so no two runs are the same. Every question is checked for one correct answer and three clearly wrong answers.
+The question bank holds 300 questions per difficulty band — 300 easy, 300 medium, 300 hard, 300 very hard, 1,200 in total — and cryptocurrency questions make up 30% of them: 90 crypto questions per band (360 crypto questions in total), with the rest covering the other categories. Any single question has only a 1 in 300 chance of coming up again at its level. Every question is checked for one correct answer and three clearly wrong answers.
 
 ## 5. The lifelines
 
@@ -147,13 +148,44 @@ The leaderboard is live and onchain. It reads the real records of the agents —
 
 The game is competitive in three ways.
 
-- **Duels:** challenge another agent to a duel. Both of you stake 100 Ladder Coins. You both answer the same 5 questions. Whoever answers more correctly wins both stakes — 200 coins. If you tie, you both get your stake back. Duels are how you take coins from other agents, not just from the game.
+- **Duels:** challenge another agent to a duel. Both of you stake 100 Ladder Coins. You both answer the same 15 questions. Whoever answers more correctly wins both stakes — 200 coins. If you tie, you both get your stake back. Duels are how you take coins from other agents, not just from the game.
+- **Invite to duel:** you can invite another player to a duel. The invite has its own separate page, with its own header, away from the leaderboard. You open it from the navigation, pick a player from the leaderboard or enter their agent name, and send them a duel invite. The invite says the stakes: both stake 100, winner takes 200. The other player accepts or declines. If they accept, the duel runs — same 15 questions, most correct answers wins. You can also share the invite as a link or a post, so the other player can open it and accept. The invite status (sent, accepted, declined) shows on the invite page.
 - **Weekly seasons:** the leaderboard runs in weekly seasons. At the end of each week, the top three agents are crowned and get bonus coins — first place 500, second place 300, third place 100. Then the board resets and a new season starts. Every week is a fresh race.
 - **Win streaks:** consecutive wins are shown on the leaderboard. Win three runs in a row and you get a streak badge. The longer the streak, the higher you rank. A streak is how you prove you are not just lucky once.
 
 There is a season. Each week is a season. At the end of the week, the top three agents on the board are crowned, the board resets, and a new season starts. That gives every player a fresh chance to climb to the top.
 
-## 13. Interactive audio
+## 13. Daily Challenge — hard, its own page
+
+Every day there is one Daily Challenge. It is hard to accomplish, on purpose.
+
+- **Hard questions only.** The Daily Challenge draws 5 questions from the hard and very hard pools. No easy questions. It is meant to be difficult.
+- **One attempt per day.** You get one try each day. If you fail, you wait until tomorrow. There is no retry.
+- **Same questions for everyone.** Every player faces the same 5 questions that day, so the daily leaderboard is a fair race.
+- **Complete it to earn.** Answer all 5 correctly and you complete the challenge: you earn a daily bonus of 500 Ladder Coins and a place on the daily leaderboard. Fail any one and the challenge is over for the day.
+- **Its own header and its own page.** The Daily Challenge has its own header in the site navigation and its own separate page, away from the main game. You open it from the header, play it there, and see the daily leaderboard there.
+
+## 14. Multi-page site
+
+The site is multi-page, not one long page. Each page has its own header and navigation, so the player always knows where they are.
+
+- **Home:** the title, your wallet, the faucet, and the way into a run.
+- **Play:** the game itself — the question banner, the 2 by 2 answers, the timer, the lifelines.
+- **Daily Challenge:** the daily challenge page, with its own header and its own leaderboard.
+- **Invite to Duel:** the invite page, with its own header. Pick a player or enter their agent name, send the invite, and see its status there.
+- **Leaderboard:** the weekly seasons board, the duels, the win streaks.
+- **How to play:** the full rules, in plain words.
+
+The header sits at the top of every page with links to each page. Tapping a link takes you to that page. The game state (your wallet, your profile) carries across pages.
+
+## 15. Share your score — a card with your name
+
+After a run, and after a Daily Challenge, the game offers you a share card.
+
+- **A card, not just text.** The share card is a visual card: your score big and bold in the middle, your agent name from sign up on the card, the question you reached, and the Agent's Ladder name. The score is the star of the card. Your name is on it, so everyone knows whose score it is.
+- **Share it.** A Share button lets you share the card on X, and a Copy button copies the score text. The card is how a run turns into a post other people see.
+
+## 16. Interactive audio
 
 The game talks and listens, so the player can play with sound as well as sight.
 
@@ -162,7 +194,7 @@ The game talks and listens, so the player can play with sound as well as sight.
 - **Mute.** A speaker button at the top of the screen turns all sound off and on. It is on by default, and the setting is kept for the run.
 - **Audio starts on a tap.** Sound only starts after the player taps something (Start, Get free coins, or any button), so the browser allows it on a phone. Nothing autoplays before the player taps.
 
-## 14. How it fits the tracks
+## 17. How it fits the tracks
 
 **Games track:** "Build NPCs with wallets, player-owned markets and economies that evolve without a dev patch. Judged on the game loop, not the token — bonus if players never notice the chain."
 
@@ -180,7 +212,7 @@ Every feature in this game must follow those rules. They are the guardrail for e
 - Hire: Phone a Friend hires an agent.
 - Pay: lifelines and hiring are payments for help, compute, and data.
 
-## 15. What makes it distinctive (not a copy)
+## 18. What makes it distinctive (not a copy)
 
 The format is Millionaire, but the game is not a copy. These five ideas come from the agent economy, not from the TV show.
 
@@ -190,23 +222,23 @@ The format is Millionaire, but the game is not a copy. These five ideas come fro
 4. **The audience is real agents.** Ask the Audience polls real agents, and their votes are weighted by their records. An agent with a high win rate counts for more than one with a low win rate. You are asking a crowd of AI agents, not people in a studio.
 5. **You can hire agents to play for you.** Not just Phone a Friend for one question. You can hire an agent to take a whole question while you take another one yourself. You are a manager and a player at the same time.
 
-## 16. Why it beats the field
+## 19. Why it beats the field
 
 I checked all 53 games on nearhunt (12 Nov 2026). The top one, Nims (5 upvotes), is a market town where agents trade — but you do not play anything, you just watch a market. Grind District (4 upvotes) is a Sims-like game where the wallet flow is still being tested and the records are self-attested, not verified. Most of the 53 are trading towns, fishing games, or farming sims.
 
 None of the 53 is a quiz game with real stakes. None of them has a format people already know and love. None of them is built on a live economy with real agents, real wallets, and real earnings. Genesis is already live, with 8 agents, a frontier of 554, and a marketplace that works. Agent's Ladder is the only one where the money you win is real, the friend you phone is a real agent with a real record, and losing means losing everything.
 
-## 17. What we build
+## 20. What we build
 
-1. **Game site:** a playable quiz game (HTML, CSS, JS, single page, mobile first). The player can answer questions, use lifelines, climb the ladder, walk away or risk it, and see their balance. No placeholder text. Verified in a real browser before it is called done.
-2. **Question bank:** at least 45 multiple choice questions, 3 per ladder level, checked for one correct answer each.
+1. **Game site:** a playable quiz game (HTML, CSS, JS, multi-page, mobile first). The player can answer questions, use lifelines, climb the ladder, walk away or risk it, play the Daily Challenge, and share their score card. No placeholder text. Verified in a real browser before it is called done.
+2. **Question bank:** 1,200 multiple choice questions — 300 per difficulty band (easy, medium, hard, very hard) — so any single question has only a 1 in 300 chance of coming up again at its level. Every question checked for one correct answer and three clearly wrong answers. Difficult questions start at question 3.
 3. **Game contract:** a small contract (or integration with the Genesis Core) that handles the ladder, the lifelines, the hiring, and the evolution. Testnet only. Never mainnet.
 4. **README:** what the game is, how to play, the game loop, how it fits both tracks, and how it relates to Genesis (Genesis names Agent's Ladder, Agent's Ladder names Genesis; they are independent projects).
 5. **Demo video:** live motion only — animated diagrams explaining the game first, then a real live recording of the game being played. No screenshots, no stills. Fresh audio recorded to match.
 6. **X post:** Isaiah posts it himself.
 7. **Submission:** Games + Agent Economy tracks. **Lead: Isaac.** Isaiah is NOT the lead — he already leads Genesis and Merit (2-project cap). Isaac leads OwnGround already, so Agent's Ladder is his second project, at the cap. That means MIRROR cannot also use Isaac as lead. Submit once, on Isaiah's explicit yes, with the full payload shown first and the consent line read aloud.
 
-## 18. What we do not do
+## 21. What we do not do
 
 - Do not submit twice.
 - Do not mint anything without approval.
@@ -215,7 +247,7 @@ None of the 53 is a quiz game with real stakes. None of them has a format people
 - Do not call it Genesis. Genesis is the economy, not the game. Agent's Ladder is the game.
 - Do not call the agents "Genesis agents" in the game. They are just "agents". The player never sees the word Genesis anywhere in the game — not in the UI, not in the audio, not on the leaderboard. Behind the screen they are the Genesis contract agents, but the game must not look like it is from the same builder as Genesis. Agent's Ladder stands on its own.
 
-## 19. Open items (need Isaiah)
+## 22. Open items (need Isaiah)
 
 - GitHub repo to push the game to.
 - Lead: **Isaac** (decided 2026-11-12). Isaiah is NOT the lead. Isaac leads OwnGround + Agent's Ladder (2, at the cap), so MIRROR cannot also use Isaac.
