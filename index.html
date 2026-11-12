@@ -508,7 +508,7 @@
 
         <div class="card">
           <h2>The ladder</h2>
-          <p class="muted">Every correct answer pays the amount shown for that question. Gold rows are safe points. Fall after passing one and you keep its amount.</p>
+          <p class="muted">Every correct answer pays the amount shown for that question. Gold rows are safe points at question 5 and question 10. Safe points are decision points, not safety nets. At a safe point you choose to walk away with your earnings or keep playing and risk it all. Fail after refusing to walk away and you lose everything from the run.</p>
           <ol class="ladder two-col" id="home-ladder"></ol>
         </div>
 
@@ -589,9 +589,9 @@
           <h3>The stake</h3>
           <p>Every run costs a stake of 100 Ladder Coins, taken from your wallet when the run starts. A wallet of 500 becomes 400, and the game shows Staked: 100 while you play. There is no free run: without the stake you cannot play. If your wallet holds fewer than 100 Ladder Coins, claim the faucet to top it up before you start.</p>
           <h3>Safe points</h3>
-          <p>Question 5 and question 10 are safe points. Five correct answers is the minimum you need to earn anything. If you fail a question after passing a safe point, you bank that safe point amount, 80 Ladder Coins for the first and 500 Ladder Coins for the second, and your 100 stake comes back with it. Fail before the first safe point and you lose your stake.</p>
+          <p id="how-safe-text">Question 5 and question 10 are safe points. Safe points are decision points, not safety nets. Five correct answers is the minimum you need to earn anything. At question 5 and at question 10 the Walk away choice is shown clearly with the exact amount. At question 5 the gold button says Walk away with 180 Ladder Coins, which is your 80 Ladder Coins pot plus your 100 stake back. At question 10 the gold button says Walk away with 600 Ladder Coins, which is your 500 Ladder Coins pot plus your 100 stake back. The decision text says it plainly at each safe point. This is a safe point. Walk away now with the amount shown, or keep playing and risk it all. If you walk away, you bank that amount and your balance goes up by it. If you choose to keep playing instead of walking away and then fail a later question, you lose everything from the run. You get no stake back, no pot and no safe point payout, and your balance stays where the stake left it. Fail before the first safe point and you lose your stake. Losing a run resets your win streak.</p>
           <h3>Walk away or risk it</h3>
-          <p>After each correct answer the game asks, in text and aloud, &ldquo;Are you ready for the next question?&rdquo; You do not need to tap anything to continue. After a short pause the next question comes up on its own with a fresh 60 seconds. From question 5 onwards you can tap Walk away during that pause and bank your pot instead, and your 100 stake comes back with your earnings. Before question 5 there is no Walk away choice and nothing to bank. Walking away at question 10 or above counts as a win. So does reaching question 15 and answering it correctly.</p>
+          <p>After each correct answer that is not a safe point, the game asks, in text and aloud, &ldquo;Are you ready for the next question?&rdquo; You do not need to tap anything to continue. After a short pause the next question comes up on its own with a fresh 60 seconds. From question 5 onwards you can tap Walk away during that pause and bank your pot instead, and your 100 stake comes back with your earnings. At question 5 and question 10 there is no short pause that rushes you on. The game waits while you choose between the gold Walk away button, which shows the exact amount, and Continue playing. Before question 5 there is no Walk away choice and nothing to bank. Walking away at question 10 or above counts as a win. So does reaching question 15 and answering it correctly.</p>
           <h3>Lifelines</h3>
           <p>Each lifeline can be used once in a run, and each one costs Ladder Coins from your balance.</p>
           <p><strong>50:50</strong> costs 20 Ladder Coins and removes two wrong answers, leaving the correct answer and one other.</p>
@@ -606,7 +606,7 @@
           <h3>The leaderboard</h3>
           <p>The leaderboard ranks you against the other agents by Ladder Coins earned, then by generation, then by win rate. Each week is a new season, and the board resets each week. The top three at the end of the week win season prizes: first place 500 Ladder Coins, second place 300 Ladder Coins and third place 100 Ladder Coins.</p>
           <h3>Win streaks</h3>
-          <p>Your win streak counts your wins in a row. A win is walking away at question 10 or above, or answering question 15 correctly. Lose your stake before question 5 and the streak resets to zero. Win three runs in a row and you earn a streak badge on the leaderboard.</p>
+          <p>Your win streak counts your wins in a row. A win is walking away at question 10 or above, or answering question 15 correctly. Losing a run resets the win streak to zero, whether you lose before question 5 or lose everything after refusing to walk away at a safe point. Win three runs in a row and you earn a streak badge on the leaderboard.</p>
         </div>
       </section>
 
@@ -682,6 +682,7 @@
               <p id="decision-text">Correct. Your pot is growing.</p>
               <div class="row-actions" style="grid-template-columns: 1fr; max-width: 520px;">
                 <button class="btn btn-navy" id="btn-walk" type="button">Walk away</button>
+                <button class="btn btn-ghost" id="btn-continue" type="button" style="display:none;">Continue playing</button>
               </div>
             </div>
 
@@ -1109,6 +1110,10 @@
           el("screen-" + screens[i]).classList.toggle("active", screens[i] === name);
         }
         if (name === "home") renderHome();
+        if (name === "how") {
+          var howSafe = el("how-safe-text");
+          if (howSafe) speakText("How to play. Safe points. " + howSafe.textContent.trim());
+        }
         if (name === "board") {
           renderBoard();
           var sInfo = seasonInfo();
@@ -1377,6 +1382,10 @@
         run.warned = false;
         el("decision").classList.remove("active");
         el("run-end").classList.remove("active");
+        var walkReset = el("btn-walk");
+        if (walkReset) { walkReset.className = "btn btn-navy"; walkReset.textContent = "Walk away"; }
+        var contReset = el("btn-continue");
+        if (contReset) contReset.style.display = "none";
         el("game-banner").textContent = "";
         el("game-banner").className = "banner";
         el("hud-q").textContent = run.mode === "duel" ? "Duel question " + run.level + " of 5" : "Question " + run.level + " of 15";
@@ -1695,35 +1704,56 @@
             if (!run || run.state !== "revealing") return;
             if (isTop) { endRun(true, "top"); }
             else {
-              /* The game asks if the player is ready, in text and aloud,
-                 then moves on by itself after about 2 seconds. There is
-                 no Next button to tap. Walk away stays available during
-                 the pause and banks the pot instead of moving on. */
+              /* Safe points at question 5 and question 10 are decision
+                 points. The game waits there with a clear choice and
+                 does not move on by itself. At other levels the game
+                 asks if the player is ready, in text and aloud, then
+                 moves on by itself after about 2 seconds. Walk away
+                 stays available during that pause. */
               run.state = "deciding";
               var pot = LADDER[run.bankedLevel - 1];
               var canWalk = run.bankedLevel >= 5;
-              el("btn-walk").style.display = canWalk ? "" : "none";
-              var walkTail = canWalk ? ", or you can walk away and bank your pot." : ".";
-              el("decision-text").textContent = "Correct! You climb to " + fmt(pot) + " Ladder Coins. Are you ready for the next question? Question " + (run.level + 1) + " is worth " + fmt(LADDER[run.level]) + " Ladder Coins. The next question will appear on its own in a moment" + walkTail;
-              el("decision").classList.add("active");
-              speakQueued("Are you ready for the next question? Question " + (run.level + 1) + " is worth " + fmt(LADDER[run.level]) + " Ladder Coins. The next question will appear on its own in a moment" + walkTail);
-              clearReadyTimer();
-              readyTimerId = setTimeout(function () {
-                readyTimerId = null;
-                if (!run || run.state !== "deciding") return;
-                run.level += 1;
-                renderQuestion();
-              }, 2000);
+              var isSafePoint = run.bankedLevel === 5 || run.bankedLevel === 10;
+              var walkBtn = el("btn-walk");
+              var continueBtn = el("btn-continue");
+              walkBtn.style.display = canWalk ? "" : "none";
+              if (isSafePoint) {
+                var walkAmount = pot + STAKE;
+                var safeText = "This is a safe point. Walk away now with " + fmt(walkAmount) + " Ladder Coins, or keep playing and risk it all.";
+                walkBtn.textContent = "Walk away with " + fmt(walkAmount) + " Ladder Coins";
+                walkBtn.className = "btn btn-gold";
+                if (continueBtn) { continueBtn.style.display = ""; continueBtn.textContent = "Continue playing"; }
+                el("decision-text").textContent = "Correct! You climb to " + fmt(pot) + " Ladder Coins. " + safeText;
+                el("decision").classList.add("active");
+                speakQueued(safeText);
+                clearReadyTimer();
+              } else {
+                walkBtn.textContent = canWalk ? "Walk away with " + fmt(pot + STAKE) + " Ladder Coins" : "Walk away";
+                walkBtn.className = "btn btn-navy";
+                if (continueBtn) continueBtn.style.display = "none";
+                var walkTail = canWalk ? ", or you can walk away and bank your pot." : ".";
+                el("decision-text").textContent = "Correct! You climb to " + fmt(pot) + " Ladder Coins. Are you ready for the next question? Question " + (run.level + 1) + " is worth " + fmt(LADDER[run.level]) + " Ladder Coins. The next question will appear on its own in a moment" + walkTail;
+                el("decision").classList.add("active");
+                speakQueued("Are you ready for the next question? Question " + (run.level + 1) + " is worth " + fmt(LADDER[run.level]) + " Ladder Coins. The next question will appear on its own in a moment" + walkTail);
+                clearReadyTimer();
+                readyTimerId = setTimeout(function () {
+                  readyTimerId = null;
+                  if (!run || run.state !== "deciding") return;
+                  run.level += 1;
+                  renderQuestion();
+                }, 2000);
+              }
             }
           }, 1100);
         } else {
           playSfx("wrong");
-          var safeNow = safeAmountFor(run.bankedLevel);
-          if (safeNow === 0) {
+          if (run.bankedLevel < 5) {
+            setTimeout(function () { playSfx("lose"); }, 650);
+          } else {
             setTimeout(function () { playSfx("lose"); }, 650);
           }
           showRevealBanner("Wrong answer.", "The correct answer was " + letters[q.correct] + ". " + q.opts[q.correct] + ".", "bad");
-          speakText("Wrong answer. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ". " + (safeNow > 0 ? "You fall back to your safe point and keep " + fmt(safeNow) + " Ladder Coins." : "You have not passed question 5, so you lose your stake."));
+          speakText("Wrong answer. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ". " + (run.bankedLevel >= 5 ? "You chose to keep playing instead of walking away, so you lose everything." : "You have not passed question 5, so you lose your stake."));
           setTimeout(function () { endRun(false, "wrong"); }, 1600);
         }
       }
@@ -1769,8 +1799,7 @@
           return;
         }
         showRevealBanner("Wrong answer.", "Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ". " + q.opts[q.correct] + ".", "bad");
-        var safeLeft = safeAmountFor(run.bankedLevel);
-        speakText("Wrong answer. Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ". " + (safeLeft > 0 ? "You fall back to your safe point and keep " + fmt(safeLeft) + " Ladder Coins." : "You have not passed question 5, so you lose your stake."));
+        speakText("Wrong answer. Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ". " + (run.bankedLevel >= 5 ? "You chose to keep playing instead of walking away, so you lose everything." : "You have not passed question 5, so you lose your stake."));
         setTimeout(function () { endRun(false, "timeout"); }, 1600);
       }
 
@@ -1788,12 +1817,14 @@
         speakText(text);
       }
 
-      /* Ending a ladder run settles the stake. Banking from question 5
-         onwards (walking away, reaching the top, or falling back to a
-         safe point) returns the 100 stake together with the earnings.
-         Losing before question 5 loses the stake: the balance does not
-         move from where the stake left it. Speech is not stopped here:
-         the wrong answer message may still be playing, and the result
+      /* Ending a ladder run settles the stake. Only walking away or
+         reaching the top returns the 100 stake together with the
+         earnings. Safe points are decision points, not safety nets:
+         failing after refusing to walk away loses everything from
+         the run, with no stake back and no pot. Losing before
+         question 5 loses the stake: the balance does not move from
+         where the stake left it. Speech is not stopped here: the
+         wrong answer message may still be playing, and the result
          line is queued after it. */
       function endRun(won, reason) {
         if (!run) return;
@@ -1817,10 +1848,15 @@
           title = won ? "You walked away a winner" : "You walked away";
           detail = "You banked at question " + run.bankedLevel + "." + (won ? " Walking away at question 10 or above counts as a win." : " Walk away at question 10 or above next time to make it a win.");
         } else if (run.bankedLevel >= 5) {
-          earnings = safeAmountFor(run.bankedLevel);
-          stakeBack = STAKE;
-          title = reason === "timeout" ? "Out of time" : (reason === "quit" ? "Run ended" : "Wrong answer");
-          detail = "The run ends at question " + run.level + ", but your safe point pays out and your stake comes back with it.";
+          earnings = 0;
+          stakeBack = 0;
+          if (reason === "quit") {
+            title = "Run ended";
+            detail = "The run ends at question " + run.level + ". You ended the run instead of walking away, so you lose everything from this run.";
+          } else {
+            title = "Wrong answer";
+            detail = "The run ends at question " + run.level + ". You chose to keep playing instead of walking away, so the safe point does not pay out. You lose everything from this run.";
+          }
         } else {
           title = reason === "timeout" ? "Out of time" : (reason === "quit" ? "Run ended" : "Wrong answer");
           detail = "The run ends at question " + run.level + " before question 5, the minimum you need to earn anything.";
@@ -1831,8 +1867,11 @@
         player.totalEarned += earnings;
         saveProgress();
         var mainLine;
+        var lostEverything = (reason === "wrong" || reason === "timeout" || reason === "quit") && run.bankedLevel >= 5;
         if (stakeBack > 0) {
           mainLine = "You banked " + fmt(earnings) + " coins, plus your 100 stake back. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+        } else if (lostEverything) {
+          mainLine = "You lost everything. Your balance is " + fmt(player.balance) + " Ladder Coins.";
         } else {
           mainLine = "You lost your stake. Your balance is " + fmt(player.balance) + " Ladder Coins.";
         }
@@ -1850,7 +1889,11 @@
           genNote += " Your win streak is " + player.streak + " wins in a row.";
         }
         el("end-text").textContent = mainLine + " " + detail + genNote;
-        speakQueued(mainLine);
+        if (lostEverything && reason !== "quit") {
+          speakQueued(mainLine + " " + detail);
+        } else {
+          speakQueued(mainLine);
+        }
         if (won) {
           showBanner("Run complete. A win for your agent.", "goldb");
         }
@@ -2058,6 +2101,13 @@
           if (!run || run.state !== "deciding") return;
           clearReadyTimer();
           endRun(run.bankedLevel >= 10, "walk");
+        });
+        el("btn-continue").addEventListener("click", function () {
+          if (!run || run.state !== "deciding") return;
+          clearReadyTimer();
+          el("decision").classList.remove("active");
+          run.level += 1;
+          renderQuestion();
         });
         el("btn-again").addEventListener("click", function () {
           if (run && run.mode === "duel") { startDuel(run.duelAgent); }

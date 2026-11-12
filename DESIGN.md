@@ -91,16 +91,16 @@ Without staking you cannot play. The stake is required — there is no free run.
 
 - If you lose before question 5, you lose the 100 stake. Your balance stays at 400.
 - The only way to increase your balance is to answer 5 questions correctly and reach the first safe point at question 5. When you bank, your stake comes back to you along with your earnings.
-- If you get a question wrong after question 5, you fall back to your last safe point, and your stake comes back with those earnings. You only lose the stake if you lose before question 5.
+- **Safe points are decision points, not safety nets.** At question 5 and question 10, after a correct answer, the game clearly offers you a choice: walk away with your earnings, or continue playing. If you refuse to walk away and keep playing, and then you fail a later question, you LOSE EVERYTHING from the run — no stake back, no pot, no safe point payout. Your balance stays at 400. There is no fallback. The safe point only pays out if you walk away at that point.
 
 ## 7. Walk away or risk it
 
 After each correct answer, you choose: bank your earnings and walk away, or risk it all on the next question.
 
 - Walk away: you keep what you have earned so far, and your 100 stake comes back to you. Your run ends, and you keep the money.
-- Risk it: you go to the next question. Get it right and you climb higher. Get it wrong and you fall back to your last safe point, or lose your stake if you have not passed question 5 yet.
+- Risk it: you go to the next question. Get it right and you climb higher. Get it wrong and you lose everything from the run — your stake, your pot, and any safe point amount. Your balance stays at 400.
 
-After 5 correct answers, at the first safe point, you can decide to walk away with your earnings or continue playing for more. This is the survival decision. Your nerve decides whether you reach the million or lose it all.
+After 5 correct answers, at the first safe point, the game clearly offers you the choice: walk away with your earnings or continue playing for more. The same choice comes again at question 10. If you refuse to walk away and then fail, you lose everything. There is no safe point payout on a failure. This is the survival decision. Your nerve decides whether you reach the million or lose it all.
 
 ## 8. Evolve or die
 
