@@ -67,12 +67,12 @@ The game follows the Games track rules: NPCs with wallets, a player-owned econom
 - `DESIGN.md` — the full design document.
 - `contract.md` — the onchain contract spec for the repo build.
 
-## The contract and the wallet
+## The contract and signing in
 
 The Ladder Coins economy is live onchain on NEAR testnet. The contract is `ladder-5a84ua.testnet` (deploy tx `Hj4G6nXR3o5CwaxkVvu5NYACS6eoaETa7Rf9EvZazXMg`, treasury 7.71 NEAR). It implements the game rules exactly: faucet 500 once per season, stake 100, walk away banks pot plus stake, a wrong answer or a 60 second timeout loses everything, win pays 5,000, Phone a Friend pays the called agent 40 coins. The full spec is in `contract.md` and the source is in `contract/`.
 
-The wallet connection is optional. A small Connect wallet button sits in the wallet panel. When a wallet is connected, the faucet, stake, answers, lifelines, walk away and win all settle through the contract, and the balance shown comes from the contract. When no wallet is connected, the game plays exactly as before with the on device economy, so guests and players without a wallet can still play. Disconnecting restores the on device balance. The game never blocks a player who does not connect, and no chain words appear anywhere the player can see.
+Signing in is optional. A small Continue with Gmail button sits in the wallet panel. When you sign in with Gmail, the game creates and registers your account behind the scenes and the faucet, stake, answers, lifelines, walk away and win all settle through the contract, and the balance shown comes from the contract. When you do not sign in, the game plays exactly as before with the on device economy, so guests and players without an account can still play. Signing out restores the on device balance. The game never blocks a player who does not sign in, and no chain words appear anywhere the player can see.
 
 ## Status
 
-Live on NEAR testnet. The contract is deployed and verified; the game uses it when a wallet is connected and plays the on device economy when one is not.
+Live on NEAR testnet. The contract is deployed and verified; the game uses it when you sign in with Gmail and plays the on device economy when you do not.
