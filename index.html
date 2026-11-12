@@ -1,0 +1,2077 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>Agent's Ladder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Public+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #edf0f6;
+        --surface: #ffffff;
+        --surface2: #e3e8f2;
+        --ink: #131b30;
+        --muted: #4c5871;
+        --line: #c9d2e2;
+        --stage: #0b1428;
+        --stage2: #12203f;
+        --stage-ink: #f4f6fc;
+        --stage-muted: #aebbd6;
+        --gold: #e6b84e;
+        --gold-ink: #231a04;
+        --gold-soft: #f7e3ac;
+        --good: #1e9e62;
+        --good-bg: #d9f4e5;
+        --bad: #d23b3b;
+        --bad-bg: #fbdddd;
+        --focus: #2563eb;
+        color-scheme: light dark;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #060a16;
+          --surface: #101a30;
+          --surface2: #16233f;
+          --ink: #eef1f9;
+          --muted: #a7b2c9;
+          --line: #2a3a5c;
+          --stage: #0b1428;
+          --stage2: #14264c;
+          --good-bg: #123c28;
+          --bad-bg: #471d1d;
+          --focus: #7aa5ff;
+        }
+      }
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Public Sans", system-ui, sans-serif;
+        line-height: 1.5;
+      }
+      button { font: inherit; cursor: pointer; }
+      button:focus-visible, a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+      .wrap { max-width: 1060px; margin: 0 auto; padding: 16px 16px 48px; }
+      .screen { display: none; }
+      .screen.active { display: block; }
+
+      /* Stage hero */
+      .stage {
+        background: radial-gradient(120% 160% at 50% 0%, var(--stage2) 0%, var(--stage) 62%);
+        color: var(--stage-ink);
+        border-radius: 20px;
+        padding: 28px 20px 24px;
+        text-align: center;
+        border: 1px solid #22355f;
+        box-shadow: 0 18px 40px rgba(4, 10, 26, 0.35);
+      }
+      .stage .rings { display: flex; justify-content: center; gap: 6px; margin-bottom: 14px; }
+      .stage .rings span { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); opacity: 0.35; }
+      .stage .rings span.on { opacity: 1; }
+      h1.title {
+        font-family: "Marcellus", Georgia, serif;
+        font-weight: 400;
+        font-size: clamp(2.3rem, 8vw, 3.6rem);
+        letter-spacing: 0.02em;
+        margin: 0;
+        color: var(--gold-soft);
+      }
+      .tagline { font-size: clamp(1.05rem, 4vw, 1.3rem); font-weight: 700; letter-spacing: 0.06em; margin: 8px 0 0; color: var(--stage-ink); }
+      .stage-sub { color: var(--stage-muted); margin: 10px auto 0; max-width: 34rem; font-size: 0.98rem; }
+
+      .pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 20px 0 4px; }
+      .pill {
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(230,184,78,0.55);
+        color: var(--stage-ink);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        min-height: 40px;
+        display: inline-flex; align-items: center; gap: 6px;
+      }
+      .pill b { color: var(--gold-soft); font-weight: 800; }
+
+      .actions { display: grid; gap: 10px; margin: 20px auto 0; max-width: 420px; }
+      .btn {
+        border: 0; border-radius: 12px; padding: 14px 18px;
+        font-weight: 800; font-size: 17px; min-height: 56px;
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        text-decoration: none;
+      }
+      .btn-gold { background: var(--gold); color: var(--gold-ink); }
+      .btn-gold:hover { background: #f0c663; }
+      .btn-stage { background: rgba(255,255,255,0.1); color: var(--stage-ink); border: 1px solid rgba(255,255,255,0.35); }
+      .btn-stage:hover { background: rgba(255,255,255,0.18); }
+      .btn-navy { background: var(--stage); color: var(--stage-ink); }
+      .btn-navy:hover { background: var(--stage2); }
+      .btn-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+      .btn-ghost:hover { background: var(--surface2); }
+      .btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+      .row-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      @media (max-width: 380px) { .row-actions { grid-template-columns: 1fr; } }
+      .faucet-msg { min-height: 1.5em; margin: 10px 0 0; color: var(--gold-soft); font-weight: 600; font-size: 0.95rem; }
+      .faucet-msg:empty { display: none; }
+
+      /* Wallet — the deposit destination on the home screen (text only) */
+      .wallet-panel {
+        margin: 16px auto 0; max-width: 420px; text-align: center;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(230,184,78,0.55);
+        border-radius: 14px; padding: 16px 16px 14px;
+      }
+      .wallet-panel.has-coins { background: rgba(230,184,78,0.16); border-color: var(--gold); border-width: 2px; }
+      .wallet-label { margin: 0; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold-soft); }
+      .wallet-amount { font-family: "Marcellus", Georgia, serif; font-size: 2.1rem; line-height: 1.15; margin: 6px 0 2px; color: var(--stage-ink); }
+      .wallet-status { margin: 6px 0 0; font-size: 0.96rem; font-weight: 600; line-height: 1.45; color: var(--stage-ink); }
+      .wallet-panel:not(.has-coins) .wallet-status { color: var(--stage-muted); font-weight: 500; }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px;
+        margin-top: 16px;
+      }
+      .card h2 { margin: 0 0 6px; font-size: 1.25rem; }
+      .card h3 { margin: 18px 0 4px; font-size: 1.05rem; }
+      .card h3:first-of-type { margin-top: 10px; }
+      .card p { margin: 6px 0; }
+      .muted { color: var(--muted); }
+      .note { font-size: 0.92rem; color: var(--muted); }
+      .stage .note { color: var(--stage-muted); }
+
+      /* Mini ladder on home */
+      .ladder { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 4px; }
+      .ladder li {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 6px 12px; border-radius: 8px; background: var(--surface2);
+        font-weight: 600; font-size: 0.95rem;
+      }
+      .ladder li .lvl { color: var(--muted); font-weight: 700; }
+      .ladder li.safe { background: var(--gold); color: var(--gold-ink); }
+      .ladder li.safe .lvl { color: var(--gold-ink); }
+      .ladder li .safe-tag { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.05em; }
+      @media (min-width: 760px) {
+        .ladder.two-col { grid-template-columns: 1fr 1fr; column-gap: 14px; }
+      }
+
+      .topbar { display: flex; align-items: center; gap: 10px; margin: 4px 0 14px; }
+      .topbar h2 { font-family: "Marcellus", Georgia, serif; font-weight: 400; font-size: 1.7rem; margin: 0; }
+      .back-btn { min-height: 56px; min-width: 56px; padding: 10px 16px; }
+
+      /* Leaderboard */
+      .season { font-weight: 700; color: var(--muted); margin: 2px 0 12px; }
+      .board { display: grid; gap: 8px; }
+      .board-row {
+        display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 6px 12px; align-items: center;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px;
+      }
+      .board-row.me { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold) inset; }
+      .rank { font-family: "Marcellus", Georgia, serif; font-size: 1.4rem; text-align: center; color: var(--muted); }
+      .board-row:nth-child(1) .rank { color: var(--gold); }
+      .bname { font-weight: 800; font-size: 1.02rem; }
+      .bmeta { color: var(--muted); font-size: 0.88rem; grid-column: 2; min-width: 0; overflow-wrap: anywhere; }
+      .bcoins { font-weight: 800; text-align: right; }
+      .bcoins small { display: block; color: var(--muted); font-weight: 600; font-size: 0.78rem; }
+
+      /* Game layout */
+      .game-grid { display: grid; gap: 16px; }
+      @media (min-width: 880px) {
+        .game-grid { grid-template-columns: 1fr 300px; align-items: start; }
+      }
+      .hud { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+      .hud .pill { background: var(--surface); border-color: var(--line); color: var(--ink); }
+      .hud .pill b { color: var(--ink); }
+      .hud .pill.goldp { border-color: var(--gold); background: var(--gold); color: var(--gold-ink); }
+      .hud .pill.goldp b { color: var(--gold-ink); }
+
+      .timer-row { display: flex; align-items: center; gap: 14px; margin: 4px 0 14px; flex-wrap: wrap; }
+      @media (max-width: 420px) { .timer-wrap { flex: 1 1 140px; } }
+      .timer-display { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+      .timer-num {
+        font-family: "Marcellus", Georgia, serif; font-size: 36px; line-height: 1;
+        min-width: 68px; text-align: center; padding: 10px 6px;
+        border: 2px solid var(--line); border-radius: 12px; background: var(--surface);
+        font-weight: 700;
+      }
+      .timer-unit { font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.2; max-width: 74px; }
+      .timer-wrap { flex: 1; }
+      .timer-label { font-size: 0.9rem; font-weight: 700; color: var(--muted); margin-bottom: 4px; letter-spacing: 0.04em; }
+      .timer-track { height: 14px; border-radius: 999px; background: var(--surface2); overflow: hidden; border: 1px solid var(--line); }
+      .timer-bar { height: 100%; width: 100%; background: var(--good); border-radius: 999px; transition: width 0.12s linear; }
+      .timer-num.danger { color: var(--bad); border-color: var(--bad); }
+      .timer-bar.danger { background: var(--bad); }
+
+      .qcard {
+        background: radial-gradient(120% 170% at 50% 0%, var(--stage2) 0%, var(--stage) 65%);
+        color: var(--stage-ink); border: 1px solid #22355f; border-radius: 18px; padding: 0;
+        overflow: hidden;
+      }
+      /* TV "Hot Seat" question banner: wide, blue, full-width of the card */
+      .qbanner {
+        background: linear-gradient(180deg, #2f6de4 0%, #1b4fc6 46%, #0f328c 100%);
+        color: #ffffff;
+        text-align: center;
+        padding: 20px 20px 22px;
+        border-bottom: 2px solid rgba(230,184,78,0.9);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -10px 22px rgba(3,12,44,0.28);
+      }
+      .qcat { color: var(--gold-soft); font-weight: 800; letter-spacing: 0.07em; font-size: 0.82rem; text-transform: uppercase; }
+      .qtext { font-size: clamp(20px, 4.6vw, 26px); font-weight: 700; line-height: 1.35; margin: 8px 0 0; color: #ffffff; overflow-wrap: break-word; }
+      /* Answers: ALWAYS a 2 x 2 horizontal grid — A|B on row 1, C|D on row 2.
+         Never a single-column vertical stack, at any viewport width. */
+      .options {
+        display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;
+        margin: 0; padding: 16px 16px 2px;
+      }
+      .opt {
+        display: flex; align-items: center; gap: 10px; text-align: left;
+        background: linear-gradient(180deg, #2560d8 0%, #1746ad 52%, #0f328c 100%);
+        color: #ffffff;
+        border: 1px solid rgba(148,184,255,0.85); border-radius: 999px;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.28);
+        padding: 12px 14px; min-height: 64px; font-weight: 600; font-size: 17px; width: 100%;
+        line-height: 1.3; min-width: 0;
+      }
+      .opt:hover:not([disabled]) { background: linear-gradient(180deg, #3a74e8 0%, #2056c4 52%, #143e9e 100%); }
+      .opt .letter {
+        flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%;
+        border: 2px solid var(--gold); color: var(--gold); background: rgba(6,18,48,0.35);
+        display: inline-flex; align-items: center; justify-content: center; font-weight: 800;
+      }
+      .opt .opt-text { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; word-break: break-word; color: #ffffff; }
+      .opt.correct { background: var(--good); border-color: var(--good); color: #ffffff; }
+      .opt.correct .letter { border-color: #ffffff; color: #ffffff; }
+      .opt.wrong { background: var(--bad); border-color: var(--bad); color: #ffffff; }
+      .opt.wrong .letter { border-color: #ffffff; color: #ffffff; }
+      .opt.removed { opacity: 0.5; }
+      .opt.suggested { box-shadow: 0 0 0 2px var(--gold) inset; }
+      .opt .sug-tag {
+        flex: 0 1 auto; min-width: 0; background: var(--gold); color: var(--gold-ink);
+        font-size: 0.62rem; font-weight: 800; padding: 3px 6px; border-radius: 999px; letter-spacing: 0.02em;
+        text-align: center; line-height: 1.2;
+      }
+      .opt[disabled] { cursor: default; }
+
+      .lifelines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+      @media (max-width: 480px) { .lifelines { grid-template-columns: 1fr; } }
+      .life {
+        background: var(--surface); border: 1px solid var(--line); color: var(--ink);
+        border-radius: 12px; padding: 12px 10px; min-height: 68px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+        font-size: 17px;
+      }
+      .life:hover:not([disabled]) { border-color: var(--gold); }
+      .life .lname { font-weight: 800; font-size: 17px; }
+      .life .lcost { color: var(--muted); font-size: 15px; font-weight: 700; }
+      .life .lused { color: var(--muted); font-size: 15px; font-weight: 800; }
+      .life[disabled] { opacity: 0.55; cursor: not-allowed; }
+      .life.used { background: var(--surface2); color: var(--muted); border-color: var(--line); opacity: 0.62; filter: grayscale(1); }
+      .life.used .lname { color: var(--muted); }
+
+      /* Always-visible ladder strip */
+      .ladder-strip-wrap {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+        padding: 12px 12px 10px; margin-bottom: 14px;
+      }
+      .ladder-strip-label { font-size: 13px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+      .ladder-strip { display: flex; gap: 4px; }
+      .ladder-seg {
+        flex: 1 1 0; height: 20px; min-width: 0; border-radius: 5px;
+        background: var(--surface2); border: 2px solid transparent;
+      }
+      .ladder-seg.done { background: var(--good); border-color: var(--good); }
+      .ladder-seg.current { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 0 2px rgba(230,184,78,0.35); }
+      .ladder-seg.safe { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+      .ladder-seg.safe.current { border-color: #8a6d1b; box-shadow: inset 0 0 0 2px #8a6d1b, 0 0 0 1px var(--gold); }
+      .ladder-seg.safe.done { border-color: var(--gold); }
+      .pot-line { margin: 10px 0 0; font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.4; }
+      .pot-line strong { font-weight: 800; }
+
+      .banner {
+        margin-top: 16px; border-radius: 12px; padding: 13px 15px; font-weight: 600;
+        background: var(--surface2); border: 1px solid var(--line);
+      }
+      .banner.good { background: var(--good-bg); border-color: var(--good); }
+      .banner.bad { background: var(--bad-bg); border-color: var(--bad); }
+      .banner.goldb { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+      .banner:empty { display: none; }
+
+      .decision { display: none; margin-top: 16px; }
+      .decision.active { display: block; }
+      .decision p { font-weight: 700; font-size: 1.08rem; margin: 0 0 10px; }
+      .decision .row-actions { max-width: 520px; }
+
+      .game-ladder { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+      .game-ladder li {
+        display: flex; justify-content: space-between; padding: 6px 12px; border-radius: 8px;
+        background: var(--surface); border: 1px solid var(--line); font-weight: 600; font-size: 0.93rem;
+      }
+      .game-ladder li .lvl { color: var(--muted); font-weight: 700; }
+      .game-ladder li.safe { border-color: var(--gold); }
+      .game-ladder li.done { background: var(--good-bg); border-color: var(--good); }
+      .game-ladder li.current { background: var(--gold); color: var(--gold-ink); border-color: var(--gold); }
+      .game-ladder li.current .lvl { color: var(--gold-ink); }
+      .side-title { font-weight: 800; margin: 0 0 8px; font-size: 1rem; }
+
+      /* Overlay panels */
+      .overlay {
+        position: fixed; inset: 0; background: rgba(3, 7, 18, 0.72);
+        display: none; align-items: flex-end; justify-content: center; z-index: 40; padding: 0;
+      }
+      .overlay.open { display: flex; }
+      .panel {
+        background: var(--surface); color: var(--ink); width: 100%; max-width: 560px;
+        border-radius: 20px 20px 0 0; padding: 20px; max-height: 88vh; overflow-y: auto;
+      }
+      @media (min-width: 640px) {
+        .overlay { align-items: center; padding: 20px; }
+        .panel { border-radius: 20px; }
+      }
+      .panel h3 { margin: 0 0 6px; font-size: 1.25rem; }
+      .panel .close-row { margin-top: 16px; display: grid; }
+      .vote-row { display: grid; grid-template-columns: 30px 1fr 52px; gap: 10px; align-items: center; margin-top: 10px; }
+      .vote-row .vletter { font-weight: 800; text-align: center; }
+      .vote-row .vname { font-weight: 600; font-size: 0.92rem; margin-bottom: 3px; }
+      .vote-track { height: 12px; background: var(--surface2); border-radius: 999px; overflow: hidden; }
+      .vote-fill { height: 100%; background: var(--gold); width: 0%; transition: width 0.5s ease; }
+      .vote-pct { font-weight: 800; text-align: right; }
+      .agent-pick {
+        display: block; width: 100%; text-align: left; margin-top: 10px;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; min-height: 56px;
+      }
+      .agent-pick:hover:not([disabled]) { border-color: var(--gold); }
+      .agent-pick .aname { font-weight: 800; font-size: 1rem; }
+      .agent-pick .ameta { color: var(--muted); font-size: 0.88rem; margin-top: 2px; overflow-wrap: anywhere; }
+      .agent-pick[disabled] { opacity: 0.5; cursor: not-allowed; }
+      .result-big { font-family: "Marcellus", Georgia, serif; font-size: 2rem; margin: 4px 0; }
+      .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+      /* Audio controls */
+      .audio-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 12px; }
+      .brand-mark { font-family: "Marcellus", Georgia, serif; font-size: 1.25rem; letter-spacing: 0.02em; color: var(--ink); white-space: nowrap; }
+      .mute-btn {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: var(--surface); color: var(--ink); border: 1px solid var(--line);
+        border-radius: 999px; padding: 10px 16px; min-height: 52px;
+        font-weight: 800; font-size: 15px;
+      }
+      .mute-btn svg { flex: 0 0 auto; }
+      .mute-btn .muted-x { display: none; }
+      .mute-btn.is-muted .muted-x { display: block; }
+      .mute-btn.is-muted .sound-waves { display: none; }
+      .mute-btn.is-muted { background: var(--bad-bg); border-color: var(--bad); color: var(--bad); }
+      .hear-btn { margin: 14px 16px 16px; width: calc(100% - 32px); }
+      .opt.picked { box-shadow: 0 0 0 3px var(--gold) inset; background: linear-gradient(180deg, #8a6d1b 0%, #6d5510 100%); color: #ffffff; }
+
+      /* Reveal feedback */
+      .reveal-head { font-size: 1.35rem; font-weight: 800; margin: 0 0 4px; }
+      .reveal-head.good { color: var(--good); }
+      .reveal-head.bad { color: var(--bad); }
+      .banner .reveal-head { margin-bottom: 2px; }
+
+      /* Final answer confirmation */
+      .confirm-pick {
+        background: var(--surface2); border: 1px solid var(--line); border-radius: 12px;
+        padding: 12px 14px; font-weight: 700; margin: 10px 0;
+      }
+      .confirm-actions { display: grid; gap: 10px; margin-top: 14px; }
+      @media (min-width: 480px) { .confirm-actions { grid-template-columns: 1fr 1fr; } }
+      .mic-btn { width: 100%; margin-top: 10px; }
+      .mic-btn.listening { background: var(--bad); color: #fff; border-color: var(--bad); }
+      .voice-note { min-height: 1.4em; }
+      .life.cant-afford .lcost { color: var(--bad); }
+
+      /* Duels, seasons and streaks */
+      .duel-btn { margin-top: 8px; padding: 9px 14px; min-height: 44px; font-size: 0.92rem; border-radius: 10px; }
+      .bprize { display: inline-block; margin-top: 6px; background: var(--gold); color: var(--gold-ink); font-weight: 800; font-size: 0.8rem; border-radius: 999px; padding: 3px 9px; }
+      .streak-badge { display: inline-block; background: var(--gold); color: var(--gold-ink); font-weight: 800; font-size: 0.78rem; border-radius: 999px; padding: 3px 9px; margin-left: 8px; vertical-align: middle; }
+      .screen.duel-mode .lifelines, .screen.duel-mode .ladder-strip-wrap, .screen.duel-mode aside { display: none; }
+      @media (min-width: 880px) { .screen.duel-mode .game-grid { grid-template-columns: 1fr; } }
+
+      /* Sign up and sign in (text only screens) */
+      [hidden] { display: none !important; }
+      .account-status { margin: 16px auto 0; max-width: 420px; color: var(--gold-soft); font-weight: 600; font-size: 0.95rem; }
+      .account-status:empty { display: none; }
+      .field-label { display: block; font-weight: 800; margin: 16px 0 6px; }
+      .field {
+        width: 100%; padding: 13px 14px; font: inherit; font-size: 16px;
+        border: 1px solid var(--line); border-radius: 12px;
+        background: var(--surface); color: var(--ink); min-height: 52px;
+      }
+      .field:focus-visible { outline: 3px solid var(--focus); outline-offset: 1px; }
+      .form-error { color: var(--bad); font-weight: 700; margin: 10px 0 0; }
+      .form-error:empty { display: none; }
+      .field-submit { width: 100%; margin-top: 16px; }
+      .confirm-big { font-family: "Marcellus", Georgia, serif; font-size: 1.6rem; line-height: 1.3; margin: 4px 0 8px; }
+      .alt-action { margin-top: 12px; }
+
+      /* Phone polish: tidy, roomy layout at 390px and below */
+      @media (max-width: 560px) {
+        .wrap { padding: 12px 12px 40px; }
+        .brand-mark { font-size: 1.1rem; }
+        .mute-btn { padding: 9px 13px; font-size: 14px; min-height: 50px; }
+        .stage { padding: 22px 14px 20px; border-radius: 16px; }
+        .pills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+        .pills .pill {
+          flex-direction: column; gap: 0; padding: 7px 4px; min-height: 54px;
+          font-size: 0.85rem; line-height: 1.3; justify-content: center; text-align: center;
+          border-radius: 12px;
+        }
+        .actions { margin-top: 16px; }
+        .card { padding: 16px; }
+        .hud { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .hud .pill { justify-content: center; text-align: center; font-size: 0.88rem; padding: 7px 8px; min-height: 44px; }
+        .timer-num { font-size: 32px; min-width: 60px; }
+        .timer-unit { font-size: 15px; max-width: 62px; }
+        /* Question banner + 2x2 answers at phone width (390px and below):
+           banner stays full-width, answers stay two side by side. */
+        .qcard { padding: 0; border-radius: 16px; }
+        .qbanner { padding: 16px 14px 18px; }
+        .qtext { font-size: 20px; }
+        .options { gap: 8px; padding: 12px 10px 2px; }
+        .opt { padding: 10px 10px; min-height: 64px; font-size: 15px; gap: 7px; border-radius: 999px; }
+        .opt .letter { width: 28px; height: 28px; font-size: 14px; border-width: 2px; }
+        .opt .sug-tag { font-size: 0.55rem; padding: 2px 5px; }
+        .hear-btn { margin: 12px 10px 14px; width: calc(100% - 20px); }
+        .board-row { grid-template-columns: 34px minmax(0, 1fr) auto; padding: 10px 12px; gap: 4px 10px; }
+        .rank { font-size: 1.15rem; }
+        .bname { font-size: 0.97rem; }
+        .bcoins { font-size: 0.95rem; }
+        .vote-row { grid-template-columns: 26px 1fr 46px; gap: 8px; }
+        .panel { padding: 18px 16px calc(18px + env(safe-area-inset-bottom)); }
+        .ladder li { font-size: 0.9rem; padding: 6px 10px; }
+        .topbar h2 { font-size: 1.45rem; }
+        .result-big { font-size: 1.7rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+
+      <div class="audio-bar">
+        <span class="brand-mark">Agent's Ladder</span>
+        <button class="mute-btn" id="btn-mute" type="button" aria-pressed="false" aria-label="Turn sound off">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path class="sound-waves" d="M16 9c1.2 1 1.2 5 0 6M18.5 6.5c2.4 2.8 2.4 8.2 0 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="muted-x" d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span id="mute-label">Sound on</span>
+        </button>
+      </div>
+
+      <!-- HOME -->
+      <section id="screen-home" class="screen active" aria-label="Home">
+        <div class="stage">
+          <div class="rings" aria-hidden="true"><span></span><span class="on"></span><span></span><span class="on"></span><span></span><span class="on"></span><span></span></div>
+          <h1 class="title">Agent's Ladder</h1>
+          <p class="tagline">Answer. Climb. Risk it all.</p>
+          <p class="stage-sub">Fifteen questions stand between your agent and the top prize of 5,000 Ladder Coins. One wrong answer and the climb is over.</p>
+          <div class="pills" role="status">
+            <span class="pill">Balance <b id="pill-balance">0 Ladder Coins</b></span>
+            <span class="pill">Generation <b id="pill-gen">0</b></span>
+            <span class="pill">Wins <b id="pill-wins">0</b></span>
+          </div>
+          <div class="actions">
+            <button class="btn btn-stage" id="btn-faucet" type="button">Get free coins</button>
+            <button class="btn btn-gold" id="btn-start" type="button">Start a run</button>
+            <div class="row-actions">
+              <button class="btn btn-stage" id="btn-to-board" type="button">Leaderboard</button>
+              <button class="btn btn-stage" id="btn-to-how" type="button">How to play</button>
+            </div>
+          </div>
+          <p class="note" style="margin-top:12px;">Starting a run stakes 100 Ladder Coins from your wallet. Reach question 5 to start earning. Lose before question 5 and you lose the stake.</p>
+          <p class="faucet-msg" id="faucet-msg" aria-live="polite"></p>
+          <div class="wallet-panel" id="wallet-panel" aria-label="Your wallet">
+            <p class="wallet-label">Your wallet</p>
+            <p class="wallet-amount" id="wallet-balance">0 Ladder Coins</p>
+            <p class="wallet-status" id="wallet-status">Your wallet is empty. Tap Get free coins and the faucet deposit will land here, in your wallet, before you start playing.</p>
+          </div>
+          <p class="account-status" id="account-status"></p>
+          <div class="actions" id="account-actions-guest">
+            <div class="row-actions">
+              <button class="btn btn-gold" id="btn-to-signup" type="button">Sign up</button>
+              <button class="btn btn-stage" id="btn-to-signin" type="button">Sign in</button>
+            </div>
+            <button class="btn btn-stage" id="btn-guest" type="button">Play as guest</button>
+          </div>
+          <div class="actions" id="account-actions-user" hidden>
+            <button class="btn btn-stage" id="btn-signout" type="button">Sign out</button>
+          </div>
+          <p class="note" style="margin-top:14px;">Ladder Coins are play coins in this demo. The agents you can phone and duel are real agents, with live records checked on 12 November 2026.</p>
+        </div>
+
+        <div class="card">
+          <h2>The ladder</h2>
+          <p class="muted">Every correct answer pays the amount shown for that question. Gold rows are safe points. Fall after passing one and you keep its amount.</p>
+          <ol class="ladder two-col" id="home-ladder"></ol>
+        </div>
+
+        <div class="card">
+          <h2>Your agent</h2>
+          <p id="agent-summary">Your agent is at generation 0 with 0 wins. Win three times to climb one generation, all the way up to generation 9.</p>
+        </div>
+      </section>
+
+      <!-- SIGN UP (text only, nothing on this screen is spoken) -->
+      <section id="screen-signup" class="screen" aria-label="Sign up">
+        <div class="topbar">
+          <button class="btn btn-ghost back-btn" type="button" data-nav="home">Back</button>
+          <h2>Sign up</h2>
+        </div>
+        <div class="card">
+          <form id="form-signup" novalidate>
+            <p>Create your free account with your email and an agent name. No password is needed for this demo. Your agent name is the name that shows on the leaderboard.</p>
+            <label class="field-label" for="su-email">Email</label>
+            <input class="field" id="su-email" type="email" autocomplete="email" placeholder="you@example.com" />
+            <label class="field-label" for="su-name">Agent name</label>
+            <input class="field" id="su-name" type="text" autocomplete="nickname" placeholder="For example, Swift Fox" />
+            <p class="form-error" id="su-error" role="alert"></p>
+            <button class="btn btn-gold field-submit" type="submit">Sign up</button>
+          </form>
+          <div id="signup-done" hidden>
+            <p class="confirm-big" id="signup-welcome"></p>
+            <p>Your progress will now be saved on this device under your email. Sign in with the same email whenever you come back.</p>
+            <div class="actions" style="margin-top:16px;">
+              <button class="btn btn-gold" id="btn-su-start" type="button">Start a run</button>
+              <button class="btn btn-ghost" id="btn-su-home" type="button">Back to home</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SIGN IN (text only, nothing on this screen is spoken) -->
+      <section id="screen-signin" class="screen" aria-label="Sign in">
+        <div class="topbar">
+          <button class="btn btn-ghost back-btn" type="button" data-nav="home">Back</button>
+          <h2>Sign in</h2>
+        </div>
+        <div class="card">
+          <form id="form-signin" novalidate>
+            <p>Enter the email you signed up with and your saved progress will be restored.</p>
+            <label class="field-label" for="si-email">Email</label>
+            <input class="field" id="si-email" type="email" autocomplete="email" placeholder="you@example.com" />
+            <p class="form-error" id="si-error" role="alert"></p>
+            <button class="btn btn-gold field-submit" type="submit">Sign in</button>
+            <button class="btn btn-ghost field-submit alt-action" id="btn-si-tosignup" type="button" hidden>Sign up instead</button>
+          </form>
+          <div id="signin-done" hidden>
+            <p class="confirm-big" id="signin-welcome"></p>
+            <p>Your balance, wins and generation are back, just as you left them.</p>
+            <div class="actions" style="margin-top:16px;">
+              <button class="btn btn-gold" id="btn-si-start" type="button">Start a run</button>
+              <button class="btn btn-ghost" id="btn-si-home" type="button">Back to home</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOW TO PLAY -->
+      <section id="screen-how" class="screen" aria-label="How to play">
+        <div class="topbar">
+          <button class="btn btn-ghost back-btn" type="button" data-nav="home">Back</button>
+          <h2>How to play</h2>
+        </div>
+        <div class="card">
+          <h3>The climb</h3>
+          <p>Each run has fifteen questions, one for each level of the ladder. Questions grow harder as you climb. Levels 1 to 5 are easy, levels 6 to 10 are medium, and levels 11 to 15 are hard. A correct answer moves you up one level and grows your pot to that level's amount.</p>
+          <h3>Listening</h3>
+          <p>Each question is read aloud with its four answers, so you can listen as well as read. Tap Hear the question again under any question to hear it once more. Everything else is spoken too, word for word with the text on screen: the final answer question, Correct! and Wrong answer, lifeline results, walking away, and winning or losing. The speaker button at the top turns all sound off and on; with the sound off, the same words still show as text. A warning beep sounds when the timer drops under 15 seconds.</p>
+          <h3>Your final answer</h3>
+          <p>Tapping an answer does not lock it in straight away. A popup asks &ldquo;Is this your final answer?&rdquo; Tap Yes to lock it in, or No to pick a different answer. You can also tap the microphone button on the popup and say Yes or No, where your device supports voice. The timer pauses while the popup is open.</p>
+          <h3>The timer</h3>
+          <p>Every question gives you 1 minute (60 seconds), shown as a countdown number and a shrinking bar. The bar turns red under 15 seconds. If the time runs out before you answer, the question counts as failed, just like a wrong answer. The timer pauses while a lifeline panel or the final answer popup is open.</p>
+          <h3>The stake</h3>
+          <p>Every run costs a stake of 100 Ladder Coins, taken from your wallet when the run starts. A wallet of 500 becomes 400, and the game shows Staked: 100 while you play. There is no free run: without the stake you cannot play. If your wallet holds fewer than 100 Ladder Coins, claim the faucet to top it up before you start.</p>
+          <h3>Safe points</h3>
+          <p>Question 5 and question 10 are safe points. Five correct answers is the minimum you need to earn anything. If you fail a question after passing a safe point, you bank that safe point amount, 80 Ladder Coins for the first and 500 Ladder Coins for the second, and your 100 stake comes back with it. Fail before the first safe point and you lose your stake.</p>
+          <h3>Walk away or risk it</h3>
+          <p>After each correct answer the game asks, in text and aloud, &ldquo;Are you ready for the next question?&rdquo; You do not need to tap anything to continue. After a short pause the next question comes up on its own with a fresh 60 seconds. From question 5 onwards you can tap Walk away during that pause and bank your pot instead, and your 100 stake comes back with your earnings. Before question 5 there is no Walk away choice and nothing to bank. Walking away at question 10 or above counts as a win. So does reaching question 15 and answering it correctly.</p>
+          <h3>Lifelines</h3>
+          <p>Each lifeline can be used once in a run, and each one costs Ladder Coins from your balance.</p>
+          <p><strong>50:50</strong> costs 20 Ladder Coins and removes two wrong answers, leaving the correct answer and one other.</p>
+          <p><strong>Ask the Audience</strong> costs 20 Ladder Coins and shows a vote bar for every answer. The audience usually favours the correct answer, but it can be wrong.</p>
+          <p><strong>Phone a Friend</strong> costs 50 Ladder Coins and calls a real agent. You pick which agent to call from a list showing each agent's live record. The agent suggests an answer and the suggestion is marked on the question, but the final choice is always yours. A generation 0 agent gets it right about 70 percent of the time.</p>
+          <h3>Free coins</h3>
+          <p>Tap Get free coins on the home screen to claim the faucet. The coins are deposited into your wallet on the home screen: watch the wallet balance change there and read the line confirming the faucet deposit landed in your wallet, then tap Start a run. Your wallet is topped up to 500 Ladder Coins whenever it sits below 500.</p>
+          <h3>Generations</h3>
+          <p>Every three wins move your agent up one generation, up to generation 9. Sign up with your email and your balance, wins and generation are saved under your email on this device, ready for you when you sign in again. If you play as a guest, your progress is kept on this device only.</p>
+          <h3>Duels</h3>
+          <p>Tap Duel next to an agent on the leaderboard to challenge that agent. You both stake 100 Ladder Coins and answer the same five questions. Whoever answers more correctly takes both stakes, 200 Ladder Coins. If you tie, you both get your stake back. Lose and you lose your 100 stake.</p>
+          <h3>The leaderboard</h3>
+          <p>The leaderboard ranks you against the other agents by Ladder Coins earned, then by generation, then by win rate. Each week is a new season, and the board resets each week. The top three at the end of the week win season prizes: first place 500 Ladder Coins, second place 300 Ladder Coins and third place 100 Ladder Coins.</p>
+          <h3>Win streaks</h3>
+          <p>Your win streak counts your wins in a row. A win is walking away at question 10 or above, or answering question 15 correctly. Lose your stake before question 5 and the streak resets to zero. Win three runs in a row and you earn a streak badge on the leaderboard.</p>
+        </div>
+      </section>
+
+      <!-- LEADERBOARD -->
+      <section id="screen-board" class="screen" aria-label="Leaderboard">
+        <div class="topbar">
+          <button class="btn btn-ghost back-btn" type="button" data-nav="home">Back</button>
+          <h2>Leaderboard</h2>
+        </div>
+        <p class="season" id="season-label">Weekly season</p>
+        <div class="board" id="board-rows"></div>
+        <div class="card">
+          <p class="note" style="margin:0;">Ranked by Ladder Coins earned, then by generation, then by win rate. Agent records shown here are the live records of real agents, checked on 12 November 2026. Your row reflects your play in this demo. Season prizes go to the top three at the end of the week: first place 500 Ladder Coins, second place 300 Ladder Coins and third place 100 Ladder Coins.</p>
+        </div>
+      </section>
+
+      <!-- GAME -->
+      <section id="screen-game" class="screen" aria-label="Game">
+        <div class="hud" role="status">
+          <span class="pill" id="hud-q">Question 1 of 15</span>
+          <span class="pill goldp"><span id="hud-pot-label">Pot</span> <b id="hud-pot">0</b></span>
+          <span class="pill">Balance <b id="hud-balance">0 Ladder Coins</b></span>
+          <span class="pill">Staked: <b id="hud-stake">100</b></span>
+          <span class="pill"><span id="hud-safe-label">Safe point</span> <b id="hud-safe">None yet</b></span>
+        </div>
+
+        <div class="ladder-strip-wrap" aria-label="Ladder progress">
+          <p class="ladder-strip-label">Your climb &middot; 15 rungs</p>
+          <div class="ladder-strip" id="ladder-strip" aria-hidden="true"></div>
+          <p class="pot-line" id="pot-line">Pot 0 coins &middot; This question worth 10 coins</p>
+        </div>
+
+        <div class="game-grid">
+          <div>
+            <div class="timer-row">
+              <div class="timer-display">
+                <div class="timer-num" id="timer-num" aria-label="Seconds remaining">60</div>
+                <span class="timer-unit">seconds left</span>
+              </div>
+              <div class="timer-wrap">
+                <div class="timer-label">TIME REMAINING</div>
+                <div class="timer-track"><div class="timer-bar" id="timer-bar"></div></div>
+              </div>
+            </div>
+
+            <div class="qcard">
+              <div class="qbanner">
+                <div class="qcat" id="q-cat">General knowledge</div>
+                <p class="qtext" id="q-text">Question</p>
+              </div>
+              <div class="options" id="q-options"></div>
+              <button class="btn btn-stage hear-btn" id="btn-hear" type="button">Hear the question again</button>
+            </div>
+
+            <div class="lifelines">
+              <button class="life" id="life-fifty" type="button">
+                <span class="lname">50:50</span>
+                <span class="lcost">20 Ladder Coins</span>
+              </button>
+              <button class="life" id="life-audience" type="button">
+                <span class="lname">Ask the Audience</span>
+                <span class="lcost">20 Ladder Coins</span>
+              </button>
+              <button class="life" id="life-phone" type="button">
+                <span class="lname">Phone a Friend</span>
+                <span class="lcost">50 Ladder Coins</span>
+              </button>
+            </div>
+
+            <div class="banner" id="game-banner" aria-live="polite"></div>
+
+            <div class="decision" id="decision">
+              <p id="decision-text">Correct. Your pot is growing.</p>
+              <div class="row-actions" style="grid-template-columns: 1fr; max-width: 520px;">
+                <button class="btn btn-navy" id="btn-walk" type="button">Walk away</button>
+              </div>
+            </div>
+
+            <div class="decision" id="run-end">
+              <p class="result-big" id="end-title">Run over</p>
+              <p id="end-text"></p>
+              <div class="row-actions">
+                <button class="btn btn-gold" id="btn-again" type="button">Play again</button>
+                <button class="btn btn-ghost" id="btn-end-home" type="button">Back to home</button>
+              </div>
+            </div>
+
+            <p style="margin-top:16px;"><button class="btn btn-ghost" id="btn-quit" type="button">End run and go home</button></p>
+          </div>
+
+          <aside>
+            <p class="side-title">The ladder</p>
+            <ol class="game-ladder" id="game-ladder"></ol>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <!-- Overlay panel for lifelines -->
+    <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="panel-title">
+      <div class="panel" id="panel"></div>
+    </div>
+
+    <p class="sr-only" aria-live="polite" id="sr-status"></p>
+
+    <script>
+      "use strict";
+
+      var LADDER = [10, 20, 30, 50, 80, 120, 180, 250, 350, 500, 700, 1000, 1500, 2500, 5000];
+      var SAFE_LEVELS = { 5: 80, 10: 500 };
+      var QUESTION_TIME = 60;
+      var FAUCET_TARGET = 500;
+      var STAKE = 100;
+
+      var AGENTS = [
+        { id: "genesis-visitor-1", owner: "otoyo4real.testnet", gen: 0, wins: 0, status: "Alive", note: "" },
+        { id: "genesis-visitor-4", owner: "gen3.genesisdemo354551.testnet", gen: 0, wins: 0, status: "Alive", note: "" },
+        { id: "genesis-visitor-7", owner: "genesisdemo354551.testnet", gen: 0, wins: 0, status: "Alive", note: "" },
+        { id: "genesis-visitor-9", owner: "genesisdemo354551.testnet", gen: 0, wins: 0, status: "Alive", note: "Registered, with no NFT minted yet." }
+      ];
+
+      var BANK = [
+        { lvl: 1, cat: "Geography", q: "What is the capital of France?", opts: ["Paris", "London", "Rome", "Berlin"], a: 0 },
+        { lvl: 1, cat: "General knowledge", q: "How many days are there in a week?", opts: ["Seven", "Five", "Six", "Eight"], a: 0 },
+        { lvl: 1, cat: "Science", q: "Which planet is known as the Red Planet?", opts: ["Mars", "Venus", "Jupiter", "Saturn"], a: 0 },
+
+        { lvl: 2, cat: "Entertainment", q: "Who wrote Romeo and Juliet?", opts: ["William Shakespeare", "Charles Dickens", "Jane Austen", "Oscar Wilde"], a: 0 },
+        { lvl: 2, cat: "Sport", q: "In which sport would you score a slam dunk?", opts: ["Basketball", "Football", "Tennis", "Golf"], a: 0 },
+        { lvl: 2, cat: "Geography", q: "The kangaroo is a well known symbol of which country?", opts: ["Australia", "Brazil", "India", "Canada"], a: 0 },
+
+        { lvl: 3, cat: "Science", q: "Which planet is closest to the Sun?", opts: ["Mercury", "Venus", "Earth", "Mars"], a: 0 },
+        { lvl: 3, cat: "History", q: "In which year did humans first land on the Moon?", opts: ["1969", "1959", "1975", "1981"], a: 0 },
+        { lvl: 3, cat: "Music", q: "Which instrument has 88 keys?", opts: ["Piano", "Guitar", "Violin", "Flute"], a: 0 },
+
+        { lvl: 4, cat: "Art", q: "Who painted the Mona Lisa?", opts: ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Claude Monet"], a: 0 },
+        { lvl: 4, cat: "Technology", q: "What does CPU stand for?", opts: ["Central Processing Unit", "Computer Personal Unit", "Central Program Utility", "Core Processing Utility"], a: 0 },
+        { lvl: 4, cat: "Geography", q: "Which country is the largest in the world by land area?", opts: ["Russia", "Canada", "China", "United States"], a: 0 },
+
+        { lvl: 5, cat: "History", q: "Who was the first President of the United States?", opts: ["George Washington", "Abraham Lincoln", "Thomas Jefferson", "John Adams"], a: 0 },
+        { lvl: 5, cat: "Geography", q: "What is the capital of Australia?", opts: ["Canberra", "Sydney", "Melbourne", "Perth"], a: 0 },
+        { lvl: 5, cat: "Sport", q: "How many players does a football team have on the pitch at one time?", opts: ["Eleven", "Nine", "Ten", "Twelve"], a: 0 },
+
+        { lvl: 6, cat: "History", q: "In which year did the Berlin Wall fall?", opts: ["1989", "1979", "1991", "1985"], a: 0 },
+        { lvl: 6, cat: "Science", q: "Which planet has the most confirmed moons?", opts: ["Saturn", "Jupiter", "Uranus", "Neptune"], a: 0 },
+        { lvl: 6, cat: "Entertainment", q: "Who wrote the novel 1984?", opts: ["George Orwell", "Aldous Huxley", "Ray Bradbury", "Franz Kafka"], a: 0 },
+
+        { lvl: 7, cat: "Sport", q: "In which country were the first modern Olympic Games held?", opts: ["Greece", "Italy", "France", "England"], a: 0 },
+        { lvl: 7, cat: "Science", q: "What is the smallest prime number?", opts: ["Two", "One", "Three", "Five"], a: 0 },
+        { lvl: 7, cat: "Music", q: "Who composed The Four Seasons?", opts: ["Antonio Vivaldi", "Ludwig van Beethoven", "Wolfgang Amadeus Mozart", "Johann Sebastian Bach"], a: 0 },
+
+        { lvl: 8, cat: "History", q: "In which year did World War II end?", opts: ["1945", "1939", "1941", "1950"], a: 0 },
+        { lvl: 8, cat: "Current affairs", q: "Which country hosted the 2024 Summer Olympics?", opts: ["France", "Japan", "Brazil", "Australia"], a: 0 },
+        { lvl: 8, cat: "History", q: "The country once called Rhodesia is now known by which name?", opts: ["Zimbabwe", "Zambia", "Malawi", "Botswana"], a: 0 },
+
+        { lvl: 9, cat: "Science", q: "Who developed the theory of general relativity?", opts: ["Albert Einstein", "Isaac Newton", "Niels Bohr", "Galileo Galilei"], a: 0 },
+        { lvl: 9, cat: "Geography", q: "In which city is the headquarters of the United Nations?", opts: ["New York", "Geneva", "Paris", "London"], a: 0 },
+        { lvl: 9, cat: "Geography", q: "Which country has the largest population in Africa?", opts: ["Nigeria", "Egypt", "Ethiopia", "South Africa"], a: 0 },
+
+        { lvl: 10, cat: "History", q: "The Colosseum was built under which empire?", opts: ["Roman Empire", "Ottoman Empire", "Persian Empire", "Aztec Empire"], a: 0 },
+        { lvl: 10, cat: "History", q: "In which year did Nigeria gain independence?", opts: ["1960", "1955", "1963", "1970"], a: 0 },
+        { lvl: 10, cat: "Sport", q: "Which country hosted the first FIFA World Cup in 1930?", opts: ["Uruguay", "Brazil", "Italy", "Argentina"], a: 0 },
+
+        { lvl: 11, cat: "Science", q: "What was the first artificial satellite launched into space?", opts: ["Sputnik 1", "Explorer 1", "Vanguard 1", "Telstar 1"], a: 0 },
+        { lvl: 11, cat: "History", q: "Which treaty ended World War I?", opts: ["Treaty of Versailles", "Treaty of Paris", "Treaty of Utrecht", "Treaty of Vienna"], a: 0 },
+        { lvl: 11, cat: "Geography", q: "What is the capital of Kazakhstan?", opts: ["Astana", "Almaty", "Bishkek", "Tashkent"], a: 0 },
+
+        { lvl: 12, cat: "History", q: "Which country was the first to give women the right to vote?", opts: ["New Zealand", "United Kingdom", "United States", "France"], a: 0 },
+        { lvl: 12, cat: "Technology", q: "What does NFT stand for?", opts: ["Non Fungible Token", "New Finance Token", "Network File Transfer", "National Fund Trust"], a: 0 },
+        { lvl: 12, cat: "Sport", q: "In which year were the first modern Olympic Games held?", opts: ["1896", "1900", "1888", "1912"], a: 0 },
+
+        { lvl: 13, cat: "Geography", q: "What is the capital of Ethiopia?", opts: ["Addis Ababa", "Nairobi", "Khartoum", "Mogadishu"], a: 0 },
+        { lvl: 13, cat: "Science", q: "What is the most abundant element in the universe?", opts: ["Hydrogen", "Helium", "Oxygen", "Carbon"], a: 0 },
+        { lvl: 13, cat: "Technology", q: "In which year was the first iPhone launched?", opts: ["2007", "2005", "2009", "2010"], a: 0 },
+
+        { lvl: 14, cat: "Geography", q: "What is the deepest lake in the world?", opts: ["Lake Baikal", "Lake Tanganyika", "Caspian Sea", "Lake Superior"], a: 0 },
+        { lvl: 14, cat: "Technology", q: "What does HTTP stand for?", opts: ["HyperText Transfer Protocol", "High Transfer Text Process", "Hyperlink Text Transmission Program", "Host Transfer Text Protocol"], a: 0 },
+        { lvl: 14, cat: "Science", q: "Who was the first woman to win a Nobel Prize?", opts: ["Marie Curie", "Rosalind Franklin", "Ada Lovelace", "Florence Nightingale"], a: 0 },
+
+        { lvl: 15, cat: "Geography", q: "Which is the only country that is also a continent?", opts: ["Australia", "Greenland", "Madagascar", "Brazil"], a: 0 },
+        { lvl: 15, cat: "Science", q: "Who formulated the laws of motion?", opts: ["Isaac Newton", "Albert Einstein", "Johannes Kepler", "James Clerk Maxwell"], a: 0 },
+        { lvl: 15, cat: "Geography", q: "What is the capital of Mongolia?", opts: ["Ulaanbaatar", "Astana", "Bishkek", "Thimphu"], a: 0 }
+      ];
+
+      function fmt(n) { return n.toLocaleString("en-GB"); }
+      /* Friendly on screen name for an agent. The stored id is never
+         shown to the player. */
+      function agentDisplay(id) {
+        var m = /(\d+)\s*$/.exec(String(id));
+        return m ? "Visitor " + m[1] : "Agent";
+      }
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var t = a[i]; a[i] = a[j]; a[j] = t;
+        }
+        return a;
+      }
+      function el(id) { return document.getElementById(id); }
+
+      /* ---- Interactive audio ----
+         Speech uses the browser's built-in speech synthesis in en-GB.
+         Sound effects are Web Audio oscillator tones, so no audio files
+         are needed. Audio only starts after the player taps something,
+         which is what phones require. The mute setting is kept in memory
+         for the run. */
+      var audioCtx = null;
+      var audioMuted = false;
+      function ensureAudio() {
+        if (!audioCtx) {
+          try {
+            var AC = window.AudioContext || window.webkitAudioContext;
+            if (AC) audioCtx = new AC();
+          } catch (e) { audioCtx = null; }
+        }
+        if (audioCtx && audioCtx.state === "suspended") { audioCtx.resume(); }
+        return audioCtx;
+      }
+      function playTone(freq, delay, dur, type, vol) {
+        if (audioMuted) return;
+        var c = ensureAudio();
+        if (!c) return;
+        var t0 = c.currentTime + delay;
+        var osc = c.createOscillator();
+        var gain = c.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, t0);
+        gain.gain.setValueAtTime(0.0001, t0);
+        gain.gain.exponentialRampToValueAtTime(vol, t0 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+        osc.connect(gain);
+        gain.connect(c.destination);
+        osc.start(t0);
+        osc.stop(t0 + dur + 0.05);
+      }
+      var TUNES = {
+        click: [[880, 0, 0.08, "sine", 0.12]],
+        correct: [[523.25, 0, 0.14, "triangle", 0.2], [659.25, 0.12, 0.14, "triangle", 0.2], [783.99, 0.24, 0.3, "triangle", 0.2]],
+        wrong: [[220, 0, 0.25, "sawtooth", 0.07], [164.81, 0.2, 0.45, "sawtooth", 0.07]],
+        win: [[523.25, 0, 0.15, "triangle", 0.2], [659.25, 0.13, 0.15, "triangle", 0.2], [783.99, 0.26, 0.15, "triangle", 0.2], [1046.5, 0.39, 0.2, "triangle", 0.22], [1318.5, 0.55, 0.45, "triangle", 0.22]],
+        lose: [[392, 0, 0.2, "triangle", 0.16], [329.63, 0.18, 0.2, "triangle", 0.16], [261.63, 0.36, 0.2, "triangle", 0.16], [196, 0.54, 0.5, "triangle", 0.16]],
+        warning: [[1174.66, 0, 0.09, "square", 0.05], [1174.66, 0.14, 0.09, "square", 0.05]]
+      };
+      function playSfx(name) {
+        if (audioMuted) return;
+        var tune = TUNES[name];
+        if (!tune) return;
+        for (var i = 0; i < tune.length; i++) {
+          playTone(tune[i][0], tune[i][1], tune[i][2], tune[i][3], tune[i][4]);
+        }
+      }
+      function pickVoice() {
+        try {
+          var voices = window.speechSynthesis.getVoices() || [];
+          var i;
+          for (i = 0; i < voices.length; i++) {
+            if (voices[i].lang && voices[i].lang.indexOf("en-GB") === 0) return voices[i];
+          }
+          for (i = 0; i < voices.length; i++) {
+            if (voices[i].lang && voices[i].lang.indexOf("en-") === 0) return voices[i];
+          }
+        } catch (e) {}
+        return null;
+      }
+      function speakText(text) {
+        if (audioMuted) return;
+        if (!("speechSynthesis" in window)) return;
+        try {
+          window.speechSynthesis.cancel();
+          var u = new SpeechSynthesisUtterance(text);
+          u.lang = "en-GB";
+          u.rate = 1;
+          u.pitch = 1;
+          var v = pickVoice();
+          if (v) u.voice = v;
+          window.speechSynthesis.speak(u);
+        } catch (e) {}
+      }
+      /* Speak without cancelling whatever is currently being said, so a
+         follow-on line (the ready prompt, the win line) plays straight
+         after the line before it instead of cutting it off. */
+      function speakQueued(text) {
+        if (audioMuted) return;
+        if (!("speechSynthesis" in window)) return;
+        try {
+          var u = new SpeechSynthesisUtterance(text);
+          u.lang = "en-GB";
+          u.rate = 1;
+          u.pitch = 1;
+          var v = pickVoice();
+          if (v) u.voice = v;
+          window.speechSynthesis.speak(u);
+        } catch (e) {}
+      }
+      function speakCurrentQuestion() {
+        if (!run) return;
+        var q = currentQuestion();
+        var letters = ["A", "B", "C", "D"];
+        var parts = ["Question " + run.level + ". " + q.q];
+        for (var i = 0; i < 4; i++) parts.push(letters[i] + ". " + q.opts[i]);
+        speakText(parts.join(" "));
+      }
+      function stopSpeaking() {
+        try { if ("speechSynthesis" in window) window.speechSynthesis.cancel(); } catch (e) {}
+      }
+      function updateMuteUI() {
+        var btn = el("btn-mute");
+        if (!btn) return;
+        btn.classList.toggle("is-muted", audioMuted);
+        btn.setAttribute("aria-pressed", audioMuted ? "true" : "false");
+        btn.setAttribute("aria-label", audioMuted ? "Turn sound on" : "Turn sound off");
+        el("mute-label").textContent = audioMuted ? "Sound off" : "Sound on";
+      }
+      function toggleMute() {
+        ensureAudio();
+        audioMuted = !audioMuted;
+        if (audioMuted) stopSpeaking();
+        updateMuteUI();
+      }
+
+      var player = { balance: 0, wins: 0, runs: 0, totalEarned: 0, streak: 0 };
+      /* Last faucet deposit in this session, for the wallet section on
+         the home screen. Text only: this is never spoken. */
+      var walletDeposit = null;
+      function generation() { return Math.min(9, Math.floor(player.wins / 3)); }
+
+      /* ---- Accounts (sign up and sign in) ----
+         Demo accounts live in this browser's localStorage, keyed by
+         email. Nothing leaves the device and no email is ever sent.
+         Everything in this section is TEXT ONLY: no function here calls
+         speakText, speakQueued or playSfx, by design. */
+      var ACCOUNTS_KEY = "agentsLadderAccounts";
+      var currentUser = null;
+
+      function storeGet(key) {
+        try { return window.localStorage.getItem(key); } catch (e) { return null; }
+      }
+      function storeSet(key, value) {
+        try { window.localStorage.setItem(key, value); } catch (e) {}
+      }
+      function storeRemove(key) {
+        try { window.localStorage.removeItem(key); } catch (e) {}
+      }
+      function loadAccounts() {
+        try {
+          var raw = storeGet(ACCOUNTS_KEY);
+          var parsed = raw ? JSON.parse(raw) : {};
+          return parsed && typeof parsed === "object" ? parsed : {};
+        } catch (e) { return {}; }
+      }
+      function saveAccounts(accounts) { storeSet(ACCOUNTS_KEY, JSON.stringify(accounts)); }
+      function emailKey(email) { return String(email || "").trim().toLowerCase(); }
+      function validEmail(email) {
+        var v = String(email || "").trim();
+        var at = v.indexOf("@");
+        var dot = v.lastIndexOf(".");
+        return at > 0 && dot > at + 1 && dot < v.length - 1 && v.indexOf(" ") === -1;
+      }
+      function playerSnapshot() {
+        return { balance: player.balance, wins: player.wins, runs: player.runs, totalEarned: player.totalEarned, streak: player.streak };
+      }
+      function applySnapshot(snap) {
+        player.balance = snap.balance || 0;
+        player.wins = snap.wins || 0;
+        player.runs = snap.runs || 0;
+        player.totalEarned = snap.totalEarned || 0;
+        player.streak = snap.streak || 0;
+      }
+      /* Persist the live progress under the signed in email. Guests are
+         not written to storage: their progress stays in memory on this
+         device, exactly as before. */
+      function saveProgress() {
+        if (!currentUser) return;
+        var accounts = loadAccounts();
+        var acct = accounts[currentUser.email];
+        if (!acct) return;
+        acct.balance = player.balance;
+        acct.wins = player.wins;
+        acct.runs = player.runs;
+        acct.totalEarned = player.totalEarned;
+        acct.streak = player.streak;
+        saveAccounts(accounts);
+      }
+      function updateAccountUI() {
+        var status = el("account-status");
+        var guestActions = el("account-actions-guest");
+        var userActions = el("account-actions-user");
+        if (!status || !guestActions || !userActions) return;
+        if (currentUser) {
+          status.textContent = "Signed in as " + currentUser.name + ". Your progress is saved under " + currentUser.email + ".";
+          guestActions.hidden = true;
+          userActions.hidden = false;
+        } else {
+          status.textContent = "You are playing as a guest. Your progress is kept on this device only. Sign up to save it under your email.";
+          guestActions.hidden = false;
+          userActions.hidden = true;
+        }
+      }
+      function escHtml(s) {
+        return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      }
+
+      function openSignUp() {
+        el("form-signup").hidden = false;
+        el("signup-done").hidden = true;
+        el("su-error").textContent = "";
+        showScreen("signup");
+      }
+      function openSignIn() {
+        el("form-signin").hidden = false;
+        el("signin-done").hidden = true;
+        el("si-error").textContent = "";
+        el("btn-si-tosignup").hidden = true;
+        showScreen("signin");
+      }
+      function doSignUp(ev) {
+        ev.preventDefault();
+        var email = el("su-email").value;
+        var name = el("su-name").value.trim();
+        var err = el("su-error");
+        if (!validEmail(email)) {
+          err.textContent = "That email does not look right. Check it has an @ and a dot, then try again.";
+          return;
+        }
+        if (!name) {
+          err.textContent = "Please enter an agent name. It is the name that shows on the leaderboard.";
+          return;
+        }
+        var key = emailKey(email);
+        var accounts = loadAccounts();
+        if (accounts[key]) {
+          err.textContent = "That email is already signed up on this device. Use Sign in to get your progress back.";
+          return;
+        }
+        /* A guest signing up keeps the progress they have already made:
+           the live player state becomes the new account's saved state. */
+        var acct = { name: name };
+        var snap = playerSnapshot();
+        acct.balance = snap.balance;
+        acct.wins = snap.wins;
+        acct.runs = snap.runs;
+        acct.totalEarned = snap.totalEarned;
+        acct.streak = snap.streak;
+        accounts[key] = acct;
+        saveAccounts(accounts);
+        currentUser = { email: key, name: name };
+        err.textContent = "";
+        el("signup-welcome").textContent = "Welcome, " + name + "! You are signed up.";
+        el("form-signup").hidden = true;
+        el("signup-done").hidden = false;
+      }
+      function doSignIn(ev) {
+        ev.preventDefault();
+        var email = el("si-email").value;
+        var err = el("si-error");
+        el("btn-si-tosignup").hidden = true;
+        if (!validEmail(email)) {
+          err.textContent = "That email does not look right. Check it has an @ and a dot, then try again.";
+          return;
+        }
+        var key = emailKey(email);
+        var accounts = loadAccounts();
+        var acct = accounts[key];
+        if (!acct) {
+          err.textContent = "We could not find an account for that email on this device. Check the email, or sign up to create one.";
+          el("btn-si-tosignup").hidden = false;
+          return;
+        }
+        saveProgress();
+        currentUser = { email: key, name: acct.name };
+        applySnapshot(acct);
+        err.textContent = "";
+        el("signin-welcome").textContent = "Welcome back, " + acct.name + "! Your saved progress has been restored.";
+        el("form-signin").hidden = true;
+        el("signin-done").hidden = false;
+      }
+      function doSignOut() {
+        saveProgress();
+        currentUser = null;
+        player = { balance: 0, wins: 0, runs: 0, totalEarned: 0, streak: 0 };
+        walletDeposit = null;
+        el("faucet-msg").textContent = "";
+        renderHome();
+      }
+      function playAsGuest() {
+        if (currentUser) doSignOut();
+        renderHome();
+        el("account-status").textContent = "You are playing as a guest. Tap Start a run when you are ready. Your progress is kept on this device only.";
+      }
+
+      var run = null;
+      var timerId = null;
+      var readyTimerId = null;
+      var panelOpen = false;
+      function clearReadyTimer() { if (readyTimerId) { clearTimeout(readyTimerId); readyTimerId = null; } }
+
+      function showScreen(name) {
+        var screens = ["home", "how", "board", "game", "signup", "signin"];
+        for (var i = 0; i < screens.length; i++) {
+          el("screen-" + screens[i]).classList.toggle("active", screens[i] === name);
+        }
+        if (name === "home") renderHome();
+        if (name === "board") {
+          renderBoard();
+          var sInfo = seasonInfo();
+          speakText("Leaderboard. Season week " + sInfo.week + ". " + (sInfo.daysLeft === 0 ? "Last day of the week." : sInfo.daysLeft + (sInfo.daysLeft === 1 ? " day" : " days") + " left this week.") + " Your win streak is " + player.streak + ".");
+        }
+        window.scrollTo(0, 0);
+      }
+
+      function renderWallet() {
+        var panel = el("wallet-panel");
+        var bal = el("wallet-balance");
+        var status = el("wallet-status");
+        if (!panel || !bal || !status) return;
+        bal.textContent = fmt(player.balance) + " Ladder Coins";
+        panel.classList.toggle("has-coins", player.balance > 0);
+        if (walletDeposit) {
+          status.textContent = "Faucet deposit landed in your wallet: " + fmt(walletDeposit.amount) + " Ladder Coins deposited. Your wallet balance is " + fmt(player.balance) + " Ladder Coins \u2014 ready to start a run.";
+        } else if (player.balance > 0 && player.balance < STAKE) {
+          status.textContent = "Your wallet holds " + fmt(player.balance) + " Ladder Coins. You need 100 Ladder Coins to stake a run, so tap Get free coins to top up your wallet first.";
+        } else if (player.balance > 0) {
+          status.textContent = "Your wallet holds " + fmt(player.balance) + " Ladder Coins. You can start a run when you are ready.";
+        } else {
+          status.textContent = "Your wallet is empty. Tap Get free coins and the faucet deposit will land here, in your wallet, before you start playing.";
+        }
+      }
+
+      function renderHome() {
+        saveProgress();
+        updateAccountUI();
+        renderWallet();
+        el("pill-balance").textContent = fmt(player.balance) + " Ladder Coins";
+        el("pill-gen").textContent = String(generation());
+        el("pill-wins").textContent = String(player.wins);
+        var toNext = 3 - (player.wins % 3);
+        var summary;
+        if (generation() >= 9) {
+          summary = "Your agent has reached generation 9, the highest generation. It holds " + player.wins + " wins from " + player.runs + " runs, and has earned " + fmt(player.totalEarned) + " Ladder Coins in total.";
+        } else if (player.runs === 0) {
+          summary = "Your agent is at generation 0 with 0 wins. Win three times to climb one generation, all the way up to generation 9.";
+        } else {
+          summary = "Your agent is at generation " + generation() + " with " + player.wins + " wins from " + player.runs + " runs, and has earned " + fmt(player.totalEarned) + " Ladder Coins in total. " + (toNext === 1 ? "One more win" : toNext + " more wins") + " will take it to generation " + (generation() + 1) + ".";
+        }
+        el("agent-summary").textContent = summary;
+        el("btn-faucet").disabled = player.balance >= FAUCET_TARGET;
+      }
+
+      function buildHomeLadder() {
+        var html = "";
+        for (var lvl = 15; lvl >= 1; lvl--) {
+          var safe = SAFE_LEVELS[lvl] ? true : false;
+          html += "<li class=\"" + (safe ? "safe" : "") + "\"><span class=\"lvl\">Question " + lvl + "</span><span>" + fmt(LADDER[lvl - 1]) + " Ladder Coins</span>" + (safe ? "<span class=\"safe-tag\">SAFE POINT</span>" : "") + "</li>";
+        }
+        el("home-ladder").innerHTML = html;
+      }
+
+      /* Weekly seasons: the board runs in week long seasons. The week
+         number and the days left come from the calendar, and the top
+         three places carry the season prizes shown on the board. */
+      function seasonInfo() {
+        var now = new Date();
+        var d = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+        var dow = (d.getUTCDay() + 6) % 7;
+        var daysLeft = 6 - dow;
+        var thursday = new Date(d.getTime());
+        thursday.setUTCDate(d.getUTCDate() - dow + 3);
+        var firstThursday = new Date(Date.UTC(thursday.getUTCFullYear(), 0, 4));
+        var fdow = (firstThursday.getUTCDay() + 6) % 7;
+        firstThursday.setUTCDate(firstThursday.getUTCDate() - fdow + 3);
+        var week = 1 + Math.round((thursday - firstThursday) / (7 * 24 * 3600 * 1000));
+        return { week: week, daysLeft: daysLeft };
+      }
+      function seasonLabel() {
+        var s = seasonInfo();
+        return "Season week " + s.week + " · " + (s.daysLeft === 0 ? "Last day of the week" : s.daysLeft + (s.daysLeft === 1 ? " day" : " days") + " left this week");
+      }
+
+      var SEASON_PRIZES = [500, 300, 100];
+      function renderBoard() {
+        el("season-label").textContent = seasonLabel();
+        var winRate = player.runs > 0 ? Math.round((player.wins / player.runs) * 100) : 0;
+        var rows = [{ name: currentUser ? currentUser.name : "Your agent", meta: "Generation " + generation() + " · Win rate " + winRate + "% · " + player.wins + " wins · Win streak " + player.streak, earned: player.totalEarned, gen: generation(), rate: winRate, me: true, streak: player.streak, agentIdx: -1 }];
+        for (var i = 0; i < AGENTS.length; i++) {
+          var a = AGENTS[i];
+          rows.push({ name: agentDisplay(a.id), meta: "Generation " + a.gen + " · Win rate 0% · " + a.wins + " wins · " + a.status + " · Win streak 0", earned: 0, gen: a.gen, rate: 0, me: false, streak: 0, agentIdx: i });
+        }
+        rows.sort(function (x, y) {
+          if (y.earned !== x.earned) return y.earned - x.earned;
+          if (y.gen !== x.gen) return y.gen - x.gen;
+          if (y.rate !== x.rate) return y.rate - x.rate;
+          return x.name < y.name ? -1 : 1;
+        });
+        var html = "";
+        for (var r = 0; r < rows.length; r++) {
+          var prize = r < 3 ? "<span class=\"bprize\">" + (r === 0 ? "First" : r === 1 ? "Second" : "Third") + " place prize " + fmt(SEASON_PRIZES[r]) + " Ladder Coins</span>" : "";
+          var badge = rows[r].streak >= 3 ? "<span class=\"streak-badge\">Streak badge: " + rows[r].streak + " wins in a row</span>" : "";
+          html += "<div class=\"board-row" + (rows[r].me ? " me" : "") + "\"><div class=\"rank\">" + (r + 1) + "</div><div><div class=\"bname\">" + escHtml(rows[r].name) + badge + "</div><div class=\"bmeta\">" + rows[r].meta + "</div>" + prize + "</div><div class=\"bcoins\">" + fmt(rows[r].earned) + "<small>Ladder Coins earned</small>" + (rows[r].agentIdx >= 0 ? "<button type=\"button\" class=\"btn btn-navy duel-btn\" data-duel=\"" + rows[r].agentIdx + "\">Duel</button>" : "") + "</div></div>";
+        }
+        el("board-rows").innerHTML = html;
+        var duelBtns = el("board-rows").querySelectorAll(".duel-btn");
+        for (var db = 0; db < duelBtns.length; db++) {
+          duelBtns[db].addEventListener("click", function () { startDuel(parseInt(this.getAttribute("data-duel"), 10)); });
+        }
+      }
+
+      /* Faucet claim and deposit — TEXT ONLY, by design. This function
+         never calls speakText, speakQueued, playSfx or ensureAudio:
+         the claim, the deposit message and the wallet balance are
+         shown on screen only, like sign up and sign in. The deposit
+         lands in the wallet section on the home screen, where the
+         player sees the balance before tapping Start a run. */
+      function faucet() {
+        if (player.balance >= FAUCET_TARGET) {
+          renderHome();
+          el("faucet-msg").textContent = "Your wallet already holds " + fmt(player.balance) + " Ladder Coins, so no new deposit is needed. You can start a run.";
+          return;
+        }
+        var deposited = FAUCET_TARGET - player.balance;
+        player.balance = FAUCET_TARGET;
+        walletDeposit = { amount: deposited };
+        renderHome();
+        el("faucet-msg").textContent = "Faucet deposit landed in your wallet.";
+      }
+
+      /* Question rotation: the questions used in the immediately
+         previous run or duel are stored per level, and the picker
+         excludes them, so a question just answered never comes up
+         again in the next run. Each level has 3 questions in the
+         bank, so excluding the previous one still leaves 2 to pick
+         from. No two runs in a row share a question. */
+      var prevRunIdx = {};
+      function pickForLevel(lvl) {
+        var pool = [];
+        for (var i = 0; i < BANK.length; i++) { if (BANK[i].lvl === lvl) pool.push(i); }
+        var candidates = [];
+        for (var c = 0; c < pool.length; c++) {
+          if (pool[c] !== prevRunIdx[lvl]) candidates.push(pool[c]);
+        }
+        if (candidates.length === 0) candidates = pool.slice();
+        var idx = candidates[Math.floor(Math.random() * candidates.length)];
+        prevRunIdx[lvl] = idx;
+        var q = BANK[idx];
+        var order = shuffle([0, 1, 2, 3]);
+        var opts = [];
+        for (var k = 0; k < 4; k++) opts.push(q.opts[order[k]]);
+        return { cat: q.cat, q: q.q, opts: opts, correct: order.indexOf(q.a), lvl: lvl };
+      }
+
+      function pickQuestions() {
+        var chosen = [];
+        for (var lvl = 1; lvl <= 15; lvl++) chosen.push(pickForLevel(lvl));
+        return chosen;
+      }
+      function pickDuelQuestions() {
+        var chosen = [];
+        for (var lvl = 1; lvl <= 5; lvl++) chosen.push(pickForLevel(lvl));
+        return chosen;
+      }
+
+      /* The stake gate: no run and no duel starts until the 100 coin
+         stake is paid. There is no free run. Below 100 coins the game
+         shows and speaks the not enough coins line and offers the
+         faucet instead of starting. */
+      function showStakeGate(kind) {
+        var msg = kind === "duel"
+          ? "Not enough coins to duel. Claim the faucet to get more."
+          : "Not enough coins to play. Claim the faucet to get more.";
+        var html = "<h3 id=\"panel-title\">" + msg + "</h3>" +
+          "<p class=\"muted\">A stake of 100 Ladder Coins is needed, and your wallet holds " + fmt(player.balance) + " Ladder Coins. Claim the faucet and your wallet is topped up to 500 Ladder Coins.</p>" +
+          "<div class=\"confirm-actions\">" +
+          "<button class=\"btn btn-gold\" type=\"button\" id=\"gate-faucet\">Claim the faucet</button>" +
+          "<button class=\"btn btn-ghost\" type=\"button\" id=\"gate-close\">Not now</button>" +
+          "</div>";
+        openPanel(html);
+        speakText(msg);
+        el("gate-faucet").addEventListener("click", function () {
+          closePanel();
+          showScreen("home");
+          faucet();
+        });
+        el("gate-close").addEventListener("click", function () { closePanel(); });
+      }
+
+      function newRunState(mode) {
+        return {
+          mode: mode,
+          level: 1,
+          questions: mode === "duel" ? pickDuelQuestions() : pickQuestions(),
+          bankedLevel: 0,
+          stake: STAKE,
+          state: "answering",
+          timeLeft: QUESTION_TIME,
+          removed: {},
+          suggested: -1,
+          pendingIdx: null,
+          warned: false,
+          used: { fifty: false, audience: false, phone: false },
+          duelAgent: -1,
+          playerScore: 0,
+          oppScore: 0,
+          oppResults: []
+        };
+      }
+
+      function startRun() {
+        ensureAudio();
+        if (player.balance < STAKE) { showStakeGate("play"); return; }
+        stopTimer();
+        clearReadyTimer();
+        player.balance -= STAKE;
+        walletDeposit = null;
+        run = newRunState("ladder");
+        el("screen-game").classList.remove("duel-mode");
+        el("btn-again").textContent = "Play again";
+        el("btn-quit").textContent = "End run and go home";
+        el("run-end").classList.remove("active");
+        el("decision").classList.remove("active");
+        showScreen("game");
+        renderQuestion();
+        showBanner("Staked: 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins.", "goldb");
+        speakQueued("You staked 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins.");
+      }
+
+      function agentAccuracy(agent) {
+        return Math.min(0.95, 0.70 + 0.05 * (agent.gen || 0));
+      }
+
+      function startDuel(agentIdx) {
+        ensureAudio();
+        if (player.balance < STAKE) { showStakeGate("duel"); return; }
+        stopTimer();
+        clearReadyTimer();
+        player.balance -= STAKE;
+        walletDeposit = null;
+        var agent = AGENTS[agentIdx];
+        run = newRunState("duel");
+        run.duelAgent = agentIdx;
+        var acc = agentAccuracy(agent);
+        for (var i = 0; i < 5; i++) run.oppResults.push(Math.random() < acc);
+        el("screen-game").classList.add("duel-mode");
+        el("btn-again").textContent = "Duel again";
+        el("btn-quit").textContent = "Leave the duel";
+        el("run-end").classList.remove("active");
+        el("decision").classList.remove("active");
+        showScreen("game");
+        renderQuestion();
+        showBanner("Duel against " + agentDisplay(agent.id) + ". Staked: 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins.", "goldb");
+        speakQueued("Duel against " + agentDisplay(agent.id) + ". You staked 100 Ladder Coins. Your balance is " + fmt(player.balance) + " Ladder Coins. Five questions. Whoever answers more correctly takes both stakes.");
+      }
+
+      function safeAmountFor(levelBanked) {
+        if (levelBanked >= 10) return 500;
+        if (levelBanked >= 5) return 80;
+        return 0;
+      }
+
+      function currentQuestion() { return run.questions[run.level - 1]; }
+
+      function renderQuestion() {
+        clearReadyTimer();
+        var q = currentQuestion();
+        run.state = "answering";
+        run.timeLeft = QUESTION_TIME;
+        run.removed = {};
+        run.suggested = -1;
+        run.pendingIdx = null;
+        run.warned = false;
+        el("decision").classList.remove("active");
+        el("run-end").classList.remove("active");
+        el("game-banner").textContent = "";
+        el("game-banner").className = "banner";
+        el("hud-q").textContent = run.mode === "duel" ? "Duel question " + run.level + " of 5" : "Question " + run.level + " of 15";
+        el("q-cat").textContent = q.cat;
+        el("q-text").textContent = q.q;
+        renderHud();
+        renderGameLadder();
+        renderOptions();
+        renderLifelines();
+        startTimer();
+        speakCurrentQuestion();
+      }
+
+      function renderHud() {
+        saveProgress();
+        el("hud-balance").textContent = fmt(player.balance) + " Ladder Coins";
+        el("hud-stake").textContent = fmt(run.stake || STAKE);
+        if (run.mode === "duel") {
+          var agent = AGENTS[run.duelAgent];
+          el("hud-pot-label").textContent = "Your score";
+          el("hud-pot").textContent = run.playerScore + " correct";
+          el("hud-safe-label").textContent = agent ? agentDisplay(agent.id) : "Agent";
+          el("hud-safe").textContent = run.oppScore + " correct";
+        } else {
+          var pot = run.bankedLevel > 0 ? LADDER[run.bankedLevel - 1] : 0;
+          el("hud-pot-label").textContent = "Pot";
+          el("hud-pot").textContent = fmt(pot) + " Ladder Coins";
+          el("hud-safe-label").textContent = "Safe point";
+          var safe = safeAmountFor(run.bankedLevel);
+          el("hud-safe").textContent = safe > 0 ? fmt(safe) + " Ladder Coins" : "None yet";
+        }
+        renderLadderStrip();
+      }
+
+      function renderLadderStrip() {
+        var strip = el("ladder-strip");
+        if (!strip || !run) return;
+        var html = "";
+        for (var lvl = 1; lvl <= 15; lvl++) {
+          var cls = "ladder-seg";
+          if (SAFE_LEVELS[lvl]) cls += " safe";
+          if (lvl <= run.bankedLevel) cls += " done";
+          else if (run.state !== "ended" && lvl === run.level) cls += " current";
+          html += "<span class=\"" + cls + "\" title=\"Question " + lvl + ": " + fmt(LADDER[lvl - 1]) + " coins" + (SAFE_LEVELS[lvl] ? " (safe point)" : "") + "\"></span>";
+        }
+        strip.innerHTML = html;
+        var pot = run.bankedLevel > 0 ? LADDER[run.bankedLevel - 1] : 0;
+        var worth = LADDER[run.level - 1] || 0;
+        var potEl = el("pot-line");
+        if (potEl) {
+          if (run.state === "ended") {
+            potEl.textContent = "Pot " + fmt(pot) + " coins \u00B7 Run finished";
+          } else {
+            potEl.textContent = "Pot " + fmt(pot) + " coins \u00B7 This question worth " + fmt(worth) + " coins";
+          }
+        }
+      }
+
+      function renderGameLadder() {
+        var html = "";
+        for (var lvl = 15; lvl >= 1; lvl--) {
+          var cls = "";
+          if (lvl === run.level && run.state !== "ended") cls = "current";
+          else if (lvl <= run.bankedLevel) cls = "done";
+          else if (SAFE_LEVELS[lvl]) cls = "safe";
+          html += "<li class=\"" + cls + "\"><span class=\"lvl\">Question " + lvl + "</span><span>" + fmt(LADDER[lvl - 1]) + "</span></li>";
+        }
+        el("game-ladder").innerHTML = html;
+      }
+
+      function renderOptions() {
+        var q = currentQuestion();
+        var letters = ["A", "B", "C", "D"];
+        var html = "";
+        for (var i = 0; i < 4; i++) {
+          var removed = run.removed[i] ? true : false;
+          var sug = run.suggested === i;
+          html += "<button type=\"button\" class=\"opt" + (removed ? " removed" : "") + (sug ? " suggested" : "") + "\" data-opt=\"" + i + "\" " + (removed || run.state !== "answering" ? "disabled" : "") + "><span class=\"letter\">" + letters[i] + "</span><span class=\"opt-text\">" + q.opts[i] + "</span>" + (sug ? "<span class=\"sug-tag\">AGENT SUGGESTION</span>" : "") + "</button>";
+        }
+        el("q-options").innerHTML = html;
+        var btns = el("q-options").querySelectorAll(".opt");
+        for (var b = 0; b < btns.length; b++) {
+          btns[b].addEventListener("click", function () { answerQuestion(parseInt(this.getAttribute("data-opt"), 10)); });
+        }
+      }
+
+      function renderLifelines() {
+        setLife("life-fifty", run.used.fifty, 20);
+        setLife("life-audience", run.used.audience, 20);
+        setLife("life-phone", run.used.phone, 50);
+      }
+      function setLife(id, used, cost) {
+        var btn = el(id);
+        var costSpan = btn.querySelector(".lcost, .lused");
+        if (!costSpan) return;
+        if (used) {
+          btn.disabled = true;
+          btn.classList.add("used");
+          btn.classList.remove("cant-afford");
+          costSpan.textContent = "Used";
+          costSpan.className = "lused";
+        } else {
+          btn.classList.remove("used");
+          costSpan.textContent = cost + " Ladder Coins";
+          costSpan.className = "lcost";
+          /* The button stays tappable when the balance is too low, so
+             tapping it shows and speaks the not enough coins message. */
+          btn.disabled = run.state !== "answering";
+          var cantAfford = run.state === "answering" && player.balance < cost;
+          btn.classList.toggle("cant-afford", cantAfford);
+          if (cantAfford) {
+            costSpan.textContent = "Costs " + cost + ". Balance too low.";
+          }
+        }
+      }
+
+      function startTimer() {
+        stopTimer();
+        updateTimerDisplay();
+        timerId = setInterval(function () {
+          if (!run || run.state !== "answering" || panelOpen) return;
+          run.timeLeft = Math.max(0, run.timeLeft - 0.1);
+          updateTimerDisplay();
+          if (run.timeLeft <= 15 && run.timeLeft > 0 && !run.warned) {
+            run.warned = true;
+            playSfx("warning");
+          }
+          if (run.timeLeft <= 0) { onTimeout(); }
+        }, 100);
+      }
+      function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
+      function updateTimerDisplay() {
+        var secs = Math.ceil(run.timeLeft);
+        var num = el("timer-num");
+        var bar = el("timer-bar");
+        num.textContent = String(secs);
+        bar.style.width = ((run.timeLeft / QUESTION_TIME) * 100) + "%";
+        var danger = run.timeLeft < 15;
+        num.classList.toggle("danger", danger);
+        bar.classList.toggle("danger", danger);
+        el("sr-status").textContent = secs + " seconds remaining";
+      }
+
+      function openPanel(html) {
+        panelOpen = true;
+        el("panel").innerHTML = html;
+        el("overlay").classList.add("open");
+        var first = el("panel").querySelector("button");
+        if (first) first.focus();
+      }
+      function closePanel() {
+        panelOpen = false;
+        el("overlay").classList.remove("open");
+        el("panel").innerHTML = "";
+      }
+
+      /* Tapping an answer does not lock it in. It opens the final answer
+         popup, and the timer pauses because the popup counts as an open
+         panel. Voice confirmation does exactly the same as the buttons. */
+      var recognizer = null;
+      function speechSupported() {
+        return !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+      }
+      function stopRecognizer() {
+        if (recognizer) {
+          try { recognizer.abort(); } catch (e) {}
+          recognizer = null;
+        }
+      }
+      function answerQuestion(idx) {
+        if (!run || run.state !== "answering" || panelOpen) return;
+        run.pendingIdx = idx;
+        stopSpeaking();
+        var btns = el("q-options").querySelectorAll(".opt");
+        if (btns[idx]) btns[idx].classList.add("picked");
+        openConfirmPanel(idx);
+      }
+      function openConfirmPanel(idx) {
+        var q = currentQuestion();
+        var letters = ["A", "B", "C", "D"];
+        var voiceOk = speechSupported();
+        var html = "<h3 id=\"panel-title\">Is this your final answer?</h3>" +
+          "<div class=\"confirm-pick\">" + letters[idx] + ". " + q.opts[idx] + "</div>" +
+          "<p class=\"muted\">The timer is paused while you decide.</p>" +
+          "<div class=\"confirm-actions\">" +
+          "<button class=\"btn btn-gold\" type=\"button\" id=\"confirm-yes\">Yes</button>" +
+          "<button class=\"btn btn-ghost\" type=\"button\" id=\"confirm-no\">No</button>" +
+          "</div>" +
+          "<button class=\"btn btn-navy mic-btn\" type=\"button\" id=\"confirm-mic\"" + (voiceOk ? "" : " disabled") + ">Answer by voice</button>" +
+          "<p class=\"muted voice-note\" id=\"voice-note\">" +
+          (voiceOk ? "Tap Answer by voice and say Yes to lock it in, or No to pick again." : "Voice is not available on this device. Use the Yes and No buttons.") +
+          "</p>";
+        openPanel(html);
+        speakText("Is this your final answer? You picked " + letters[idx] + ": " + q.opts[idx] + ".");
+        el("confirm-yes").addEventListener("click", function () { confirmFinalAnswer(true); });
+        el("confirm-no").addEventListener("click", function () { confirmFinalAnswer(false); });
+        var micBtn = el("confirm-mic");
+        if (voiceOk && micBtn) {
+          micBtn.addEventListener("click", function () {
+            if (recognizer) {
+              stopRecognizer();
+              micBtn.textContent = "Answer by voice";
+              micBtn.classList.remove("listening");
+              var n = el("voice-note");
+              if (n) n.textContent = "Tap Answer by voice and say Yes to lock it in, or No to pick again.";
+              return;
+            }
+            listenForFinalAnswer();
+          });
+        }
+      }
+      function confirmFinalAnswer(yes) {
+        stopRecognizer();
+        var idx = run ? run.pendingIdx : null;
+        closePanel();
+        if (!run) return;
+        if (yes) {
+          lockInAnswer(idx);
+        } else {
+          run.pendingIdx = null;
+          var btns = el("q-options").querySelectorAll(".opt");
+          if (idx !== null && btns[idx]) btns[idx].classList.remove("picked");
+        }
+      }
+      function listenForFinalAnswer() {
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SR) return;
+        var micBtn = el("confirm-mic");
+        var note = el("voice-note");
+        if (!micBtn) return;
+        try {
+          stopRecognizer();
+          recognizer = new SR();
+          recognizer.lang = "en-GB";
+          recognizer.interimResults = false;
+          recognizer.maxAlternatives = 1;
+          micBtn.textContent = "Listening... tap to stop";
+          micBtn.classList.add("listening");
+          if (note) note.textContent = "Listening. Say Yes or No.";
+          recognizer.onresult = function (ev) {
+            var said = "";
+            try { said = ev.results[0][0].transcript || ""; } catch (e) {}
+            said = said.toLowerCase();
+            stopRecognizer();
+            if (/\byes\b/.test(said) || said.indexOf("yeah") !== -1 || said.indexOf("confirm") !== -1 || said.indexOf("lock") !== -1) {
+              confirmFinalAnswer(true);
+            } else if (/\bno\b/.test(said)) {
+              confirmFinalAnswer(false);
+            } else {
+              if (micBtn) { micBtn.textContent = "Answer by voice"; micBtn.classList.remove("listening"); }
+              if (note) note.textContent = "Heard \u201C" + said + "\u201D. Say Yes or No, or tap a button.";
+            }
+          };
+          recognizer.onerror = function () {
+            stopRecognizer();
+            if (micBtn) { micBtn.textContent = "Answer by voice"; micBtn.classList.remove("listening"); }
+            if (note) note.textContent = "Voice did not work. Use the Yes and No buttons.";
+          };
+          recognizer.onend = function () {
+            if (micBtn && micBtn.textContent.indexOf("Listening") === 0) {
+              micBtn.textContent = "Answer by voice";
+              micBtn.classList.remove("listening");
+            }
+          };
+          recognizer.start();
+        } catch (e) {
+          if (note) note.textContent = "Voice is not available on this device. Use the Yes and No buttons.";
+        }
+      }
+      function lockInAnswer(idx) {
+        if (!run || run.state !== "answering") return;
+        var q = currentQuestion();
+        var letters = ["A", "B", "C", "D"];
+        run.state = "revealing";
+        stopTimer();
+        var btns = el("q-options").querySelectorAll(".opt");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].disabled = true;
+          btns[i].classList.remove("picked");
+          if (i === q.correct) btns[i].classList.add("correct");
+          if (i === idx && idx !== q.correct) btns[i].classList.add("wrong");
+        }
+        renderLifelines();
+        if (run.mode === "duel") {
+          var dCorrect = idx === q.correct;
+          if (dCorrect) run.playerScore += 1;
+          if (run.oppResults[run.level - 1]) run.oppScore += 1;
+          renderHud();
+          var dname = agentDisplay(AGENTS[run.duelAgent].id);
+          var scoreLine = "The score is you " + run.playerScore + ", " + dname + " " + run.oppScore + ".";
+          playSfx(dCorrect ? "correct" : "wrong");
+          if (dCorrect) {
+            showRevealBanner("Correct!", scoreLine, "good");
+            speakText("Correct! " + scoreLine);
+          } else {
+            showRevealBanner("Wrong answer.", "The correct answer was " + letters[q.correct] + ". " + q.opts[q.correct] + ". " + scoreLine, "bad");
+            speakText("Wrong answer. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ". " + scoreLine);
+          }
+          setTimeout(function () {
+            if (!run || run.state !== "revealing") return;
+            if (run.level >= 5) { endDuel(); }
+            else { run.level += 1; renderQuestion(); }
+          }, 1500);
+          return;
+        }
+        if (idx === q.correct) {
+          var isTop = run.level >= 15;
+          playSfx(isTop ? "win" : "correct");
+          run.bankedLevel = run.level;
+          renderHud();
+          renderGameLadder();
+          var amount = LADDER[run.bankedLevel - 1];
+          showRevealBanner("Correct!", "You climb to " + fmt(amount) + " Ladder Coins.", "good");
+          speakText("Correct! You climb to " + fmt(amount) + " Ladder Coins.");
+          setTimeout(function () {
+            if (!run || run.state !== "revealing") return;
+            if (isTop) { endRun(true, "top"); }
+            else {
+              /* The game asks if the player is ready, in text and aloud,
+                 then moves on by itself after about 2 seconds. There is
+                 no Next button to tap. Walk away stays available during
+                 the pause and banks the pot instead of moving on. */
+              run.state = "deciding";
+              var pot = LADDER[run.bankedLevel - 1];
+              var canWalk = run.bankedLevel >= 5;
+              el("btn-walk").style.display = canWalk ? "" : "none";
+              var walkTail = canWalk ? ", or you can walk away and bank your pot." : ".";
+              el("decision-text").textContent = "Correct! You climb to " + fmt(pot) + " Ladder Coins. Are you ready for the next question? Question " + (run.level + 1) + " is worth " + fmt(LADDER[run.level]) + " Ladder Coins. The next question will appear on its own in a moment" + walkTail;
+              el("decision").classList.add("active");
+              speakQueued("Are you ready for the next question? Question " + (run.level + 1) + " is worth " + fmt(LADDER[run.level]) + " Ladder Coins. The next question will appear on its own in a moment" + walkTail);
+              clearReadyTimer();
+              readyTimerId = setTimeout(function () {
+                readyTimerId = null;
+                if (!run || run.state !== "deciding") return;
+                run.level += 1;
+                renderQuestion();
+              }, 2000);
+            }
+          }, 1100);
+        } else {
+          playSfx("wrong");
+          var safeNow = safeAmountFor(run.bankedLevel);
+          if (safeNow === 0) {
+            setTimeout(function () { playSfx("lose"); }, 650);
+          }
+          showRevealBanner("Wrong answer.", "The correct answer was " + letters[q.correct] + ". " + q.opts[q.correct] + ".", "bad");
+          speakText("Wrong answer. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ". " + (safeNow > 0 ? "You fall back to your safe point and keep " + fmt(safeNow) + " Ladder Coins." : "You have not passed question 5, so you lose your stake."));
+          setTimeout(function () { endRun(false, "wrong"); }, 1600);
+        }
+      }
+      function showRevealBanner(head, detail, kind) {
+        var b = el("game-banner");
+        b.innerHTML = "";
+        var h = document.createElement("p");
+        h.className = "reveal-head " + (kind === "good" ? "good" : "bad");
+        h.textContent = head;
+        var d = document.createElement("span");
+        d.textContent = detail;
+        b.appendChild(h);
+        b.appendChild(d);
+        b.className = "banner" + (kind ? " " + kind : "");
+      }
+
+      function onTimeout() {
+        if (!run || run.state !== "answering") return;
+        run.state = "revealing";
+        stopTimer();
+        stopSpeaking();
+        playSfx("wrong");
+        var q = currentQuestion();
+        var letters = ["A", "B", "C", "D"];
+        var btns = el("q-options").querySelectorAll(".opt");
+        for (var i = 0; i < btns.length; i++) {
+          btns[i].disabled = true;
+          if (i === q.correct) btns[i].classList.add("correct");
+        }
+        renderLifelines();
+        if (run.mode === "duel") {
+          if (run.oppResults[run.level - 1]) run.oppScore += 1;
+          renderHud();
+          var dname = agentDisplay(AGENTS[run.duelAgent].id);
+          var scoreLine = "The score is you " + run.playerScore + ", " + dname + " " + run.oppScore + ".";
+          showRevealBanner("Wrong answer.", "Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ". " + q.opts[q.correct] + ". " + scoreLine, "bad");
+          speakText("Wrong answer. Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ". " + scoreLine);
+          setTimeout(function () {
+            if (!run || run.state !== "revealing") return;
+            if (run.level >= 5) { endDuel(); }
+            else { run.level += 1; renderQuestion(); }
+          }, 1600);
+          return;
+        }
+        showRevealBanner("Wrong answer.", "Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ". " + q.opts[q.correct] + ".", "bad");
+        var safeLeft = safeAmountFor(run.bankedLevel);
+        speakText("Wrong answer. Time is up, so that question counts as failed. The correct answer was " + letters[q.correct] + ": " + q.opts[q.correct] + ". " + (safeLeft > 0 ? "You fall back to your safe point and keep " + fmt(safeLeft) + " Ladder Coins." : "You have not passed question 5, so you lose your stake."));
+        setTimeout(function () { endRun(false, "timeout"); }, 1600);
+      }
+
+      function showBanner(text, kind) {
+        var b = el("game-banner");
+        b.textContent = text;
+        b.className = "banner" + (kind ? " " + kind : "");
+      }
+
+      /* A lifeline the player cannot afford is not silent: the message is
+         shown in the banner and spoken, word for word the same. */
+      function notEnoughCoins(name, cost) {
+        var text = "Not enough coins. " + name + " costs " + cost + " Ladder Coins and your balance is " + fmt(player.balance) + " Ladder Coins.";
+        showBanner(text, "bad");
+        speakText(text);
+      }
+
+      /* Ending a ladder run settles the stake. Banking from question 5
+         onwards (walking away, reaching the top, or falling back to a
+         safe point) returns the 100 stake together with the earnings.
+         Losing before question 5 loses the stake: the balance does not
+         move from where the stake left it. Speech is not stopped here:
+         the wrong answer message may still be playing, and the result
+         line is queued after it. */
+      function endRun(won, reason) {
+        if (!run) return;
+        clearReadyTimer();
+        run.state = "ended";
+        stopTimer();
+        stopRecognizer();
+        closePanel();
+        player.runs += 1;
+        var earnings = 0;
+        var stakeBack = 0;
+        var title, detail;
+        if (reason === "top") {
+          earnings = 5000;
+          stakeBack = STAKE;
+          title = "You won the million";
+          detail = "You answered all fifteen questions. That is a win. The whole ladder, climbed in one run.";
+        } else if (reason === "walk") {
+          earnings = LADDER[run.bankedLevel - 1];
+          stakeBack = STAKE;
+          title = won ? "You walked away a winner" : "You walked away";
+          detail = "You banked at question " + run.bankedLevel + "." + (won ? " Walking away at question 10 or above counts as a win." : " Walk away at question 10 or above next time to make it a win.");
+        } else if (run.bankedLevel >= 5) {
+          earnings = safeAmountFor(run.bankedLevel);
+          stakeBack = STAKE;
+          title = reason === "timeout" ? "Out of time" : (reason === "quit" ? "Run ended" : "Wrong answer");
+          detail = "The run ends at question " + run.level + ", but your safe point pays out and your stake comes back with it.";
+        } else {
+          title = reason === "timeout" ? "Out of time" : (reason === "quit" ? "Run ended" : "Wrong answer");
+          detail = "The run ends at question " + run.level + " before question 5, the minimum you need to earn anything.";
+        }
+        if (won) { player.wins += 1; player.streak += 1; }
+        else if (stakeBack === 0) { player.streak = 0; }
+        player.balance += earnings + stakeBack;
+        player.totalEarned += earnings;
+        saveProgress();
+        var mainLine;
+        if (stakeBack > 0) {
+          mainLine = "You banked " + fmt(earnings) + " coins, plus your 100 stake back. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+        } else {
+          mainLine = "You lost your stake. Your balance is " + fmt(player.balance) + " Ladder Coins.";
+        }
+        el("run-end").classList.add("active");
+        el("decision").classList.remove("active");
+        el("end-title").textContent = title;
+        var genNote = "";
+        if (won && player.wins % 3 === 0 && generation() > 0) {
+          genNote = " That win takes your agent to generation " + generation() + ".";
+        } else if (won) {
+          var need = 3 - (player.wins % 3);
+          genNote = " You now hold " + player.wins + " wins. " + (need === 1 ? "One more win" : need + " more wins") + " and your agent climbs a generation.";
+        }
+        if (won && player.streak >= 3) {
+          genNote += " Your win streak is " + player.streak + " wins in a row.";
+        }
+        el("end-text").textContent = mainLine + " " + detail + genNote;
+        speakQueued(mainLine);
+        if (won) {
+          showBanner("Run complete. A win for your agent.", "goldb");
+        }
+        renderHud();
+        renderGameLadder();
+        renderLifelines();
+      }
+
+      /* Ending a duel settles both stakes. The player already paid 100
+         when the duel started: winning adds 200 (both stakes), a tie
+         returns the 100 stake, and losing adds nothing. */
+      function endDuel(forfeit) {
+        if (!run || run.mode !== "duel") return;
+        clearReadyTimer();
+        run.state = "ended";
+        stopTimer();
+        stopRecognizer();
+        closePanel();
+        var agent = AGENTS[run.duelAgent];
+        var name = agentDisplay(agent.id);
+        var ps = run.playerScore;
+        var os = run.oppScore;
+        var title, mainLine;
+        if (forfeit) {
+          title = "Duel over";
+          mainLine = "You left the duel against " + name + " early. You lost your 100 stake. Your balance is " + fmt(player.balance) + " Ladder Coins.";
+        } else if (ps > os) {
+          player.balance += 200;
+          player.totalEarned += 200;
+          title = "You won the duel";
+          mainLine = "You won the duel, " + ps + " to " + os + ". You take 200 coins. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+        } else if (ps < os) {
+          title = "You lost the duel";
+          mainLine = "You lost the duel, " + ps + " to " + os + ". You lost your 100 stake. Your balance is " + fmt(player.balance) + " Ladder Coins.";
+        } else {
+          player.balance += STAKE;
+          title = "Duel tied";
+          mainLine = "The duel is tied, " + ps + " to " + os + ". You both get your stake back. Your balance is now " + fmt(player.balance) + " Ladder Coins.";
+        }
+        saveProgress();
+        el("run-end").classList.add("active");
+        el("decision").classList.remove("active");
+        el("end-title").textContent = title;
+        el("end-text").textContent = mainLine;
+        speakQueued(mainLine);
+        if (!forfeit && ps > os) {
+          playSfx("win");
+          showBanner("Duel complete. You take both stakes.", "goldb");
+        }
+        renderHud();
+        renderLifelines();
+      }
+
+      function useFifty() {
+        if (!run || run.mode === "duel" || run.state !== "answering" || run.used.fifty) return;
+        if (player.balance < 20) { notEnoughCoins("50:50", 20); return; }
+        playSfx("click");
+        player.balance -= 20;
+        run.used.fifty = true;
+        var q = currentQuestion();
+        var wrong = [];
+        for (var i = 0; i < 4; i++) { if (i !== q.correct) wrong.push(i); }
+        var keep = wrong[Math.floor(Math.random() * wrong.length)];
+        for (var w = 0; w < wrong.length; w++) { if (wrong[w] !== keep) run.removed[wrong[w]] = true; }
+        if (run.suggested >= 0 && run.removed[run.suggested]) run.suggested = -1;
+        renderOptions();
+        renderHud();
+        renderLifelines();
+        showBanner("50:50 used. Two wrong answers have been removed for 20 Ladder Coins.", "");
+        speakText("Two wrong answers removed.");
+      }
+
+      function useAudience() {
+        if (!run || run.mode === "duel" || run.state !== "answering" || run.used.audience) return;
+        if (player.balance < 20) { notEnoughCoins("Ask the Audience", 20); return; }
+        playSfx("click");
+        player.balance -= 20;
+        run.used.audience = true;
+        var q = currentQuestion();
+        var visible = [];
+        for (var i = 0; i < 4; i++) { if (!run.removed[i]) visible.push(i); }
+        var weights = {};
+        var audienceWrong = Math.random() < 0.18;
+        var favoured;
+        if (audienceWrong) {
+          var wrongVisible = [];
+          for (var v = 0; v < visible.length; v++) { if (visible[v] !== q.correct) wrongVisible.push(visible[v]); }
+          favoured = wrongVisible[Math.floor(Math.random() * wrongVisible.length)];
+        } else { favoured = q.correct; }
+        var total = 0;
+        for (var k = 0; k < visible.length; k++) {
+          var idx = visible[k];
+          var wgt = idx === favoured ? 46 + Math.random() * 24 : 6 + Math.random() * 18;
+          weights[idx] = wgt; total += wgt;
+        }
+        var pcts = {}, usedSum = 0;
+        for (var m = 0; m < visible.length; m++) {
+          var p = Math.round((weights[visible[m]] / total) * 100);
+          pcts[visible[m]] = p; usedSum += p;
+        }
+        pcts[favoured] += (100 - usedSum);
+        var letters = ["A", "B", "C", "D"];
+        var html = "<h3 id=\"panel-title\">Ask the Audience</h3><p class=\"muted\">The audience has voted. The vote usually favours the correct answer, but the audience can be wrong. The timer is paused while this panel is open.</p>";
+        for (var r = 0; r < 4; r++) {
+          if (run.removed[r]) continue;
+          html += "<div class=\"vote-row\"><div class=\"vletter\">" + letters[r] + "</div><div><div class=\"vname\">" + q.opts[r] + "</div><div class=\"vote-track\"><div class=\"vote-fill\" data-w=\"" + pcts[r] + "\"></div></div></div><div class=\"vote-pct\">" + pcts[r] + "%</div></div>";
+        }
+        html += "<div class=\"close-row\"><button class=\"btn btn-navy\" type=\"button\" id=\"panel-close\">Back to the question</button></div>";
+        openPanel(html);
+        renderHud();
+        renderLifelines();
+        var fills = el("panel").querySelectorAll(".vote-fill");
+        setTimeout(function () {
+          for (var f = 0; f < fills.length; f++) fills[f].style.width = fills[f].getAttribute("data-w") + "%";
+        }, 40);
+        el("panel-close").addEventListener("click", closePanel);
+        var voteParts = ["The audience voted."];
+        for (var s = 0; s < 4; s++) {
+          if (run.removed[s]) continue;
+          voteParts.push(letters[s] + ": " + pcts[s] + "%.");
+        }
+        speakText(voteParts.join(" "));
+      }
+
+      function usePhone() {
+        if (!run || run.mode === "duel" || run.state !== "answering" || run.used.phone) return;
+        if (player.balance < 50) { notEnoughCoins("Phone a Friend", 50); return; }
+        playSfx("click");
+        var html = "<h3 id=\"panel-title\">Phone a Friend</h3><p class=\"muted\">Pick the agent you want to call. Calling costs 50 Ladder Coins. Each record below is the agent's live record, checked on 12 November 2026. The timer is paused while this panel is open.</p>";
+        for (var i = 0; i < AGENTS.length; i++) {
+          var a = AGENTS[i];
+          var cant = player.balance < 50;
+          html += "<button type=\"button\" class=\"agent-pick\" data-agent=\"" + i + "\" " + (cant ? "disabled" : "") + "><span class=\"aname\">" + agentDisplay(a.id) + "</span><span class=\"ameta\" style=\"display:block;\">Generation " + a.gen + " · Wins " + a.wins + " · " + a.status + (a.note ? " · " + a.note : "") + (cant ? " · Your balance is too low to call." : "") + "</span></button>";
+        }
+        html += "<div class=\"close-row\"><button class=\"btn btn-ghost\" type=\"button\" id=\"panel-close\">Not now. Back to the question.</button></div>";
+        openPanel(html);
+        el("panel-close").addEventListener("click", closePanel);
+        var picks = el("panel").querySelectorAll(".agent-pick");
+        for (var p = 0; p < picks.length; p++) {
+          picks[p].addEventListener("click", function () { phoneAgent(parseInt(this.getAttribute("data-agent"), 10)); });
+        }
+      }
+
+      function phoneAgent(idx) {
+        if (!run || run.used.phone || player.balance < 50) return;
+        player.balance -= 50;
+        run.used.phone = true;
+        var agent = AGENTS[idx];
+        var q = currentQuestion();
+        var visible = [];
+        for (var i = 0; i < 4; i++) { if (!run.removed[i]) visible.push(i); }
+        var suggestion;
+        if (Math.random() < 0.70) { suggestion = q.correct; }
+        else {
+          var wrongVisible = [];
+          for (var v = 0; v < visible.length; v++) { if (visible[v] !== q.correct) wrongVisible.push(visible[v]); }
+          suggestion = wrongVisible[Math.floor(Math.random() * wrongVisible.length)];
+        }
+        run.suggested = suggestion;
+        var letters = ["A", "B", "C", "D"];
+        var html = "<h3 id=\"panel-title\">" + agentDisplay(agent.id) + " has answered</h3><p>" + agentDisplay(agent.id) + " suggests <strong>" + letters[suggestion] + ". " + q.opts[suggestion] + "</strong>.</p><p class=\"muted\">The suggestion is now marked on the question. A generation 0 agent gets it right about 70 percent of the time, so weigh it against your own judgement. The final answer is yours to choose.</p><div class=\"close-row\"><button class=\"btn btn-navy\" type=\"button\" id=\"panel-close2\">Back to the question</button></div>";
+        el("panel").innerHTML = html;
+        el("panel-close2").addEventListener("click", closePanel);
+        renderOptions();
+        renderHud();
+        renderLifelines();
+        showBanner(agentDisplay(agent.id) + " suggests option " + letters[suggestion] + ". The suggestion is marked on the question.", "");
+        speakText(agentDisplay(agent.id) + " suggests " + letters[suggestion] + ": " + q.opts[suggestion] + ".");
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        buildHomeLadder();
+        renderHome();
+        updateMuteUI();
+        el("btn-to-signup").addEventListener("click", openSignUp);
+        el("btn-to-signin").addEventListener("click", openSignIn);
+        el("btn-guest").addEventListener("click", playAsGuest);
+        el("btn-signout").addEventListener("click", doSignOut);
+        el("form-signup").addEventListener("submit", doSignUp);
+        el("form-signin").addEventListener("submit", doSignIn);
+        el("btn-si-tosignup").addEventListener("click", openSignUp);
+        el("btn-su-start").addEventListener("click", startRun);
+        el("btn-si-start").addEventListener("click", startRun);
+        el("btn-su-home").addEventListener("click", function () { showScreen("home"); });
+        el("btn-si-home").addEventListener("click", function () { showScreen("home"); });
+        /* Audio only starts after a tap, so browsers allow it on phones. */
+        document.addEventListener("click", function () { ensureAudio(); }, false);
+        el("btn-mute").addEventListener("click", toggleMute);
+        el("btn-hear").addEventListener("click", function () {
+          ensureAudio();
+          speakCurrentQuestion();
+        });
+        el("btn-faucet").addEventListener("click", faucet);
+        el("btn-start").addEventListener("click", startRun);
+        el("btn-to-board").addEventListener("click", function () { showScreen("board"); });
+        el("btn-to-how").addEventListener("click", function () { showScreen("how"); });
+        var backs = document.querySelectorAll("[data-nav]");
+        for (var i = 0; i < backs.length; i++) {
+          backs[i].addEventListener("click", function () { showScreen(this.getAttribute("data-nav")); });
+        }
+        el("life-fifty").addEventListener("click", useFifty);
+        el("life-audience").addEventListener("click", useAudience);
+        el("life-phone").addEventListener("click", usePhone);
+        el("btn-walk").addEventListener("click", function () {
+          if (!run || run.state !== "deciding") return;
+          clearReadyTimer();
+          endRun(run.bankedLevel >= 10, "walk");
+        });
+        el("btn-again").addEventListener("click", function () {
+          if (run && run.mode === "duel") { startDuel(run.duelAgent); }
+          else { startRun(); }
+        });
+        el("btn-end-home").addEventListener("click", function () { showScreen("home"); });
+        el("btn-quit").addEventListener("click", function () {
+          if (!run || run.state === "ended") { showScreen("home"); return; }
+          stopSpeaking();
+          if (run.mode === "duel") { endDuel(true); }
+          else { endRun(false, "quit"); }
+        });
+        /* Modals do not close on backdrop tap: the player must tap a button inside the panel to continue. */
+      });
+    </script>
+  </body>
+</html>
