@@ -15306,7 +15306,7 @@
            a sign in return even if its address loses the code. */
         storeSet(PV_HINT_KEY, "1");
         pvLoadSdk().then(function (parts) {
-          var redirectURI = window.location.origin + window.location.pathname;
+          var redirectURI = window.location.origin;
           return parts.privy.auth.oauth.generateURL("google", redirectURI);
         }).then(function (res) {
           var url = null;
