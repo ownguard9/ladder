@@ -71,9 +71,6 @@
         border: 1px solid #22355f;
         box-shadow: 0 18px 40px rgba(4, 10, 26, 0.35);
       }
-      .stage .rings { display: flex; justify-content: center; gap: 6px; margin-bottom: 14px; }
-      .stage .rings span { width: 9px; height: 9px; border-radius: 50%; background: var(--gold); opacity: 0.35; }
-      .stage .rings span.on { opacity: 1; }
       h1.title {
         font-family: "Marcellus", Georgia, serif;
         font-weight: 400;
@@ -187,25 +184,30 @@
       @media (min-width: 880px) {
         .game-grid { grid-template-columns: 1fr 300px; align-items: start; }
       }
-      .hud { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
-      .hud .pill { background: var(--surface); border-color: var(--line); color: var(--ink); }
-      .hud .pill b { color: var(--ink); }
-      .hud .pill.goldp { border-color: var(--gold); background: var(--gold); color: var(--gold-ink); }
-      .hud .pill.goldp b { color: var(--gold-ink); }
-
-      .timer-row { display: flex; align-items: center; gap: 14px; margin: 4px 0 14px; flex-wrap: wrap; }
-      @media (max-width: 420px) { .timer-wrap { flex: 1 1 140px; } }
-      .timer-display { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
-      .timer-num {
-        font-family: "Marcellus", Georgia, serif; font-size: 36px; line-height: 1;
-        min-width: 68px; text-align: center; padding: 10px 6px;
-        border: 2px solid var(--line); border-radius: 12px; background: var(--surface);
-        font-weight: 700;
+      /* Compact game header: a back button plus one status line, so the
+         question banner sits high on the phone screen. */
+      .game-topbar { display: flex; align-items: stretch; gap: 10px; margin-bottom: 10px; }
+      .game-back { min-height: 44px; padding: 8px 14px; font-size: 15px; flex: 0 0 auto; }
+      .hud-compact {
+        flex: 1 1 auto; min-width: 0; display: flex; flex-wrap: wrap; align-items: center;
+        gap: 2px 7px; padding: 8px 12px;
+        background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+        font-size: 0.88rem; font-weight: 600; line-height: 1.35;
       }
-      .timer-unit { font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.2; max-width: 74px; }
-      .timer-wrap { flex: 1; }
-      .timer-label { font-size: 0.9rem; font-weight: 700; color: var(--muted); margin-bottom: 4px; letter-spacing: 0.04em; }
-      .timer-track { height: 14px; border-radius: 999px; background: var(--surface2); overflow: hidden; border: 1px solid var(--line); }
+      .hud-compact b { font-weight: 800; }
+      .hud-compact > span { white-space: nowrap; }
+      .hud-sep { color: var(--muted); font-weight: 400; }
+      .pill-balance { white-space: nowrap; }
+
+      .timer-compact { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; }
+      .timer-num {
+        font-family: "Marcellus", Georgia, serif; font-size: 26px; line-height: 1;
+        min-width: 54px; text-align: center; padding: 7px 4px;
+        border: 2px solid var(--line); border-radius: 10px; background: var(--surface);
+        font-weight: 700; flex: 0 0 auto;
+      }
+      .timer-unit { font-size: 13px; font-weight: 700; color: var(--muted); line-height: 1.2; flex: 0 0 auto; }
+      .timer-track { flex: 1 1 auto; height: 12px; border-radius: 999px; background: var(--surface2); overflow: hidden; border: 1px solid var(--line); }
       .timer-bar { height: 100%; width: 100%; background: var(--good); border-radius: 999px; transition: width 0.12s linear; }
       .timer-num.danger { color: var(--bad); border-color: var(--bad); }
       .timer-bar.danger { background: var(--bad); }
@@ -277,15 +279,11 @@
       .life.used { background: var(--surface2); color: var(--muted); border-color: var(--line); opacity: 0.62; filter: grayscale(1); }
       .life.used .lname { color: var(--muted); }
 
-      /* Always-visible ladder strip */
-      .ladder-strip-wrap {
-        background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-        padding: 12px 12px 10px; margin-bottom: 14px;
-      }
-      .ladder-strip-label { font-size: 13px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; }
+      /* Slim climb strip: fifteen rungs, no label, no extra height */
+      .climb-wrap { margin: 0 0 10px; }
       .ladder-strip { display: flex; gap: 4px; }
       .ladder-seg {
-        flex: 1 1 0; height: 20px; min-width: 0; border-radius: 5px;
+        flex: 1 1 0; height: 14px; min-width: 0; border-radius: 5px;
         background: var(--surface2); border: 2px solid transparent;
       }
       .ladder-seg.done { background: var(--good); border-color: var(--good); }
@@ -293,8 +291,14 @@
       .ladder-seg.safe { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
       .ladder-seg.safe.current { border-color: #8a6d1b; box-shadow: inset 0 0 0 2px #8a6d1b, 0 0 0 1px var(--gold); }
       .ladder-seg.safe.done { border-color: var(--gold); }
-      .pot-line { margin: 10px 0 0; font-size: 17px; font-weight: 700; color: var(--ink); line-height: 1.4; }
-      .pot-line strong { font-weight: 800; }
+      /* Gold worth badge on the question banner: what this question pays */
+      .worth-badge {
+        display: inline-block; margin-top: 12px;
+        background: var(--gold); color: var(--gold-ink);
+        font-weight: 800; font-size: 1rem; line-height: 1.3;
+        padding: 7px 16px; border-radius: 999px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.55);
+      }
 
       .banner {
         margin-top: 16px; border-radius: 12px; padding: 13px 15px; font-weight: 600;
@@ -356,8 +360,7 @@
       .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
       /* Audio controls */
-      .audio-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 12px; }
-      .brand-mark { font-family: "Marcellus", Georgia, serif; font-size: 1.25rem; letter-spacing: 0.02em; color: var(--ink); white-space: nowrap; }
+      .audio-bar { display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin: 0 0 12px; }
       .mute-btn {
         display: inline-flex; align-items: center; gap: 8px;
         background: var(--surface); color: var(--ink); border: 1px solid var(--line);
@@ -394,7 +397,7 @@
       .duel-btn { margin-top: 8px; padding: 9px 14px; min-height: 44px; font-size: 0.92rem; border-radius: 10px; }
       .bprize { display: inline-block; margin-top: 6px; background: var(--gold); color: var(--gold-ink); font-weight: 800; font-size: 0.8rem; border-radius: 999px; padding: 3px 9px; }
       .streak-badge { display: inline-block; background: var(--gold); color: var(--gold-ink); font-weight: 800; font-size: 0.78rem; border-radius: 999px; padding: 3px 9px; margin-left: 8px; vertical-align: middle; }
-      .screen.duel-mode .lifelines, .screen.duel-mode .ladder-strip-wrap, .screen.duel-mode aside { display: none; }
+      .screen.duel-mode .lifelines, .screen.duel-mode .climb-wrap, .screen.duel-mode .worth-badge, .screen.duel-mode aside { display: none; }
       @media (min-width: 880px) { .screen.duel-mode .game-grid { grid-template-columns: 1fr; } }
 
       /* Sign up and sign in (text only screens) */
@@ -417,21 +420,25 @@
       /* Phone polish: tidy, roomy layout at 390px and below */
       @media (max-width: 560px) {
         .wrap { padding: 12px 12px 40px; }
-        .brand-mark { font-size: 1.1rem; }
         .mute-btn { padding: 9px 13px; font-size: 14px; min-height: 50px; }
         .stage { padding: 22px 14px 20px; border-radius: 16px; }
-        .pills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+        .pills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
         .pills .pill {
           flex-direction: column; gap: 0; padding: 7px 4px; min-height: 54px;
           font-size: 0.85rem; line-height: 1.3; justify-content: center; text-align: center;
           border-radius: 12px;
         }
+        .pills .pill-balance {
+          grid-column: 1 / -1;
+          flex-direction: row; gap: 6px; padding: 8px 12px; min-height: 44px;
+          white-space: nowrap;
+        }
         .actions { margin-top: 16px; }
         .card { padding: 16px; }
-        .hud { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-        .hud .pill { justify-content: center; text-align: center; font-size: 0.88rem; padding: 7px 8px; min-height: 44px; }
-        .timer-num { font-size: 32px; min-width: 60px; }
-        .timer-unit { font-size: 15px; max-width: 62px; }
+        .hud-compact { font-size: 0.84rem; padding: 7px 10px; gap: 2px 6px; }
+        .game-back { padding: 8px 12px; font-size: 14px; }
+        .timer-num { font-size: 24px; min-width: 50px; }
+        .timer-unit { font-size: 12px; }
         /* Question banner + 2x2 answers at phone width (390px and below):
            banner stays full-width, answers stay two side by side. */
         .qcard { padding: 0; border-radius: 16px; }
@@ -458,7 +465,6 @@
     <main class="wrap">
 
       <div class="audio-bar">
-        <span class="brand-mark">Agent's Ladder</span>
         <button class="mute-btn" id="btn-mute" type="button" aria-pressed="false" aria-label="Turn sound off">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path class="sound-waves" d="M16 9c1.2 1 1.2 5 0 6M18.5 6.5c2.4 2.8 2.4 8.2 0 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="muted-x" d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           <span id="mute-label">Sound on</span>
@@ -468,12 +474,11 @@
       <!-- HOME -->
       <section id="screen-home" class="screen active" aria-label="Home">
         <div class="stage">
-          <div class="rings" aria-hidden="true"><span></span><span class="on"></span><span></span><span class="on"></span><span></span><span class="on"></span><span></span></div>
           <h1 class="title">Agent's Ladder</h1>
           <p class="tagline">Answer. Climb. Risk it all.</p>
           <p class="stage-sub">Fifteen questions stand between your agent and the top prize of 5,000 Ladder Coins. One wrong answer and the climb is over.</p>
           <div class="pills" role="status">
-            <span class="pill">Balance <b id="pill-balance">0 Ladder Coins</b></span>
+            <span class="pill pill-balance">Balance <b id="pill-balance">0 Ladder Coins</b></span>
             <span class="pill">Generation <b id="pill-gen">0</b></span>
             <span class="pill">Wins <b id="pill-wins">0</b></span>
           </div>
@@ -589,9 +594,9 @@
           <h3>The stake</h3>
           <p>Every run costs a stake of 100 Ladder Coins, taken from your wallet when the run starts. A wallet of 500 becomes 400, and the game shows Staked: 100 while you play. There is no free run: without the stake you cannot play. If your wallet holds fewer than 100 Ladder Coins, claim the faucet to top it up before you start.</p>
           <h3>Safe points</h3>
-          <p id="how-safe-text">Question 5 and question 10 are safe points. Safe points are decision points, not safety nets. Five correct answers is the minimum you need to earn anything. At question 5 and at question 10 the Walk away choice is shown clearly with the exact amount. At question 5 the gold button says Walk away with 180 Ladder Coins, which is your 80 Ladder Coins pot plus your 100 stake back. At question 10 the gold button says Walk away with 600 Ladder Coins, which is your 500 Ladder Coins pot plus your 100 stake back. The decision text says it plainly at each safe point. This is a safe point. Walk away now with the amount shown, or keep playing and risk it all. If you walk away, you bank that amount and your balance goes up by it. If you choose to keep playing instead of walking away and then fail a later question, you lose everything from the run. You get no stake back, no pot and no safe point payout, and your balance stays where the stake left it. Fail before the first safe point and you lose your stake. Losing a run resets your win streak.</p>
+          <p id="how-safe-text">Question 5 and question 10 are safe points. Safe points are decision points, not safety nets. Five correct answers is the minimum you need to earn anything. From question 5 upwards, after every correct answer the game always asks you plainly, in text and aloud, with the exact amount for that question. For example, at question 5 it asks, Do you want to walk away with 180 Ladder Coins, or continue playing? The game waits for your answer and never moves on without you choosing. The gold Walk away button shows the exact amount, which is your current pot plus your 100 stake back, and the Continue playing button sits beside it. At question 5 the gold button says Walk away with 180 Ladder Coins, which is your 80 Ladder Coins pot plus your 100 stake back, so a balance of 400 becomes 580. At question 6 the gold button says Walk away with 220 Ladder Coins, which is your 120 Ladder Coins pot plus your 100 stake back, so a balance of 400 becomes 620. At question 7 the gold button says Walk away with 280 Ladder Coins, which is your 180 Ladder Coins pot plus your 100 stake back, so a balance of 400 becomes 680. At question 10 the gold button says Walk away with 600 Ladder Coins, which is your 500 Ladder Coins pot plus your 100 stake back, so a balance of 400 becomes 1000. If you walk away, you bank that amount and your balance goes up by it. If you choose to continue playing instead of walking away and then fail a later question, you lose everything from the run. You get no stake back, no pot and no safe point payout, and your balance stays where the stake left it. Fail before the first safe point and you lose your stake. Losing a run resets your win streak.</p>
           <h3>Walk away or risk it</h3>
-          <p>After each correct answer that is not a safe point, the game asks, in text and aloud, &ldquo;Are you ready for the next question?&rdquo; You do not need to tap anything to continue. After a short pause the next question comes up on its own with a fresh 60 seconds. From question 5 onwards you can tap Walk away during that pause and bank your pot instead, and your 100 stake comes back with your earnings. At question 5 and question 10 there is no short pause that rushes you on. The game waits while you choose between the gold Walk away button, which shows the exact amount, and Continue playing. Before question 5 there is no Walk away choice and nothing to bank. Walking away at question 10 or above counts as a win. So does reaching question 15 and answering it correctly.</p>
+          <p id="how-walk-text">Before question 5, after each correct answer the game asks, in text and aloud, &ldquo;Are you ready for the next question?&rdquo; You do not need to tap anything to continue. After a short pause the next question comes up on its own with a fresh 60 seconds. From question 5 upwards that changes. After every correct answer at question 5, 6, 7, 8, 9, 10, 11, 12, 13 and 14 the game always asks you plainly, in text and aloud, &ldquo;Do you want to walk away with the amount shown, or continue playing?&rdquo; with the exact amount for that question in the question itself. The game waits for your answer. It never skips the question and never moves on without you choosing. Tap the gold Walk away button, which shows the exact amount, and you bank your current pot plus your 100 stake back and the run ends. Tap Continue playing and the next question comes, and you risk it all. Before question 5 there is no Walk away choice and nothing to bank. Walking away at question 10 or above counts as a win. So does reaching question 15 and answering it correctly.</p>
           <h3>Lifelines</h3>
           <p>Each lifeline can be used once in a run, and each one costs Ladder Coins from your balance.</p>
           <p><strong>50:50</strong> costs 20 Ladder Coins and removes two wrong answers, leaving the correct answer and one other.</p>
@@ -625,37 +630,28 @@
 
       <!-- GAME -->
       <section id="screen-game" class="screen" aria-label="Game">
-        <div class="hud" role="status">
-          <span class="pill" id="hud-q">Question 1 of 15</span>
-          <span class="pill goldp"><span id="hud-pot-label">Pot</span> <b id="hud-pot">0</b></span>
-          <span class="pill">Balance <b id="hud-balance">0 Ladder Coins</b></span>
-          <span class="pill">Staked: <b id="hud-stake">100</b></span>
-          <span class="pill"><span id="hud-safe-label">Safe point</span> <b id="hud-safe">None yet</b></span>
-        </div>
-
-        <div class="ladder-strip-wrap" aria-label="Ladder progress">
-          <p class="ladder-strip-label">Your climb &middot; 15 rungs</p>
-          <div class="ladder-strip" id="ladder-strip" aria-hidden="true"></div>
-          <p class="pot-line" id="pot-line">Pot 0 coins &middot; This question worth 10 coins</p>
+        <div class="game-topbar">
+          <button class="btn btn-ghost game-back" id="btn-game-back" type="button">Back</button>
+          <div class="hud-compact" role="status"><span id="hud-q">Q1 of 15</span><span class="hud-sep" aria-hidden="true">&middot;</span><span><span id="hud-pot-label">Pot</span> <b id="hud-pot">0</b></span><span class="hud-sep" aria-hidden="true">&middot;</span><span>Balance <b id="hud-balance">0</b></span><span class="hud-sep" aria-hidden="true">&middot;</span><span>Staked <b id="hud-stake">100</b></span><span class="hud-sep" aria-hidden="true">&middot;</span><span><span id="hud-safe-label">Safe point</span> <b id="hud-safe">None yet</b></span></div>
         </div>
 
         <div class="game-grid">
           <div>
-            <div class="timer-row">
-              <div class="timer-display">
-                <div class="timer-num" id="timer-num" aria-label="Seconds remaining">60</div>
-                <span class="timer-unit">seconds left</span>
-              </div>
-              <div class="timer-wrap">
-                <div class="timer-label">TIME REMAINING</div>
-                <div class="timer-track"><div class="timer-bar" id="timer-bar"></div></div>
-              </div>
+            <div class="climb-wrap" aria-label="Ladder progress">
+              <div class="ladder-strip" id="ladder-strip" aria-hidden="true"></div>
+            </div>
+
+            <div class="timer-compact">
+              <div class="timer-num" id="timer-num" aria-label="Seconds remaining">60</div>
+              <div class="timer-track"><div class="timer-bar" id="timer-bar"></div></div>
+              <span class="timer-unit">seconds left</span>
             </div>
 
             <div class="qcard">
               <div class="qbanner">
                 <div class="qcat" id="q-cat">General knowledge</div>
                 <p class="qtext" id="q-text">Question</p>
+                <div><span class="worth-badge" id="pot-line">This question worth 10 coins</span></div>
               </div>
               <div class="options" id="q-options"></div>
               <button class="btn btn-stage hear-btn" id="btn-hear" type="button">Hear the question again</button>
@@ -906,7 +902,9 @@
         if (!run) return;
         var q = currentQuestion();
         var letters = ["A", "B", "C", "D"];
-        var parts = ["Question " + run.level + ". " + q.q];
+        var parts = ["Question " + run.level + "."];
+        if (run.mode !== "duel") parts.push("This question worth " + fmt(LADDER[run.level - 1]) + " coins.");
+        parts.push(q.q);
         for (var i = 0; i < 4; i++) parts.push(letters[i] + ". " + q.opts[i]);
         speakText(parts.join(" "));
       }
@@ -1113,6 +1111,8 @@
         if (name === "how") {
           var howSafe = el("how-safe-text");
           if (howSafe) speakText("How to play. Safe points. " + howSafe.textContent.trim());
+          var howWalk = el("how-walk-text");
+          if (howWalk) speakQueued("Walk away or risk it. " + howWalk.textContent.trim());
         }
         if (name === "board") {
           renderBoard();
@@ -1144,7 +1144,7 @@
         saveProgress();
         updateAccountUI();
         renderWallet();
-        el("pill-balance").textContent = fmt(player.balance) + " Ladder Coins";
+        el("pill-balance").textContent = fmt(player.balance);
         el("pill-gen").textContent = String(generation());
         el("pill-wins").textContent = String(player.wins);
         var toNext = 3 - (player.wins % 3);
@@ -1388,7 +1388,7 @@
         if (contReset) contReset.style.display = "none";
         el("game-banner").textContent = "";
         el("game-banner").className = "banner";
-        el("hud-q").textContent = run.mode === "duel" ? "Duel question " + run.level + " of 5" : "Question " + run.level + " of 15";
+        el("hud-q").textContent = run.mode === "duel" ? "Duel Q" + run.level + " of 5" : "Q" + run.level + " of 15";
         el("q-cat").textContent = q.cat;
         el("q-text").textContent = q.q;
         renderHud();
@@ -1401,7 +1401,7 @@
 
       function renderHud() {
         saveProgress();
-        el("hud-balance").textContent = fmt(player.balance) + " Ladder Coins";
+        el("hud-balance").textContent = fmt(player.balance);
         el("hud-stake").textContent = fmt(run.stake || STAKE);
         if (run.mode === "duel") {
           var agent = AGENTS[run.duelAgent];
@@ -1412,10 +1412,10 @@
         } else {
           var pot = run.bankedLevel > 0 ? LADDER[run.bankedLevel - 1] : 0;
           el("hud-pot-label").textContent = "Pot";
-          el("hud-pot").textContent = fmt(pot) + " Ladder Coins";
+          el("hud-pot").textContent = fmt(pot);
           el("hud-safe-label").textContent = "Safe point";
           var safe = safeAmountFor(run.bankedLevel);
-          el("hud-safe").textContent = safe > 0 ? fmt(safe) + " Ladder Coins" : "None yet";
+          el("hud-safe").textContent = safe > 0 ? fmt(safe) : "None yet";
         }
         renderLadderStrip();
       }
@@ -1434,12 +1434,12 @@
         strip.innerHTML = html;
         var pot = run.bankedLevel > 0 ? LADDER[run.bankedLevel - 1] : 0;
         var worth = LADDER[run.level - 1] || 0;
-        var potEl = el("pot-line");
-        if (potEl) {
+        var badge = el("pot-line");
+        if (badge) {
           if (run.state === "ended") {
-            potEl.textContent = "Pot " + fmt(pot) + " coins \u00B7 Run finished";
+            badge.textContent = "Run finished";
           } else {
-            potEl.textContent = "Pot " + fmt(pot) + " coins \u00B7 This question worth " + fmt(worth) + " coins";
+            badge.textContent = "This question worth " + fmt(worth) + " coins";
           }
         }
       }
@@ -1704,12 +1704,12 @@
             if (!run || run.state !== "revealing") return;
             if (isTop) { endRun(true, "top"); }
             else {
-              /* Safe points at question 5 and question 10 are decision
-                 points. The game waits there with a clear choice and
-                 does not move on by itself. At other levels the game
-                 asks if the player is ready, in text and aloud, then
-                 moves on by itself after about 2 seconds. Walk away
-                 stays available during that pause. */
+              /* From question 5 upwards the game always asks the walk
+                 away question and waits for the player to choose. It
+                 does not move on by itself at those levels. Before
+                 question 5 the game asks if the player is ready, in
+                 text and aloud, then moves on by itself after about
+                 2 seconds, and there is no walk away choice. */
               run.state = "deciding";
               var pot = LADDER[run.bankedLevel - 1];
               var canWalk = run.bankedLevel >= 5;
@@ -1717,24 +1717,27 @@
               var walkBtn = el("btn-walk");
               var continueBtn = el("btn-continue");
               walkBtn.style.display = canWalk ? "" : "none";
-              if (isSafePoint) {
+              if (canWalk) {
+                /* From question 5 upwards the game always asks plainly
+                   and waits. It never moves on by itself and never
+                   skips the question: the player must tap Walk away
+                   or Continue playing. */
                 var walkAmount = pot + STAKE;
-                var safeText = "This is a safe point. Walk away now with " + fmt(walkAmount) + " Ladder Coins, or keep playing and risk it all.";
+                var askText = (isSafePoint ? "This is a safe point. " : "") + "Do you want to walk away with " + fmt(walkAmount) + " Ladder Coins, or continue playing? If you continue and then fail, you lose everything from the run.";
                 walkBtn.textContent = "Walk away with " + fmt(walkAmount) + " Ladder Coins";
                 walkBtn.className = "btn btn-gold";
                 if (continueBtn) { continueBtn.style.display = ""; continueBtn.textContent = "Continue playing"; }
-                el("decision-text").textContent = "Correct! You climb to " + fmt(pot) + " Ladder Coins. " + safeText;
+                el("decision-text").textContent = "Correct! You climb to " + fmt(pot) + " Ladder Coins. " + askText;
                 el("decision").classList.add("active");
-                speakQueued(safeText);
+                speakQueued(askText);
                 clearReadyTimer();
               } else {
-                walkBtn.textContent = canWalk ? "Walk away with " + fmt(pot + STAKE) + " Ladder Coins" : "Walk away";
+                walkBtn.textContent = "Walk away";
                 walkBtn.className = "btn btn-navy";
                 if (continueBtn) continueBtn.style.display = "none";
-                var walkTail = canWalk ? ", or you can walk away and bank your pot." : ".";
-                el("decision-text").textContent = "Correct! You climb to " + fmt(pot) + " Ladder Coins. Are you ready for the next question? Question " + (run.level + 1) + " is worth " + fmt(LADDER[run.level]) + " Ladder Coins. The next question will appear on its own in a moment" + walkTail;
+                el("decision-text").textContent = "Correct! You climb to " + fmt(pot) + " Ladder Coins. Are you ready for the next question? Question " + (run.level + 1) + " is worth " + fmt(LADDER[run.level]) + " Ladder Coins. The next question will appear on its own in a moment.";
                 el("decision").classList.add("active");
-                speakQueued("Are you ready for the next question? Question " + (run.level + 1) + " is worth " + fmt(LADDER[run.level]) + " Ladder Coins. The next question will appear on its own in a moment" + walkTail);
+                speakQueued("Are you ready for the next question? Question " + (run.level + 1) + " is worth " + fmt(LADDER[run.level]) + " Ladder Coins. The next question will appear on its own in a moment.");
                 clearReadyTimer();
                 readyTimerId = setTimeout(function () {
                   readyTimerId = null;
@@ -2114,6 +2117,14 @@
           else { startRun(); }
         });
         el("btn-end-home").addEventListener("click", function () { showScreen("home"); });
+        /* The game screen Back button does exactly what End run does:
+           it ends the run (or the duel) and shows the result first. */
+        el("btn-game-back").addEventListener("click", function () {
+          if (!run || run.state === "ended") { showScreen("home"); return; }
+          stopSpeaking();
+          if (run.mode === "duel") { endDuel(true); }
+          else { endRun(false, "quit"); }
+        });
         el("btn-quit").addEventListener("click", function () {
           if (!run || run.state === "ended") { showScreen("home"); return; }
           stopSpeaking();

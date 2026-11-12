@@ -10,13 +10,27 @@ Open `index.html` in a browser. No install, no wallet, no gas.
 
 1. **Sign up** with your email and an agent name, sign in with your email, or play as a guest.
 2. **Claim the faucet** to get 500 Ladder Coins in your wallet.
-3. **Stake 100 coins** to start a run. Without staking you cannot play.
-4. **Answer questions.** Each question has 4 answers in a 2 by 2 grid, and 1 minute on the clock. Tap an answer, then confirm "Is this your final answer?" — or say Yes or No by voice.
-5. **Climb the ladder.** 15 questions, 10 to 5,000 Ladder Coins. Safe points at question 5 and question 10.
-6. **5 correct answers is the minimum to earn anything.** Lose before question 5 and you lose your 100 stake — your balance stays at 400. Reach question 5 and you can walk away with your earnings (stake back plus pot) or keep playing for more.
-7. **Walk away or risk it.** After each correct answer, bank your earnings or risk it all on the next question.
+3. **Stake 100 coins** to start a run. Without staking you cannot play. There is no free run.
+4. **Answer questions.** Each question has 4 answers in a 2 by 2 grid, and 1 minute on the clock. Tap an answer, then confirm "Is this your final answer?" — or say Yes or No by voice. Every question is read aloud with its four answers, and a gold badge shows what the question is worth.
+5. **Climb the ladder.** 15 questions, 10 to 5,000 Ladder Coins. Question 5 pays 80, question 6 pays 120, question 7 pays 180, question 10 pays 500, question 15 pays 5,000.
+6. **5 correct answers is the minimum to earn anything.** Lose before question 5 and you lose your 100 stake — your balance stays at 400.
+7. **Safe points are decision points, not safety nets.** Question 5 and question 10 are the safe points. They do not protect you if you fail later. They are the moments the game asks you to choose.
+8. **Walk away from question 5 upwards.** After every correct answer from question 5 onwards (question 5, 6, 7, 8, 9, 10, 11, 12, 13 and 14), you can walk away with your earnings so far, plus your 100 stake back. Walk away at question 5 and you bank 580. Walk away at question 6 and you bank 620. Walk away at question 7 and you bank 680. Walk away at question 10 and you bank 1,000.
+9. **The game always asks.** After every correct answer from question 5 onwards, the game stops and asks you plainly: "Do you want to walk away with [amount] Ladder Coins, or continue playing?" — with a clear Walk away button and a clear Continue button. The game waits for your answer. It never skips the question and never moves on without you choosing.
+10. **Refuse to walk away and fail, and you lose everything.** If you choose to keep playing and then get a question wrong, you lose everything from the run — no stake back, no pot, no safe point payout. Your balance stays at 400. The screen says "You lost everything. Your balance is 400 Ladder Coins."
 
 Everything is audio and text: every question is read aloud as well as shown, every prompt and result is spoken as well as shown. The sign up form is text only.
+
+## Try it — do this, see that
+
+1. Claim the faucet and see 500 Ladder Coins in your wallet.
+2. Stake 100 coins to start a run and see your balance drop to 400.
+3. Answer 5 questions correctly and see the game ask "Do you want to walk away with 180 Ladder Coins, or continue playing?"
+4. Tap Walk away at question 5 and see "You banked 80 coins, plus your 100 stake back. Your balance is now 580 Ladder Coins."
+5. Start a new run, answer 6 questions correctly, tap Walk away and see your balance become 620.
+6. Start a new run, answer 5 questions correctly, tap Continue, then get question 6 wrong and see "You lost everything. Your balance is 400 Ladder Coins."
+7. Start a new run, get a question wrong before question 5 and see "You lost your stake" with your balance at 400.
+8. Tap 50:50 on a question and see two wrong answers removed, leaving the correct answer and one other.
 
 ## Lifelines
 

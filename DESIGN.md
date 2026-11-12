@@ -92,6 +92,7 @@ Without staking you cannot play. The stake is required — there is no free run.
 - If you lose before question 5, you lose the 100 stake. Your balance stays at 400.
 - The only way to increase your balance is to answer 5 questions correctly and reach the first safe point at question 5. When you bank, your stake comes back to you along with your earnings.
 - **Safe points are decision points, not safety nets.** At question 5 and question 10, after a correct answer, the game clearly offers you a choice: walk away with your earnings, or continue playing. If you refuse to walk away and keep playing, and then you fail a later question, you LOSE EVERYTHING from the run — no stake back, no pot, no safe point payout. Your balance stays at 400. There is no fallback. The safe point only pays out if you walk away at that point.
+- **You can walk away from question 5 upwards.** After every correct answer from question 5 onwards (question 5, 6, 7, 8, 9, 10, 11, 12, 13 and 14), the game offers you the choice: walk away with your earnings so far, or keep playing and risk it all on the next question. Walking away banks your current pot plus your 100 stake back. If you keep playing and then fail, you lose everything.
 
 ## 7. Walk away or risk it
 
@@ -100,7 +101,9 @@ After each correct answer, you choose: bank your earnings and walk away, or risk
 - Walk away: you keep what you have earned so far, and your 100 stake comes back to you. Your run ends, and you keep the money.
 - Risk it: you go to the next question. Get it right and you climb higher. Get it wrong and you lose everything from the run — your stake, your pot, and any safe point amount. Your balance stays at 400.
 
-After 5 correct answers, at the first safe point, the game clearly offers you the choice: walk away with your earnings or continue playing for more. The same choice comes again at question 10. If you refuse to walk away and then fail, you lose everything. There is no safe point payout on a failure. This is the survival decision. Your nerve decides whether you reach the million or lose it all.
+From question 5 upwards, after every correct answer, the game clearly offers you this choice. You can walk away at question 5, 6, 7, 8, 9, 10, 11, 12, 13 or 14, and bank your current pot plus your 100 stake back. Question 5 and question 10 are the safe points, but the walk away choice is yours at every question from 5 onwards. If you refuse to walk away and then fail, you lose everything. There is no safe point payout on a failure. This is the survival decision. Your nerve decides whether you reach the million or lose it all.
+
+The game ALWAYS ASKS. After every correct answer from question 5 onwards, it stops and asks you plainly: "Do you want to walk away with [amount] Ladder Coins, or continue playing?" — with a clear Walk away button and a clear Continue button. The game waits for your answer. It never skips the question and it never moves on without you choosing. Before question 5 there is no walk away choice, because five correct answers is the minimum to earn anything.
 
 ## 8. Evolve or die
 
