@@ -459,14 +459,23 @@
         .topbar h2 { font-size: 1.45rem; }
         .result-big { font-size: 1.7rem; }
       }
-      /* Site navigation: one header across every page */
-      .site-nav { position: sticky; top: 0; z-index: 30; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 8px; margin: 0 0 14px; }
-      .site-nav .nav-link { border: 1px solid transparent; background: transparent; color: var(--ink); font-weight: 700; font-size: 0.95rem; padding: 10px 12px; min-height: 44px; border-radius: 10px; }
-      .site-nav .nav-link:hover { background: var(--surface2); }
-      .site-nav .nav-link.active { background: var(--stage); color: var(--stage-ink); }
-      .site-nav .nav-sound { margin-left: auto; }
-      .site-nav .mute-btn { min-height: 44px; padding: 8px 13px; }
-      @media (max-width: 560px) { .site-nav .nav-link { font-size: 0.88rem; padding: 9px 9px; } }
+      /* Site header: a slim top bar (wordmark + icon-only sound button)
+         above one navigation row that never wraps. The nav scrolls
+         sideways on narrow screens instead of stacking into rows. */
+      .site-header { position: sticky; top: 0; z-index: 30; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 8px 10px; margin: 0 0 14px; }
+      .topbar-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 1px 2px 7px; }
+      .wordmark { font-family: "Marcellus", Georgia, serif; font-size: 1.15rem; letter-spacing: 0.02em; margin: 0; line-height: 1.2; white-space: nowrap; }
+      .site-header .mute-btn {
+        width: 40px; height: 40px; min-height: 40px; padding: 0; gap: 0;
+        border-radius: 50%; justify-content: center; flex: 0 0 auto;
+      }
+      .site-header .mute-btn svg { width: 21px; height: 21px; }
+      .nav-row { display: flex; flex-wrap: nowrap; gap: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+      .nav-row::-webkit-scrollbar { display: none; }
+      .nav-row .nav-link { flex: 0 0 auto; white-space: nowrap; border: 1px solid transparent; background: transparent; color: var(--ink); font-weight: 700; font-size: 0.92rem; padding: 8px 11px; min-height: 40px; border-radius: 999px; }
+      .nav-row .nav-link:hover { background: var(--surface2); }
+      .nav-row .nav-link.active { background: var(--stage); color: var(--stage-ink); }
+      @media (max-width: 560px) { .nav-row .nav-link { font-size: 0.88rem; padding: 8px 10px; } }
 
       /* Share your score card */
       .share-card { display: none; margin-top: 16px; background: radial-gradient(120% 160% at 50% 0%, var(--stage2) 0%, var(--stage) 62%); color: var(--stage-ink); border: 2px solid var(--gold); border-radius: 18px; padding: 22px 18px; text-align: center; }
@@ -489,20 +498,23 @@
   <body>
     <main class="wrap">
 
-      <nav class="site-nav" aria-label="Site pages">
-        <button type="button" class="nav-link" data-page="home">Home</button>
-        <button type="button" class="nav-link" data-page="play">Play</button>
-        <button type="button" class="nav-link" data-page="daily">Daily Challenge</button>
-        <button type="button" class="nav-link" data-page="invite">Invite to Duel</button>
-        <button type="button" class="nav-link" data-page="board">Leaderboard</button>
-        <button type="button" class="nav-link" data-page="how">How to play</button>
-        <span class="nav-sound">
+      <header class="site-header">
+        <div class="topbar-row">
+          <p class="wordmark">Agent's Ladder</p>
           <button class="mute-btn" id="btn-mute" type="button" aria-pressed="false" aria-label="Turn sound off">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path class="sound-waves" d="M16 9c1.2 1 1.2 5 0 6M18.5 6.5c2.4 2.8 2.4 8.2 0 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="muted-x" d="M16 9l6 6M22 9l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            <span id="mute-label">Sound on</span>
+            <span id="mute-label" class="sr-only">Sound on</span>
           </button>
-        </span>
-      </nav>
+        </div>
+        <nav class="nav-row" aria-label="Site pages">
+          <button type="button" class="nav-link" data-page="home">Home</button>
+          <button type="button" class="nav-link" data-page="play">Play</button>
+          <button type="button" class="nav-link" data-page="daily">Daily Challenge</button>
+          <button type="button" class="nav-link" data-page="invite">Invite to Duel</button>
+          <button type="button" class="nav-link" data-page="board">Leaderboard</button>
+          <button type="button" class="nav-link" data-page="how">How to play</button>
+        </nav>
+      </header>
 
             <!-- HOME -->
       <section id="screen-home" class="screen active" aria-label="Home">
