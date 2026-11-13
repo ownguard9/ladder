@@ -68,6 +68,7 @@ Ladder Coins are an internal onchain game currency, not redeemable for NEAR. 1 L
 ## Tracks
 
 Games (primary) + Agent Economy (second). Lead: Isaac.
+Built by the same person as [OwnGround](https://github.com/ownguard9/ownground) — Isaac leads both projects.
 
 ## Files
 
