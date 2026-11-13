@@ -829,11 +829,14 @@ impl Contract {
         let mut rest = 100 - correct_share;
         let mut votes = [0u64; 4];
         votes[correct as usize] = correct_share;
-        for a in 0..4 {
-            if a as u8 == correct {
-                continue;
-            }
-            if a == 3 {
+        // Distribute `rest` over the three wrong answers, giving the last
+        // one whatever remains, so the four votes always sum to exactly 100
+        // no matter which index is correct. (The old loop gave the leftover
+        // to index 3 unconditionally, so when the correct answer was index 3
+        // the leftover was never assigned and the sum fell short of 100.)
+        let others: Vec<usize> = (0..4).filter(|&a| a as u8 != correct).collect();
+        for (i, &a) in others.iter().enumerate() {
+            if i == others.len() - 1 {
                 votes[a] = rest;
             } else {
                 let share = rand_below(rest + 1);
@@ -1378,6 +1381,43 @@ mod tests {
             "correct answer must have the largest audience share"
         );
         assert_eq!(balance(&c, player()), 360);
+    }
+
+    #[test]
+    fn audience_votes_sum_to_100_for_every_correct_position() {
+        // Regression test: the old distribution gave the leftover votes to
+        // index 3 unconditionally, so when the correct answer was index 3
+        // the leftover was never assigned and the votes summed to less
+        // than 100. Test sets n=0..4 put correct answers 0,1,2,3 at level 0
+        // (correct = qid % 4), so this covers every position. One contract,
+        // one player per set (accounts(1..5)): the mock storage is shared
+        // across contract instances in a test, so a fresh contract per set
+        // would trip the once-per-season faucet.
+        let mut c = new_contract();
+        for n in 0..4u32 {
+            populate_key(&mut c, n);
+        }
+        for n in 0..4u32 {
+            let who = accounts(1 + n as usize);
+            fund(&mut c, who.clone());
+            start_run_as(&mut c, who.clone(), n);
+            set_ctx(who.clone(), 0);
+            let votes = c.use_audience();
+            assert_eq!(votes.len(), 4);
+            assert_eq!(
+                votes.iter().map(|v| *v as u32).sum::<u32>(),
+                100,
+                "audience votes must sum to 100 (correct={} set n={})",
+                correct(0, n),
+                n
+            );
+            assert_eq!(
+                votes[correct(0, n) as usize],
+                *votes.iter().max().unwrap(),
+                "correct answer must have the largest audience share (set n={})",
+                n
+            );
+        }
     }
 
     #[test]
