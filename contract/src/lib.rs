@@ -110,6 +110,12 @@ const SEASON_PRIZES_PAID_KEY: &[u8] = b"spp";
 /// storage key, which `get_market` iterates.
 const MARKET_PREFIX: &[u8] = b"mk";
 const MARKET_KEYS_KEY: &[u8] = b"mkl";
+/// Offers on agents: token id -> offers. Lives OUTSIDE the `Contract`
+/// struct like the market state, same shape (LookupMap + a Borsh
+/// Vec<String> of token ids) because an UnorderedMap cannot iterate
+/// from a fresh handle outside the struct.
+const OFFERS_PREFIX: &[u8] = b"of";
+const OFFER_KEYS_KEY: &[u8] = b"ofl";
 
 /// One player's run in progress.
 #[derive(
@@ -237,6 +243,28 @@ pub struct MarketAgent {
     pub owner_id: AccountId,
     #[schemars(with = "Option<String>")]
     pub price: Option<U128>,
+}
+
+/// One offer on an agent: a player offers `price` Ladder Coins to buy
+/// the agent. No escrow — the coins only move when the owner accepts —
+/// but the buyer must hold at least the price when offering (and again
+/// at accept time). One offer per (token, buyer); a repeat offer
+/// replaces the price.
+#[derive(
+    BorshDeserialize,
+    BorshSerialize,
+    Clone,
+    Debug,
+    serde::Serialize,
+    serde::Deserialize,
+    schemars::JsonSchema,
+)]
+#[serde(crate = "near_sdk::serde")]
+pub struct Offer {
+    pub token_id: String,
+    pub buyer_id: AccountId,
+    #[schemars(with = "String")]
+    pub price: U128,
 }
 
 #[derive(Clone, Debug, PartialEq, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
@@ -391,6 +419,63 @@ fn market_insert(token_id: String, record: MarketAgent) {
         write_market_keys(&keys);
     }
     map.insert(token_id, record);
+}
+
+/// Offers on agents: token id -> offers.
+fn offers_map() -> LookupMap<String, Vec<Offer>> {
+    LookupMap::new(OFFERS_PREFIX)
+}
+
+/// Token ids with at least one offer, in first-offer order (the
+/// iteration source for `get_all_offers`).
+fn read_offer_keys() -> Vec<String> {
+    match env::storage_read(OFFER_KEYS_KEY) {
+        Some(bytes) => Vec::<String>::try_from_slice(&bytes).unwrap_or_default(),
+        None => vec![],
+    }
+}
+
+fn write_offer_keys(keys: &[String]) {
+    env::storage_write(OFFER_KEYS_KEY, &borsh::to_vec(keys).unwrap());
+}
+
+/// The offers on a token (empty when none).
+fn offers_for(token_id: &str) -> Vec<Offer> {
+    offers_map()
+        .get(&token_id.to_string())
+        .cloned()
+        .unwrap_or_default()
+}
+
+/// Writes the offers for a token, maintaining the token-id list: the
+/// token is added when its first offer is recorded and removed when
+/// its last offer is gone.
+fn write_offers(token_id: String, offers: Vec<Offer>) {
+    let mut map = offers_map();
+    let mut keys = read_offer_keys();
+    if offers.is_empty() {
+        map.remove(&token_id);
+        keys.retain(|k| *k != token_id);
+    } else {
+        if !keys.contains(&token_id) {
+            keys.push(token_id.clone());
+        }
+        map.insert(token_id, offers);
+    }
+    write_offer_keys(&keys);
+}
+
+/// Removes one buyer's offer for a token. Returns true when an offer
+/// was removed.
+fn remove_offer(token_id: &str, buyer_id: &AccountId) -> bool {
+    let mut offers = offers_for(token_id);
+    let before = offers.len();
+    offers.retain(|o| o.buyer_id != *buyer_id);
+    let removed = offers.len() != before;
+    if removed {
+        write_offers(token_id.to_string(), offers);
+    }
+    removed
 }
 
 /// The correct answer (0..3) for a bank question, derived by testing
@@ -1183,6 +1268,253 @@ impl Contract {
     /// The market record for one agent, if any.
     pub fn get_agent_listing(&self, token_id: String) -> Option<MarketAgent> {
         market_map().get(&token_id).cloned()
+    }
+
+    // ─── Agent Offers ────────────────────────────────────────────
+
+    /// Executes an accepted offer: the offer price in Ladder Coins
+    /// MOVES from the buyer to the seller (total supply unchanged),
+    /// market ownership transfers to the buyer, the listing is
+    /// cleared, and ALL offers on the token are removed. Shared by
+    /// the synchronous path and the Genesis-ownership callback.
+    fn execute_accept(&mut self, token_id: String, buyer_id: AccountId, seller: AccountId) {
+        let offers = offers_for(&token_id);
+        let offer = offers
+            .iter()
+            .find(|o| o.buyer_id == buyer_id)
+            .expect("No offer from this buyer for this agent");
+        let price = offer.price.0;
+        assert!(
+            self.balance_of(&buyer_id) >= price,
+            "Buyer has insufficient Ladder Coin balance"
+        );
+        self.move_coins(&buyer_id, &seller, price);
+        market_insert(
+            token_id.clone(),
+            MarketAgent {
+                token_id: token_id.clone(),
+                owner_id: buyer_id,
+                price: None,
+            },
+        );
+        write_offers(token_id, vec![]);
+    }
+
+    /// Removes one offer. Returns false when the offer was already
+    /// gone (the callback path treats that as a silent no-op).
+    fn execute_decline(&mut self, token_id: String, buyer_id: AccountId) -> bool {
+        remove_offer(&token_id, &buyer_id)
+    }
+
+    /// Makes an offer on an agent: `price` Ladder Coins to buy it. No
+    /// escrow — the coins only move when the owner accepts — but the
+    /// buyer must hold at least the price right now (and again at
+    /// accept time). The recorded market owner (if any) cannot offer
+    /// on their own agent. One offer per (token, buyer): a repeat
+    /// offer replaces the price.
+    pub fn make_offer(&mut self, token_id: String, price: U128) {
+        assert!(price.0 > 0, "Price must be greater than 0");
+        let caller = env::predecessor_account_id();
+        if let Some(rec) = market_map().get(&token_id).cloned() {
+            assert_ne!(rec.owner_id, caller, "You already own this agent");
+        }
+        assert!(
+            self.balance_of(&caller) >= price.0,
+            "Insufficient Ladder Coin balance"
+        );
+        let mut offers = offers_for(&token_id);
+        if let Some(existing) = offers.iter_mut().find(|o| o.buyer_id == caller) {
+            existing.price = price;
+        } else {
+            offers.push(Offer {
+                token_id: token_id.clone(),
+                buyer_id: caller,
+                price,
+            });
+        }
+        write_offers(token_id, offers);
+    }
+
+    /// Accepts an offer: sells the agent to the buyer at the offer
+    /// price. When the agent has a recorded Ladder market owner, only
+    /// that owner may accept and the sale executes synchronously.
+    /// Otherwise the caller must be the agent's Genesis Core owner:
+    /// the contract reads the agent from Genesis Core and the
+    /// callback executes the sale only when the agent exists, is
+    /// Alive, and its Core owner is the caller. The sale lands in
+    /// the callback (a later block); poll `get_agent_listing` to
+    /// confirm it.
+    pub fn accept_offer(&mut self, token_id: String, buyer_id: AccountId) {
+        let caller = env::predecessor_account_id();
+        assert!(
+            offers_for(&token_id)
+                .iter()
+                .any(|o| o.buyer_id == buyer_id),
+            "No offer from this buyer for this agent"
+        );
+        if let Some(rec) = market_map().get(&token_id).cloned() {
+            assert_eq!(
+                rec.owner_id, caller,
+                "Only the market owner can accept offers for this agent"
+            );
+            self.execute_accept(token_id, buyer_id, caller);
+            return;
+        }
+        // No recorded market owner: verify Genesis ownership via Core.
+        Promise::new(GENESIS_CORE.parse().unwrap())
+            .function_call(
+                "get_agent".to_string(),
+                near_sdk::serde_json::json!({ "token_id": token_id })
+                    .to_string()
+                    .into_bytes(),
+                NearToken::from_yoctonear(0),
+                Gas::from_tgas(10),
+            )
+            .then(
+                Promise::new(env::current_account_id()).function_call(
+                    "accept_offer_callback".to_string(),
+                    near_sdk::serde_json::json!({
+                        "token_id": token_id,
+                        "buyer_id": buyer_id,
+                        "seller": caller,
+                    })
+                    .to_string()
+                    .into_bytes(),
+                    NearToken::from_yoctonear(0),
+                    Gas::from_tgas(20),
+                ),
+            );
+    }
+
+    /// Callback after the Genesis Core `get_agent` call in
+    /// `accept_offer`. Private: only this contract can call it.
+    /// Executes the sale only when the agent exists, is Alive, and
+    /// its Core owner is the seller. A market record for a different
+    /// owner that appeared in the meantime blocks the sale.
+    #[private]
+    pub fn accept_offer_callback(
+        &mut self,
+        token_id: String,
+        buyer_id: AccountId,
+        seller: AccountId,
+        #[callback_result] agent: Result<Option<CoreAgent>, PromiseError>,
+    ) {
+        let agent = match agent {
+            Ok(Some(a)) => a,
+            _ => return,
+        };
+        if agent.token_id != token_id {
+            return;
+        }
+        if agent.status != CoreAgentStatus::Alive {
+            return;
+        }
+        if agent.owner_id != seller {
+            return;
+        }
+        if let Some(rec) = market_map().get(&token_id).cloned() {
+            if rec.owner_id != seller {
+                return;
+            }
+        }
+        self.execute_accept(token_id, buyer_id, seller);
+    }
+
+    /// Declines (removes) one offer. Same ownership rule as
+    /// `accept_offer`: synchronous when a market owner is recorded
+    /// and the caller is that owner, otherwise via the Genesis Core
+    /// ownership check in the callback.
+    pub fn decline_offer(&mut self, token_id: String, buyer_id: AccountId) {
+        let caller = env::predecessor_account_id();
+        assert!(
+            offers_for(&token_id)
+                .iter()
+                .any(|o| o.buyer_id == buyer_id),
+            "No offer from this buyer for this agent"
+        );
+        if let Some(rec) = market_map().get(&token_id).cloned() {
+            assert_eq!(
+                rec.owner_id, caller,
+                "Only the market owner can decline offers for this agent"
+            );
+            assert!(
+                self.execute_decline(token_id, buyer_id),
+                "No offer from this buyer for this agent"
+            );
+            return;
+        }
+        Promise::new(GENESIS_CORE.parse().unwrap())
+            .function_call(
+                "get_agent".to_string(),
+                near_sdk::serde_json::json!({ "token_id": token_id })
+                    .to_string()
+                    .into_bytes(),
+                NearToken::from_yoctonear(0),
+                Gas::from_tgas(10),
+            )
+            .then(
+                Promise::new(env::current_account_id()).function_call(
+                    "decline_offer_callback".to_string(),
+                    near_sdk::serde_json::json!({
+                        "token_id": token_id,
+                        "buyer_id": buyer_id,
+                        "seller": caller,
+                    })
+                    .to_string()
+                    .into_bytes(),
+                    NearToken::from_yoctonear(0),
+                    Gas::from_tgas(20),
+                ),
+            );
+    }
+
+    /// Callback after the Genesis Core `get_agent` call in
+    /// `decline_offer`. Private: only this contract can call it.
+    /// Removes the offer only when the agent exists, is Alive, and
+    /// its Core owner is the seller.
+    #[private]
+    pub fn decline_offer_callback(
+        &mut self,
+        token_id: String,
+        buyer_id: AccountId,
+        seller: AccountId,
+        #[callback_result] agent: Result<Option<CoreAgent>, PromiseError>,
+    ) {
+        let agent = match agent {
+            Ok(Some(a)) => a,
+            _ => return,
+        };
+        if agent.token_id != token_id {
+            return;
+        }
+        if agent.status != CoreAgentStatus::Alive {
+            return;
+        }
+        if agent.owner_id != seller {
+            return;
+        }
+        if let Some(rec) = market_map().get(&token_id).cloned() {
+            if rec.owner_id != seller {
+                return;
+            }
+        }
+        self.execute_decline(token_id, buyer_id);
+    }
+
+    /// Withdraws the caller's own offer on an agent.
+    pub fn withdraw_offer(&mut self, token_id: String) {
+        let caller = env::predecessor_account_id();
+        assert!(remove_offer(&token_id, &caller), "No offer to withdraw");
+    }
+
+    /// All offers on one agent.
+    pub fn get_offers(&self, token_id: String) -> Vec<Offer> {
+        offers_for(&token_id)
+    }
+
+    /// Every offer on every agent.
+    pub fn get_all_offers(&self) -> Vec<Offer> {
+        read_offer_keys().iter().flat_map(|k| offers_for(k)).collect()
     }
 
     // ─── Settle ──────────────────────────────────────────────────
@@ -2083,5 +2415,287 @@ mod tests {
         assert!(answer.is_some());
         assert_eq!(balance(&c, player3()), 40, "hire fee to Core owner");
         assert_eq!(balance(&c, player2()), 0);
+    }
+
+    // ─── Agent Offers ────────────────────────────────────────────
+
+    fn offer_token() -> &'static str {
+        "genesis-visitor-1"
+    }
+
+    #[test]
+    fn offer_make_and_views() {
+        let mut c = new_contract();
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        let offers = c.get_offers(offer_token().to_string());
+        assert_eq!(offers.len(), 1);
+        assert_eq!(offers[0].token_id, offer_token());
+        assert_eq!(offers[0].buyer_id, player3());
+        assert_eq!(offers[0].price, U128(100));
+        assert_eq!(c.get_all_offers().len(), 1);
+        assert!(c.get_offers("genesis-visitor-4".to_string()).is_empty());
+    }
+
+    #[test]
+    fn offer_repeat_replaces_price() {
+        let mut c = new_contract();
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(150));
+        let offers = c.get_offers(offer_token().to_string());
+        assert_eq!(offers.len(), 1, "one offer per buyer");
+        assert_eq!(offers[0].price, U128(150));
+    }
+
+    #[test]
+    #[should_panic(expected = "Price must be greater than 0")]
+    fn offer_zero_price_fails() {
+        let mut c = new_contract();
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(0));
+    }
+
+    #[test]
+    #[should_panic(expected = "You already own this agent")]
+    fn offer_by_market_owner_fails() {
+        let mut c = new_contract();
+        record_listing(&mut c, offer_token(), player2(), 200);
+        fund(&mut c, player2());
+        set_ctx(player2(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+    }
+
+    #[test]
+    #[should_panic(expected = "Insufficient Ladder Coin balance")]
+    fn offer_insufficient_balance_fails() {
+        let mut c = new_contract();
+        // player3 never claimed the faucet: balance 0 < 100.
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+    }
+
+    #[test]
+    fn offer_accept_flow() {
+        let mut c = new_contract();
+        record_listing(&mut c, offer_token(), player2(), 200);
+        // Two buyers offer; accepting one clears BOTH offers and the listing.
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(150));
+        fund(&mut c, player());
+        set_ctx(player(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        assert_eq!(c.get_offers(offer_token().to_string()).len(), 2);
+        assert_eq!(c.get_all_offers().len(), 2);
+        // Owner accepts player3's 150 offer.
+        let supply_before = c.mt_total_supply(LADDER_TOKEN_ID.to_string()).0;
+        set_ctx(player2(), 0);
+        c.accept_offer(offer_token().to_string(), player3());
+        let rec = c
+            .get_agent_listing(offer_token().to_string())
+            .unwrap();
+        assert_eq!(rec.owner_id, player3(), "ownership transfers to buyer");
+        assert_eq!(rec.price, None, "listing cleared");
+        assert_eq!(balance(&c, player3()), 350, "500 - 150 offer price");
+        assert_eq!(balance(&c, player2()), 150, "seller receives the offer price");
+        assert_eq!(balance(&c, player()), 500, "other buyer keeps their coins");
+        assert_eq!(
+            c.get_offers(offer_token().to_string()).len(),
+            0,
+            "all offers cleared"
+        );
+        assert_eq!(c.get_all_offers().len(), 0);
+        assert_eq!(
+            c.mt_total_supply(LADDER_TOKEN_ID.to_string()).0,
+            supply_before,
+            "accept moves coins, it does not mint"
+        );
+    }
+
+    #[test]
+    fn offer_decline_removes_one() {
+        let mut c = new_contract();
+        record_listing(&mut c, offer_token(), player2(), 200);
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(150));
+        fund(&mut c, player());
+        set_ctx(player(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        set_ctx(player2(), 0);
+        c.decline_offer(offer_token().to_string(), player3());
+        let offers = c.get_offers(offer_token().to_string());
+        assert_eq!(offers.len(), 1);
+        assert_eq!(offers[0].buyer_id, player());
+        assert_eq!(c.get_all_offers().len(), 1);
+    }
+
+    #[test]
+    fn offer_withdraw_removes_own() {
+        let mut c = new_contract();
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        fund(&mut c, player());
+        set_ctx(player(), 0);
+        c.make_offer(offer_token().to_string(), U128(120));
+        set_ctx(player3(), 0);
+        c.withdraw_offer(offer_token().to_string());
+        let offers = c.get_offers(offer_token().to_string());
+        assert_eq!(offers.len(), 1);
+        assert_eq!(offers[0].buyer_id, player());
+        // Withdrawing the last offer drops the token from the list.
+        set_ctx(player(), 0);
+        c.withdraw_offer(offer_token().to_string());
+        assert!(c.get_offers(offer_token().to_string()).is_empty());
+        assert!(c.get_all_offers().is_empty());
+    }
+
+    #[test]
+    #[should_panic(expected = "No offer to withdraw")]
+    fn offer_withdraw_no_offer_fails() {
+        let mut c = new_contract();
+        set_ctx(player3(), 0);
+        c.withdraw_offer(offer_token().to_string());
+    }
+
+    #[test]
+    #[should_panic(expected = "Only the market owner can accept offers for this agent")]
+    fn offer_accept_by_non_owner_fails() {
+        let mut c = new_contract();
+        record_listing(&mut c, offer_token(), player2(), 200);
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        set_ctx(player(), 0);
+        c.accept_offer(offer_token().to_string(), player3());
+    }
+
+    #[test]
+    #[should_panic(expected = "Only the market owner can decline offers for this agent")]
+    fn offer_decline_by_non_owner_fails() {
+        let mut c = new_contract();
+        record_listing(&mut c, offer_token(), player2(), 200);
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        set_ctx(player(), 0);
+        c.decline_offer(offer_token().to_string(), player3());
+    }
+
+    #[test]
+    #[should_panic(expected = "Buyer has insufficient Ladder Coin balance")]
+    fn offer_accept_insufficient_buyer_balance_fails() {
+        let mut c = new_contract();
+        populate_key(&mut c, 0);
+        record_listing(&mut c, offer_token(), player2(), 200);
+        fund(&mut c, player3()); // 500
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(490));
+        // Buyer spends 100 on a run stake, dropping below the offer price.
+        set_ctx(player3(), 0);
+        c.start_run(test_ids(0));
+        assert_eq!(balance(&c, player3()), 400);
+        set_ctx(player2(), 0);
+        c.accept_offer(offer_token().to_string(), player3());
+    }
+
+    #[test]
+    fn offer_accept_without_market_record_waits_for_callback() {
+        let mut c = new_contract();
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        // No market record: accept builds the Genesis-ownership
+        // cross-contract call, which never lands in unit tests, so
+        // no sale has happened yet.
+        set_ctx(player2(), 0);
+        c.accept_offer(offer_token().to_string(), player3());
+        assert!(c.get_agent_listing(offer_token().to_string()).is_none());
+        assert_eq!(c.get_offers(offer_token().to_string()).len(), 1);
+    }
+
+    #[test]
+    fn offer_accept_via_genesis_callback() {
+        let mut c = new_contract();
+        // No market record: the seller is the Genesis Core owner (player2).
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        // Invoke the callback directly with a fabricated Core result.
+        set_ctx_as_contract();
+        c.accept_offer_callback(
+            offer_token().to_string(),
+            player3(),
+            player2(),
+            Ok(Some(core_agent(offer_token(), player2(), 0, true))),
+        );
+        let rec = c
+            .get_agent_listing(offer_token().to_string())
+            .unwrap();
+        assert_eq!(rec.owner_id, player3(), "ownership transfers to buyer");
+        assert_eq!(rec.price, None);
+        assert_eq!(balance(&c, player3()), 400, "500 - 100 offer price");
+        assert_eq!(balance(&c, player2()), 100, "seller receives the offer price");
+        assert!(c.get_offers(offer_token().to_string()).is_empty());
+        assert!(c.get_all_offers().is_empty());
+    }
+
+    #[test]
+    fn offer_accept_callback_wrong_owner_is_noop() {
+        let mut c = new_contract();
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        set_ctx_as_contract();
+        // Core says the agent belongs to player() — not the seller.
+        c.accept_offer_callback(
+            offer_token().to_string(),
+            player3(),
+            player2(),
+            Ok(Some(core_agent(offer_token(), player(), 0, true))),
+        );
+        // Nothing executed: the offer is still there, no market record.
+        assert_eq!(c.get_offers(offer_token().to_string()).len(), 1);
+        assert!(c.get_agent_listing(offer_token().to_string()).is_none());
+        assert_eq!(balance(&c, player3()), 500);
+        assert_eq!(balance(&c, player2()), 0);
+    }
+
+    #[test]
+    fn offer_decline_via_genesis_callback() {
+        let mut c = new_contract();
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        fund(&mut c, player());
+        set_ctx(player(), 0);
+        c.make_offer(offer_token().to_string(), U128(120));
+        set_ctx_as_contract();
+        c.decline_offer_callback(
+            offer_token().to_string(),
+            player3(),
+            player2(),
+            Ok(Some(core_agent(offer_token(), player2(), 0, true))),
+        );
+        let offers = c.get_offers(offer_token().to_string());
+        assert_eq!(offers.len(), 1);
+        assert_eq!(offers[0].buyer_id, player());
+    }
+
+    #[test]
+    fn offer_get_all_offers_across_tokens() {
+        let mut c = new_contract();
+        fund(&mut c, player3());
+        set_ctx(player3(), 0);
+        c.make_offer(offer_token().to_string(), U128(100));
+        set_ctx(player3(), 0);
+        c.make_offer("genesis-visitor-4".to_string(), U128(200));
+        assert_eq!(c.get_all_offers().len(), 2);
     }
 }
