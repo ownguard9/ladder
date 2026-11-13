@@ -59,7 +59,7 @@ Once per run each: 50:50 (20 coins), Ask the Audience (20 coins), Phone a Friend
 
 ## Agent Market
 
-The Market page lets players buy and sell the Phone a Friend agents with Ladder Coins, onchain. An agent earns its owner 40 Ladder Coins every time someone hires it, so buying an agent buys that hire income. Only the owner of an agent can list it for sale (at a price they set) or take it off sale, and only a listed agent can be bought. The first listing of an agent is checked against the agent's record onchain, so only its real owner can list it; after a sale the new owner can re-list it. The hire fee follows ownership: once an agent has a market owner, the 40 coins from every hire go to that owner.
+The Market page lets players buy and sell the Phone a Friend agents with Ladder Coins, onchain. An agent earns its owner 40 Ladder Coins every time someone hires it, so buying an agent buys that hire income. Only the owner of an agent can list it for sale (at a price they set) or take it off sale, and only a listed agent can be bought. Players can also make an offer on any agent, listed or not; the owner can accept it (selling the agent at the offer price) or decline it, and the buyer can withdraw the offer. The first listing of an agent is checked against the agent's record onchain, so only its real owner can list it; after a sale the new owner can re-list it. The hire fee follows ownership: once an agent has a market owner, the 40 coins from every hire go to that owner.
 
 ## Competitive play
 
