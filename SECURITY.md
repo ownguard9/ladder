@@ -4,7 +4,7 @@ This document states the trust assumptions, known limitations and security statu
 
 ## Scope
 
-- Contract: `ladder-5a84ua.testnet` on NEAR testnet. Deployment transaction `Hj4G6nXR3o5CwaxkVvu5NYACS6eoaETa7Rf9EvZazXMg`.
+- Contract: `ladder-5a84ua.testnet` on NEAR testnet. Full deployment history is in `README.md`.
 - Game site: https://ladder-game-wheat.vercel.app/
 - Ladder Coins are an internal onchain game currency. They are not redeemable for NEAR and they hold no monetary value. The worst case for any flaw below is a cheated leaderboard, not a loss of funds.
 
@@ -12,7 +12,7 @@ This document states the trust assumptions, known limitations and security statu
 
 ### 1. Answer key authority: the most important limitation
 
-**Status: FIXED and DEPLOYED 13 Nov 2026 (redeploy tx HV1b1qsDPKHG8qgQz8wKhRDdgSPU99N9GdksL1WsXhMY).**
+**Status: FIXED and DEPLOYED 13 Nov 2026 (see `README.md` for the deployment history).**
 
 The deployed contract trusts player supplied answer commitments. At `start_run` the player supplies the 15 question hashes and the salt. At `answer`, `use_5050`, `use_audience` and `phone_friend` the player supplies the `correct_answer`, and the contract checks it against the player supplied commitment. The player is both the committer and the verifier, so a technically capable player can choose their own 15 answers, generate matching hashes, start a run with them, submit the same answers as the correct answers, and win all 15 questions for 5,000 Ladder Coins.
 
