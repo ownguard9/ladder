@@ -94,6 +94,22 @@ const USED_SETS_PREFIX: &[u8] = b"us";
 const ANSWER_KEY_VERSION_KEY: &[u8] = b"akv";
 const SEASON_PRIZE_BUDGET_KEY: &[u8] = b"spb";
 const SEASON_PRIZES_PAID_KEY: &[u8] = b"spp";
+/// Agent Market listings: token id -> market record. Lives OUTSIDE the
+/// `Contract` struct like the answer-key state, so a redeploy keeps
+/// every existing balance, run, win and season intact.
+///
+/// NOTE on the storage shape: an `UnorderedMap`/`IterableMap` cannot
+/// live outside the struct — their iteration index (`FreeList`
+/// `occupied_count`/`first_free`, `Vector` `len`) is in-memory
+/// metadata that is only persisted via the parent struct's Borsh
+/// serialization, so a fresh handle always iterates as empty (proven
+/// by test: `get` worked, `get_market` returned 0 rows). The market
+/// is therefore a storage-backed `LookupMap` (reads work from any
+/// fresh handle, exactly like the answer-key maps) plus the token-id
+/// list kept as one Borsh-serialized `Vec<String>` under its own
+/// storage key, which `get_market` iterates.
+const MARKET_PREFIX: &[u8] = b"mk";
+const MARKET_KEYS_KEY: &[u8] = b"mkl";
 
 /// One player's run in progress.
 #[derive(
@@ -200,6 +216,27 @@ pub struct CoreAgent {
     pub owner_id: AccountId,
     pub generation: u32,
     pub status: CoreAgentStatus,
+}
+
+/// One Agent Market record: who owns the agent on the Ladder market
+/// and, when listed, at what price in Ladder Coins. `price` None means
+/// owned but not listed. Buying an agent buys its Phone a Friend hire
+/// income: the 40-coin hire payment goes to the market owner.
+#[derive(
+    BorshDeserialize,
+    BorshSerialize,
+    Clone,
+    Debug,
+    serde::Serialize,
+    serde::Deserialize,
+    schemars::JsonSchema,
+)]
+#[serde(crate = "near_sdk::serde")]
+pub struct MarketAgent {
+    pub token_id: String,
+    pub owner_id: AccountId,
+    #[schemars(with = "Option<String>")]
+    pub price: Option<U128>,
 }
 
 #[derive(Clone, Debug, PartialEq, serde::Serialize, serde::Deserialize, schemars::JsonSchema)]
@@ -324,6 +361,36 @@ fn read_season_prizes_paid() -> u128 {
 
 fn write_season_prizes_paid(v: u128) {
     write_u128(SEASON_PRIZES_PAID_KEY, v);
+}
+
+/// Agent Market listings: token id -> market record.
+fn market_map() -> LookupMap<String, MarketAgent> {
+    LookupMap::new(MARKET_PREFIX)
+}
+
+/// Token ids with a market record, in listing order (the iteration
+/// source for `get_market`).
+fn read_market_keys() -> Vec<String> {
+    match env::storage_read(MARKET_KEYS_KEY) {
+        Some(bytes) => Vec::<String>::try_from_slice(&bytes).unwrap_or_default(),
+        None => vec![],
+    }
+}
+
+fn write_market_keys(keys: &[String]) {
+    env::storage_write(MARKET_KEYS_KEY, &borsh::to_vec(keys).unwrap());
+}
+
+/// Inserts/updates a market record, appending the token id to the
+/// iteration list the first time it is recorded.
+fn market_insert(token_id: String, record: MarketAgent) {
+    let mut map = market_map();
+    if map.get(&token_id).is_none() {
+        let mut keys = read_market_keys();
+        keys.push(token_id.clone());
+        write_market_keys(&keys);
+    }
+    map.insert(token_id, record);
 }
 
 /// The correct answer (0..3) for a bank question, derived by testing
@@ -946,8 +1013,14 @@ impl Contract {
         };
         run.used_phone = true;
         self.runs.insert(player_id.clone(), run);
-        // 40 to the called agent's owner, 10 stays in the treasury.
-        self.move_coins(&contract, &agent.owner_id, PHONE_FRIEND_PAY);
+        // 40 to the called agent's Ladder market owner when one is
+        // recorded (buying an agent buys its hire income), otherwise
+        // to the Genesis Core owner. 10 stays in the treasury.
+        let payee = market_map()
+            .get(&agent.token_id)
+            .map(|m| m.owner_id.clone())
+            .unwrap_or(agent.owner_id);
+        self.move_coins(&contract, &payee, PHONE_FRIEND_PAY);
         let accuracy = (70u64 + 5u64 * agent.generation as u64).min(95);
         let roll = rand_below(100);
         if roll < accuracy {
@@ -956,6 +1029,160 @@ impl Contract {
             let wrong: Vec<u8> = (0u8..4).filter(|&a| a != correct).collect();
             Some(wrong[rand_below(3) as usize])
         }
+    }
+
+    // ─── Agent Market ────────────────────────────────────────────
+
+    /// Lists a Genesis agent for sale in Ladder Coins. Price must be
+    /// greater than 0. When the agent already has a recorded Ladder
+    /// market owner, only that owner may re-list it and the price is
+    /// set synchronously. On a first listing the caller must be the
+    /// agent's Genesis Core owner: the contract reads the agent from
+    /// Genesis Core and the callback records the listing only when
+    /// the agent exists, is Alive, and its Core owner is the caller.
+    /// The listing lands in the callback (a later block); poll
+    /// `get_agent_listing` to confirm it.
+    pub fn list_agent(&mut self, token_id: String, price: U128) {
+        assert!(price.0 > 0, "Price must be greater than 0");
+        let caller = env::predecessor_account_id();
+        let mut map = market_map();
+        if let Some(mut rec) = map.get(&token_id).cloned() {
+            assert_eq!(
+                rec.owner_id, caller,
+                "Only the market owner can re-list this agent"
+            );
+            rec.price = Some(price);
+            market_insert(token_id, rec);
+            return;
+        }
+        // First listing: verify ownership against Genesis Core.
+        Promise::new(GENESIS_CORE.parse().unwrap())
+            .function_call(
+                "get_agent".to_string(),
+                near_sdk::serde_json::json!({ "token_id": token_id })
+                    .to_string()
+                    .into_bytes(),
+                NearToken::from_yoctonear(0),
+                Gas::from_tgas(10),
+            )
+            .then(
+                Promise::new(env::current_account_id()).function_call(
+                    "list_agent_callback".to_string(),
+                    near_sdk::serde_json::json!({
+                        "token_id": token_id,
+                        "price": price,
+                        "lister": caller,
+                    })
+                    .to_string()
+                    .into_bytes(),
+                    NearToken::from_yoctonear(0),
+                    Gas::from_tgas(20),
+                ),
+            );
+    }
+
+    /// Callback after the Genesis Core `get_agent` call in `list_agent`.
+    /// Private: only this contract can call it. Records the listing
+    /// only when the agent exists, is Alive, and its Core owner is
+    /// the lister. A listing recorded by another path in the meantime
+    /// (e.g. a second listing call) is never overwritten for a
+    /// different owner.
+    #[private]
+    pub fn list_agent_callback(
+        &mut self,
+        token_id: String,
+        price: U128,
+        lister: AccountId,
+        #[callback_result] agent: Result<Option<CoreAgent>, PromiseError>,
+    ) {
+        let agent = match agent {
+            Ok(Some(a)) => a,
+            _ => return,
+        };
+        if agent.token_id != token_id {
+            return;
+        }
+        if agent.status != CoreAgentStatus::Alive {
+            return;
+        }
+        if agent.owner_id != lister {
+            return;
+        }
+        let mut map = market_map();
+        if let Some(existing) = map.get(&token_id) {
+            if existing.owner_id != lister {
+                return;
+            }
+        }
+        market_insert(
+            token_id.clone(),
+            MarketAgent {
+                token_id,
+                owner_id: lister,
+                price: Some(price),
+            },
+        );
+    }
+
+    /// Removes a listing (price back to None) without giving up
+    /// market ownership. Only the recorded market owner.
+    pub fn delist_agent(&mut self, token_id: String) {
+        let caller = env::predecessor_account_id();
+        let mut map = market_map();
+        let mut rec = map
+            .get(&token_id)
+            .cloned()
+            .expect("Agent is not in the market");
+        assert_eq!(
+            rec.owner_id, caller,
+            "Only the market owner can delist this agent"
+        );
+        rec.price = None;
+        map.insert(token_id, rec);
+    }
+
+    /// Buys a listed agent. The price in Ladder Coins MOVES from the
+    /// buyer to the seller (total supply unchanged) and market
+    /// ownership transfers to the buyer; the listing is cleared.
+    /// The buyer must not already own the agent and must hold at
+    /// least the listed price.
+    pub fn buy_agent(&mut self, token_id: String) {
+        let caller = env::predecessor_account_id();
+        let mut map = market_map();
+        let rec = map
+            .get(&token_id)
+            .cloned()
+            .expect("Agent is not in the market");
+        let price = rec.price.expect("Agent is not for sale");
+        assert_ne!(rec.owner_id, caller, "You already own this agent");
+        assert!(
+            self.balance_of(&caller) >= price.0,
+            "Insufficient Ladder Coin balance"
+        );
+        let seller = rec.owner_id.clone();
+        self.move_coins(&caller, &seller, price.0);
+        map.insert(
+            token_id.clone(),
+            MarketAgent {
+                token_id,
+                owner_id: caller,
+                price: None,
+            },
+        );
+    }
+
+    /// Every agent recorded in the market, listed or not.
+    pub fn get_market(&self) -> Vec<MarketAgent> {
+        let map = market_map();
+        read_market_keys()
+            .iter()
+            .filter_map(|k| map.get(k).cloned())
+            .collect()
+    }
+
+    /// The market record for one agent, if any.
+    pub fn get_agent_listing(&self, token_id: String) -> Option<MarketAgent> {
+        market_map().get(&token_id).cloned()
     }
 
     // ─── Settle ──────────────────────────────────────────────────
@@ -1571,5 +1798,290 @@ mod tests {
         // Beyond the end: empty.
         let empty = c.get_leaderboard(Some(10), Some(5));
         assert!(empty.is_empty());
+    }
+
+    // ─── Agent Market ────────────────────────────────────────────
+
+    fn market_contract_acct() -> AccountId {
+        "ladder.testnet".parse().unwrap()
+    }
+
+    /// Context with an explicit current account id. Needed for the
+    /// #[private] callbacks (predecessor must equal current) and for
+    /// keeping the coin escrow account consistent across
+    /// phone_friend and its callback in one test.
+    fn set_ctx_full(predecessor: AccountId, current: AccountId, timestamp: u64) {
+        let mut b = VMContextBuilder::new();
+        b.predecessor_account_id(predecessor);
+        b.current_account_id(current);
+        b.block_timestamp(timestamp);
+        b.random_seed([7u8; 32]);
+        testing_env!(b.build());
+    }
+
+    /// Context as the contract itself (for direct #[private] callback
+    /// calls in tests).
+    fn set_ctx_as_contract() {
+        let contract = market_contract_acct();
+        set_ctx_full(contract.clone(), contract, 0);
+    }
+
+    fn core_agent(token_id: &str, owner: AccountId, generation: u32, alive: bool) -> CoreAgent {
+        CoreAgent {
+            token_id: token_id.to_string(),
+            owner_id: owner,
+            generation,
+            status: if alive {
+                CoreAgentStatus::Alive
+            } else {
+                CoreAgentStatus::Dead
+            },
+        }
+    }
+
+    /// Record a market listing by invoking the callback directly with
+    /// a fabricated Genesis Core result (the cross-contract call
+    /// itself cannot run in unit tests).
+    fn record_listing(c: &mut Contract, token_id: &str, lister: AccountId, price: u128) {
+        set_ctx_as_contract();
+        c.list_agent_callback(
+            token_id.to_string(),
+            U128(price),
+            lister.clone(),
+            Ok(Some(core_agent(token_id, lister, 0, true))),
+        );
+    }
+
+    #[test]
+    fn market_callback_records_first_listing() {
+        let mut c = new_contract();
+        assert!(c.get_agent_listing("genesis-visitor-1".to_string()).is_none());
+        assert!(c.get_market().is_empty());
+        record_listing(&mut c, "genesis-visitor-1", player2(), 100);
+        let rec = c
+            .get_agent_listing("genesis-visitor-1".to_string())
+            .expect("listing must be recorded");
+        assert_eq!(rec.token_id, "genesis-visitor-1");
+        assert_eq!(rec.owner_id, player2());
+        assert_eq!(rec.price, Some(U128(100)));
+        assert_eq!(c.get_market().len(), 1);
+    }
+
+    #[test]
+    fn market_callback_refuses_non_owner() {
+        let mut c = new_contract();
+        set_ctx_as_contract();
+        c.list_agent_callback(
+            "genesis-visitor-1".to_string(),
+            U128(100),
+            player2(),
+            Ok(Some(core_agent("genesis-visitor-1", player3(), 0, true))),
+        );
+        assert!(c.get_agent_listing("genesis-visitor-1".to_string()).is_none());
+    }
+
+    #[test]
+    fn market_callback_refuses_dead_agent() {
+        let mut c = new_contract();
+        set_ctx_as_contract();
+        c.list_agent_callback(
+            "genesis-visitor-1".to_string(),
+            U128(100),
+            player2(),
+            Ok(Some(core_agent("genesis-visitor-1", player2(), 0, false))),
+        );
+        assert!(c.get_agent_listing("genesis-visitor-1".to_string()).is_none());
+    }
+
+    #[test]
+    fn market_callback_refuses_missing_agent() {
+        let mut c = new_contract();
+        set_ctx_as_contract();
+        c.list_agent_callback(
+            "genesis-visitor-1".to_string(),
+            U128(100),
+            player2(),
+            Ok(None),
+        );
+        assert!(c.get_agent_listing("genesis-visitor-1".to_string()).is_none());
+    }
+
+    #[test]
+    fn market_first_listing_waits_for_genesis_callback() {
+        // In unit tests the cross-contract call never lands, so the
+        // listing is not recorded yet — the caller must poll
+        // get_agent_listing on-chain until the callback records it.
+        let mut c = new_contract();
+        set_ctx(player2(), 0);
+        c.list_agent("genesis-visitor-1".to_string(), U128(100));
+        assert!(c.get_agent_listing("genesis-visitor-1".to_string()).is_none());
+    }
+
+    #[test]
+    #[should_panic(expected = "Price must be greater than 0")]
+    fn market_list_zero_price_fails() {
+        let mut c = new_contract();
+        set_ctx(player2(), 0);
+        c.list_agent("genesis-visitor-1".to_string(), U128(0));
+    }
+
+    #[test]
+    #[should_panic(expected = "Only the market owner can re-list this agent")]
+    fn market_relist_by_non_owner_fails() {
+        let mut c = new_contract();
+        record_listing(&mut c, "genesis-visitor-1", player2(), 100);
+        set_ctx(player3(), 0);
+        c.list_agent("genesis-visitor-1".to_string(), U128(200));
+    }
+
+    #[test]
+    #[should_panic(expected = "Only the market owner can delist this agent")]
+    fn market_delist_by_non_owner_fails() {
+        let mut c = new_contract();
+        record_listing(&mut c, "genesis-visitor-1", player2(), 100);
+        set_ctx(player3(), 0);
+        c.delist_agent("genesis-visitor-1".to_string());
+    }
+
+    #[test]
+    #[should_panic(expected = "You already own this agent")]
+    fn market_buy_own_listing_fails() {
+        let mut c = new_contract();
+        record_listing(&mut c, "genesis-visitor-1", player2(), 100);
+        fund(&mut c, player2());
+        set_ctx(player2(), 0);
+        c.buy_agent("genesis-visitor-1".to_string());
+    }
+
+    #[test]
+    #[should_panic(expected = "Insufficient Ladder Coin balance")]
+    fn market_buy_insufficient_balance_fails() {
+        let mut c = new_contract();
+        record_listing(&mut c, "genesis-visitor-1", player2(), 200);
+        // player3 never claimed the faucet: balance 0 < 200.
+        set_ctx(player3(), 0);
+        c.buy_agent("genesis-visitor-1".to_string());
+    }
+
+    #[test]
+    fn market_relist_delist_buy_flow() {
+        let mut c = new_contract();
+        record_listing(&mut c, "genesis-visitor-1", player2(), 100);
+        // Re-list (synchronous, owner only) reprices the listing.
+        set_ctx(player2(), 0);
+        c.list_agent("genesis-visitor-1".to_string(), U128(200));
+        assert_eq!(
+            c.get_agent_listing("genesis-visitor-1".to_string())
+                .unwrap()
+                .price,
+            Some(U128(200))
+        );
+        // Delist keeps ownership, clears the price; buying then fails.
+        set_ctx(player2(), 0);
+        c.delist_agent("genesis-visitor-1".to_string());
+        let rec = c
+            .get_agent_listing("genesis-visitor-1".to_string())
+            .unwrap();
+        assert_eq!(rec.owner_id, player2());
+        assert_eq!(rec.price, None);
+        set_ctx(player3(), 0);
+        let r = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+            c.buy_agent("genesis-visitor-1".to_string());
+        }));
+        assert!(r.is_err(), "buying a delisted agent must fail");
+        // Re-list and buy: coins MOVE (supply unchanged), ownership
+        // transfers, listing clears.
+        set_ctx(player2(), 0);
+        c.list_agent("genesis-visitor-1".to_string(), U128(150));
+        fund(&mut c, player3());
+        let supply_before = c.mt_total_supply(LADDER_TOKEN_ID.to_string()).0;
+        set_ctx(player3(), 0);
+        c.buy_agent("genesis-visitor-1".to_string());
+        let rec = c
+            .get_agent_listing("genesis-visitor-1".to_string())
+            .unwrap();
+        assert_eq!(rec.owner_id, player3());
+        assert_eq!(rec.price, None);
+        assert_eq!(balance(&c, player3()), 350, "500 - 150 price");
+        assert_eq!(balance(&c, player2()), 150, "seller receives the price");
+        assert_eq!(
+            c.mt_total_supply(LADDER_TOKEN_ID.to_string()).0,
+            supply_before,
+            "buying moves coins, it does not mint"
+        );
+    }
+
+    #[test]
+    fn market_get_market_lists_all() {
+        let mut c = new_contract();
+        record_listing(&mut c, "genesis-visitor-1", player2(), 100);
+        record_listing(&mut c, "genesis-visitor-4", player3(), 250);
+        let mut market = c.get_market();
+        market.sort_by(|a, b| a.token_id.cmp(&b.token_id));
+        assert_eq!(market.len(), 2);
+        assert_eq!(market[0].token_id, "genesis-visitor-1");
+        assert_eq!(market[1].token_id, "genesis-visitor-4");
+        assert_eq!(market[1].price, Some(U128(250)));
+    }
+
+    #[test]
+    fn market_hire_fee_goes_to_market_owner() {
+        let mut c = new_contract();
+        populate_key(&mut c, 0);
+        // Market owner is player2; the Genesis Core owner of the
+        // agent is player3. The 40-coin hire fee must go to the
+        // market owner (player2), not the Core owner.
+        record_listing(&mut c, "genesis-visitor-1", player2(), 100);
+        let contract = market_contract_acct();
+        // Fund + start a run with the escrow account pinned to the
+        // test contract account, so phone_friend and its callback
+        // move coins from the same account.
+        set_ctx_full(player(), contract.clone(), 0);
+        c.claim_faucet();
+        set_ctx_full(player(), contract.clone(), 0);
+        c.start_run(test_ids(0));
+        assert_eq!(balance(&c, player()), 400);
+        set_ctx_full(player(), contract.clone(), 0);
+        let _p = c.phone_friend("genesis-visitor-1".to_string(), 0);
+        assert!(c.get_run_view(player()).unwrap().phone_pending);
+        assert_eq!(balance(&c, player()), 350, "50 phone cost paid");
+        // Invoke the callback directly with a fabricated Core result.
+        set_ctx_full(contract.clone(), contract.clone(), 0);
+        let answer = c.phone_friend_callback(
+            player(),
+            0,
+            Ok(Some(core_agent("genesis-visitor-1", player3(), 0, true))),
+        );
+        assert!(answer.is_some(), "callback must return an answer");
+        let run = c.get_run_view(player()).unwrap();
+        assert!(!run.phone_pending);
+        assert!(run.used_phone);
+        assert_eq!(balance(&c, player2()), 40, "hire fee to market owner");
+        assert_eq!(balance(&c, player3()), 0, "Core owner gets nothing");
+        assert_eq!(balance(&c, contract), 110, "100 stake + 50 cost - 40 fee");
+    }
+
+    #[test]
+    fn market_hire_fee_without_listing_goes_to_core_owner() {
+        // No market record: the old behavior — 40 to the Genesis
+        // Core owner — is preserved.
+        let mut c = new_contract();
+        populate_key(&mut c, 0);
+        let contract = market_contract_acct();
+        set_ctx_full(player(), contract.clone(), 0);
+        c.claim_faucet();
+        set_ctx_full(player(), contract.clone(), 0);
+        c.start_run(test_ids(0));
+        set_ctx_full(player(), contract.clone(), 0);
+        let _p = c.phone_friend("genesis-visitor-1".to_string(), 0);
+        set_ctx_full(contract.clone(), contract.clone(), 0);
+        let answer = c.phone_friend_callback(
+            player(),
+            0,
+            Ok(Some(core_agent("genesis-visitor-1", player3(), 0, true))),
+        );
+        assert!(answer.is_some());
+        assert_eq!(balance(&c, player3()), 40, "hire fee to Core owner");
+        assert_eq!(balance(&c, player2()), 0);
     }
 }
