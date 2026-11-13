@@ -121,6 +121,17 @@ async function expectFail(name, fn, needle) {
   async function bal() {
     return Number(await view('mt_balance_of', { account_id: playerId, token_id: 'ladder' }));
   }
+  // Read-after-write can lag: a view call may hit a node that has not yet
+  // processed the last transaction. Poll the balance until it equals the
+  // expected value (or the timeout expires) instead of trusting one read.
+  async function waitForBal(expected, tries = 12) {
+    let b = await bal();
+    for (let i = 0; i < tries && b !== expected; i++) {
+      await sleep(1000);
+      b = await bal();
+    }
+    return b;
+  }
 
   console.log('\n--- 0. ANSWER KEY (P0 fix) ---');
   const version = await view('get_answer_key_version', {});
@@ -146,7 +157,7 @@ async function expectFail(name, fn, needle) {
   // (b) a wrong answer can never count as correct.
   const s1 = questionSet(0);
   await call('start_run', { question_ids: s1.ids });
-  check('start_run with bank question ids ok, balance 400 after stake', (await bal()) === 400);
+  check('start_run with bank question ids ok, balance 400 after stake', (await waitForBal(400)) === 400);
   const wrong0 = (s1.correct[0] + 1) % 4;
   const loseRes = await callOk('answer', { question_id: 0, answer: wrong0 });
   check('wrong answer loses everything', loseRes && loseRes.outcome === 'wrong_lost_everything' && loseRes.pot === '0', JSON.stringify(loseRes));
@@ -157,7 +168,7 @@ async function expectFail(name, fn, needle) {
   console.log('\n--- 3. START RUN + ANSWER CORRECT TO Q5 + WALK AWAY ---');
   const s2 = questionSet(10);
   await call('start_run', { question_ids: s2.ids });
-  check('second run starts, balance 300 after stake', (await bal()) === 300);
+  check('second run starts, balance 300 after stake', (await waitForBal(300)) === 300);
   for (let q = 0; q < 5; q++) {
     const r = await callOk('answer', { question_id: q, answer: s2.correct[q] });
     check(`answer Q${q + 1} correct (level ${r.level}, pot ${r.pot})`, r.correct && r.outcome === 'correct');
@@ -180,7 +191,16 @@ async function expectFail(name, fn, needle) {
   const ownerBalBefore = Number(await view('mt_balance_of', { account_id: 'otoyo4real.testnet', token_id: 'ladder' }));
   const pfAns = await callOk('phone_friend', { token_id: 'genesis-visitor-1', question_id: 0 });
   check('phone_friend returns an answer 0..3 or null', pfAns === null || (pfAns >= 0 && pfAns <= 3), 'answer ' + pfAns);
-  const ownerBalAfter = Number(await view('mt_balance_of', { account_id: 'otoyo4real.testnet', token_id: 'ladder' }));
+  // The 40-coin owner payment lands in the cross-contract callback, which
+  // executes in a later block than the phone_friend call itself, so poll
+  // for the balance change instead of reading it immediately (an immediate
+  // read can race the callback and see the old balance).
+  let ownerBalAfter = ownerBalBefore;
+  for (let i = 0; i < 15; i++) {
+    await sleep(1000);
+    ownerBalAfter = Number(await view('mt_balance_of', { account_id: 'otoyo4real.testnet', token_id: 'ladder' }));
+    if (ownerBalAfter === ownerBalBefore + 40) break;
+  }
   check('agent owner paid +40', ownerBalAfter === ownerBalBefore + 40, `${ownerBalBefore} -> ${ownerBalAfter}`);
   // Finish this run by answering all 15 correctly, then win.
   const a1 = await callOk('answer', { question_id: 0, answer: s3.correct[0] });
