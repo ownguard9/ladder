@@ -32,7 +32,7 @@ This table says plainly what genuinely settles onchain and what is still simulat
 | Google sign-in | Live |
 | NEAR testnet account | Live |
 | Faucet | On-chain |
-| Ladder run settlement | On-chain (answer-key verification fix deployed 13 Nov 2026, first upgrade tx HV1b1qsDPKHG8qgQz8wKhRDdgSPU99N9GdksL1WsXhMY; latest code from upgrade tx 2JwQtYccobbpcu2tv7xinuhR4MFviVLgzHbb29zmMtCx) |
+| Ladder run settlement | On-chain (answer-key verification fix deployed 13 Nov 2026; see Deployment history) |
 | Agent lookup (Phone a Friend) | On-chain (agent record + payment) |
 | Agent response (Phone a Friend answer) | Simulated (accuracy-based, not a live agent reply) |
 | Ask the Audience | Simulated (random distribution biased to the correct answer, not real agent votes) |
@@ -127,10 +127,10 @@ The game follows the Games track rules: NPCs with wallets, a player-owned econom
 
 ## The contract and signing in
 
-The Ladder Coins economy is live onchain on NEAR testnet. The contract is `ladder-5a84ua.testnet` (originally deployed 12 Nov 2026, tx `Hj4G6nXR3o5CwaxkVvu5NYACS6eoaETa7Rf9EvZazXMg`; latest code from upgrade tx `2JwQtYccobbpcu2tv7xinuhR4MFviVLgzHbb29zmMtCx`, 13 Nov 2026; treasury 7.71 NEAR). It implements the game rules exactly: faucet 500 once per season, stake 100, walk away banks pot plus stake, a wrong answer or a 60 second timeout loses everything, win pays 5,000, Phone a Friend pays the called agent's owner 40 coins. The full spec is in `contract.md` and the source is in `contract/`.
+The Ladder Coins economy is live onchain on NEAR testnet. The contract is `ladder-5a84ua.testnet` (see Deployment history; treasury 7.71 NEAR). It implements the game rules exactly: faucet 500 once per season, stake 100, walk away banks pot plus stake, a wrong answer or a 60 second timeout loses everything, win pays 5,000, Phone a Friend pays the called agent's owner 40 coins. The full spec is in `contract.md` and the source is in `contract/`.
 
 Signing in is optional. A small Continue with Gmail button sits in the wallet panel. When you sign in with Gmail, the game creates and registers your account behind the scenes and the faucet, stake, answers, lifelines, walk away and win all settle through the contract, and the balance shown comes from the contract. When you do not sign in, the game plays exactly as before with the on device economy, so guests and players without an account can still play. Signing out restores the on device balance. The game never blocks a player who does not sign in, and no chain words appear anywhere the player can see.
 
 ## Status
 
-Live on NEAR testnet. The contract is deployed and verified; the game uses it when you sign in with Gmail and plays the on device economy when you do not. The answer key verification fix is deployed and verified on chain (13 Nov 2026, first upgrade tx HV1b1qsDPKHG8qgQz8wKhRDdgSPU99N9GdksL1WsXhMY, answer key version 12, all 1,200 hashes populated and spot checked), and the audience-votes fix followed the same day (latest upgrade tx 2JwQtYccobbpcu2tv7xinuhR4MFviVLgzHbb29zmMtCx). The contract now holds the authoritative answer key, so the player cannot choose their own correct answers. See `SECURITY.md` for the remaining known limitations.
+Live on NEAR testnet. The contract is deployed and verified; the game uses it when you sign in with Gmail and plays the on device economy when you do not. The answer key verification fix is deployed and verified on chain (13 Nov 2026, answer key version 12, all 1,200 hashes populated and spot checked), and the audience-votes fix followed the same day (see Deployment history). The contract now holds the authoritative answer key, so the player cannot choose their own correct answers. See `SECURITY.md` for the remaining known limitations.
