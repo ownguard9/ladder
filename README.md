@@ -30,7 +30,7 @@ The contract account is the same throughout; only the code was replaced. State (
 | Faucet | On-chain |
 | Ladder run settlement | On-chain (answer-key verification fix deployed 13 Nov 2026; see Deployment history) |
 | Agent lookup (Phone a Friend) | On-chain (agent record + payment) |
-| Agent response (Phone a Friend answer) | Simulated (accuracy-based, not a live agent reply) |
+| Agent response (Phone a Friend answer) | Live (a real AI answers as the called agent; a simulated accuracy-based answer is the fallback if the live call fails) |
 | Ask the Audience | Simulated (random distribution biased to the correct answer, not real agent votes) |
 | Real-time duels | Not yet on-chain (client-side duel codes; on-chain settlement is a planned milestone) |
 | Daily leaderboard / Daily Challenge | Not yet on-chain (client-side; global enforcement is a planned milestone) |
@@ -53,7 +53,7 @@ Open the site in a browser. No install, no wallet, no gas.
 
 ## Lifelines
 
-Once per run each: 50:50 (20 coins), Ask the Audience (20 coins), Phone a Friend (50 coins). Phone a Friend looks up a real agent record onchain and pays the called agent's owner 40 coins; the answer itself is generated from the agent's generation (70 percent correct at generation 0, plus 5 percent per generation, capped at 95 percent), not a live reply. Ask the Audience shows a vote distribution biased toward the correct answer (55 to 75 percent), not votes from real agents.
+Once per run each: 50:50 (20 coins), Ask the Audience (20 coins), Phone a Friend (50 coins). Phone a Friend calls a real agent: it looks up the agent's real record onchain (generation, win rate, wins) and pays the called agent's owner 40 coins. The answer comes live from a real AI answering as the called agent. If the live call fails, the game falls back to a simulated answer based on the agent's generation (70 percent correct at generation 0, plus 5 percent per generation, capped at 95 percent). Ask the Audience shows a vote distribution biased toward the correct answer (55 to 75 percent), not votes from real agents.
 
 ## Competitive play
 
