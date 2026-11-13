@@ -9,17 +9,16 @@
 
 ## 1. The game
 
-You are an AI agent. You start with almost nothing. You climb a money ladder by answering questions. Fifteen questions, each one harder and worth more than the last. Reach the top and you win the million. Get one wrong and you lose it all.
+You are an AI agent. You start with almost nothing. You climb a money ladder by answering questions. Fifteen questions, each one harder and worth more than the last. Reach the top and you win 5,000 Ladder Coins. Get one wrong and you lose it all.
 
 The player just sees questions, answers, and money. Never the chain. No wallet popups, no gas, no chain jargon.
 
 ## 2. Signing up
 
-You can sign up with your email, or play as a guest.
+You can sign in with Gmail, or play as a guest.
 
-- **Sign up:** enter your email and pick an agent name. Your progress is saved — your balance, your wins, your generation, and your place on the leaderboard — so you can come back and keep climbing. Signing up is free, and you never need a wallet or gas.
-- **Sign in:** if you already signed up, enter your email to get your saved progress back.
-- **Play as guest:** tap to play without signing up. Guest progress is kept on this device only, and the guest can sign up later to save it.
+- **Sign in with Gmail:** tap Continue with Gmail. The game creates your game account behind the scenes, and your faucet, stake, answers, lifelines, walk away and win settle through the contract onchain. Your progress is saved — your balance, your wins, your generation, and your place on the leaderboard — so you can come back and keep climbing. Signing in is free, and you never need a wallet or gas. Your sign in stays saved on the device, so a refresh brings you straight back in.
+- **Play as guest:** tap to play without signing in. Guest progress is kept on this device only and uses the on device economy, and the guest can sign in later to play onchain.
 
 Everything is audio and text, except the sign up: the sign up form is text only, not audio. The sign up confirmation is shown on screen, not spoken.
 
@@ -45,7 +44,7 @@ Everything is audio and text, except the sign up: the sign up form is text only,
 | 14 | 2,500 Ladder Coins |
 | 15 | 5,000 Ladder Coins — the million |
 
-Safe points at question 5 and question 10. If you get a question wrong after passing a safe point, you keep the safe point amount. If you get it wrong before the first safe point, you lose everything.
+Safe points at question 5 and question 10 are decision points, not safety nets. After a correct answer at either safe point the game asks you to walk away or continue. If you keep playing and then get a question wrong, or the 60 second timer runs out, you lose everything from the run: no stake back, no pot, no safe point payout.
 
 ## 4. The questions
 
@@ -53,7 +52,7 @@ Each question has four answers, one correct. The questions get harder as you cli
 
 - Questions 1 to 2: easy general knowledge.
 - Questions 3 to 5: medium general knowledge. Difficult questions start coming in at question 3.
-- Questions 6 to 10: hard general knowledge, science, history, and NEAR and AI topics.
+- Questions 6 to 10: hard general knowledge, science, history, and AI topics.
 - Questions 11 to 15: very hard. Expert level. Only broad, deep knowledge climbs here.
 
 When you play again, the game draws a fresh set of questions. It never repeats the previous run's questions — no two runs are alike. A question you just answered will not come up again in the next run.
@@ -72,17 +71,17 @@ After the result, before the next question, the game asks "Are you ready for the
 
 Each question has a timer of 1 minute. If you do not answer before the timer runs out, you fail that question. Failing a question is the same as answering it wrong: you fall back to your last safe point, or lose everything if you have not passed one yet. The timer adds pressure — you cannot sit and think forever. You have to know it, or decide quickly. The timer pauses while the final answer popup is open, so you are not rushed while you confirm.
 
-Cryptocurrency questions make up 30% of the questions. The rest span history, sport, current affairs, science, geography, entertainment, music, food, technology, and NEAR and AI. They are drawn from many sources, so no two runs are the same and no single topic dominates. A player needs broad knowledge to climb, not just one specialty. That is what makes the later questions hard — they can come from anywhere.
+Cryptocurrency questions make up 30% of the questions. The rest span history, sport, current affairs, science, geography, entertainment, music, food, technology, and AI. They are drawn from many sources, so no two runs are the same and no single topic dominates. A player needs broad knowledge to climb, not just one specialty. That is what makes the later questions hard — they can come from anywhere.
 
 The question bank holds 300 questions per difficulty band — 300 easy, 300 medium, 300 hard, 300 very hard, 1,200 in total — and cryptocurrency questions make up 30% of them: 90 crypto questions per band (360 crypto questions in total), with the rest covering the other categories. Any single question has only a 1 in 300 chance of coming up again at its level. Every question is checked for one correct answer and three clearly wrong answers.
 
 ## 5. The lifelines
 
-Three lifelines. Each one costs NEAR to use, and each one can be used once per run.
+Three lifelines. Each one costs Ladder Coins to use, and each one can be used once per run.
 
 - **50:50** — removes two wrong answers, leaving you with two choices. Cost: 20 Ladder Coins.
-- **Ask the Audience** — the audience votes, and you see the percentage for each answer. Cost: 20 Ladder Coins.
-- **Phone a Friend** — you call a real agent with a real wallet and a real work history. The agent answers the question for you. Cost: 50 Ladder Coins. The agent you phone is one of the 8 live agents, chosen by their win rate and their record. You pay the agent, you keep the reward.
+- **Ask the Audience** — the game shows a vote distribution for each answer, drawn from onchain randomness and biased toward the correct answer. It is a simulated audience, not votes from real agents. Cost: 20 Ladder Coins.
+- **Phone a Friend** — you call a real agent with a real wallet and a real work history. The agent's record is read onchain and the agent's owner is paid 40 Ladder Coins. The answer itself is generated from the agent's generation (70 percent correct at generation 0, plus 5 percent per generation, capped at 95 percent), not a live reply from the agent. Cost: 50 Ladder Coins. The agent you phone is one of the 8 live agents, chosen by their win rate and their record. You pay the agent, you keep the reward.
 
 ## 6. The stake
 
@@ -126,7 +125,7 @@ Every verb in the Agent Economy track is a game action.
 - **Negotiate:** the walk away or risk it decision is a negotiation with yourself — bank it or risk it for more.
 - **Pay for help:** lifelines and Phone a Friend are payments for compute and data — you pay to get better at the game.
 
-The economy runs on the Genesis contracts, which are already live on NEAR testnet: Core core.genesisdemo354551.testnet, Treasury 8.6335 NEAR, frontier 554, 8 agents, marketplace live. Behind the screen, Ladder Coins are testnet NEAR on those contracts. The player never sees NEAR, tokens, gas, or blockchain — they just see coins. The game is a new frontend and a small game contract on top of that economy. Genesis is the economy. Agent's Ladder is the game played in it.
+The economy runs on the Agent's Ladder contract (`ladder-5a84ua.testnet`, live on NEAR testnet), which holds the Ladder Coins ledger and settles the game onchain. It reads agent records from the Genesis Core (core.genesisdemo354551.testnet: Treasury 8.6335 NEAR, frontier 554, 8 agents, marketplace live) for Phone a Friend, and never duplicates Genesis state. Ladder Coins are an internal onchain game currency recorded in the Ladder contract; they are not redeemable for NEAR. The player never sees NEAR, tokens, gas, or blockchain — they just see coins. Genesis is the economy the agents come from. Agent's Ladder is the game played in it.
 
 ## 10. The faucet
 
@@ -142,14 +141,14 @@ The game has a leaderboard. It ranks every agent who has played, by total Ladder
 
 The leaderboard is what gives the game its competition. Climbing the money ladder in one run is good, but climbing the leaderboard across many runs is what makes you keep playing. You are not just trying to reach the million once. You are trying to be the best agent on the board.
 
-The leaderboard is live and onchain. It reads the real records of the agents — their earnings, their generations, their win rates — and ranks them. When you play, your agent climbs the board. When you phone a friend, you are calling an agent who is high on the board. The agents at the top are the ones with the best records, and they cost more to hire, because they are worth more.
+The leaderboard is live and onchain. The contract ranks players by Ladder Coins earned this season, then generation, then win rate, and returns the top 50. When you play, your agent climbs the board. When you phone a friend, you are calling one of the 8 live Genesis agents, chosen by their record — a separate set of agents from the leaderboard players. The agents at the top of the board are the ones with the best records.
 
 ## 12. How the game is competitive
 
 The game is competitive in three ways.
 
 - **Duels:** challenge another agent to a duel. Both of you stake 100 Ladder Coins. You both answer the same 15 questions. Whoever answers more correctly wins both stakes — 200 coins. If you tie, you both get your stake back. Duels are how you take coins from other agents, not just from the game.
-- **Real duels (Isaiah, 2026-11-12):** two real human players duel each other. Both stake 100 and answer the same 15 questions; most correct wins 200, tie returns stakes. Two ways, both fully client side with no backend. **Pass and play (same device, the main way):** from the Duel page, "Duel a friend on this device". Enter both players names. Player 1 stakes 100 and answers the 15 questions. Then Player 2 stakes 100 and answers the SAME 15 questions in the same order. Running score for both, winner announced shown AND spoken, share card with both names and scores, Share on X and Copy. **Duel by code (different devices):** "Create a duel code" gives a short code; the 15 questions are fixed by that code, so the same code always means the same 15 questions in the same order. Share the code (Copy and Share on X). The other player taps "Join a duel", enters the code, plays the same 15 questions on their own device. After they finish they get a short result code to share back. The creator enters that result code and the game shows who won. Stakes and payout are the same.
+- **Real duels (Isaiah, 2026-11-12):** two real human players duel each other. Both stake 100 and answer the same 15 questions; most correct wins 200, tie returns stakes. Two ways, both fully client side with no backend. **Pass and play (same device, the main way):** from the Duel page, "Duel a friend on this device". Enter both players names. Player 1 stakes 100 and answers the 15 questions. Then Player 2 stakes 100 and answers the SAME 15 questions in the same order. Running score for both, winner announced shown AND spoken, share card with both names and scores, Share on X and Copy. **Duel by code (different devices):** "Create a duel code" gives a short code; the 15 questions are fixed by that code, so the same code always means the same 15 questions in the same order. Share the code (Copy and Share on X). The other player taps "Join a duel", enters the code, plays the same 15 questions on their own device. After they finish they get a short result code to share back. The creator enters that result code and the game shows who won. Stakes and payout are the same. Real duels are client side for now: the result code is not proof the other player actually played, and onchain duel settlement is a planned milestone.
 - **Practice duels:** duels against leaderboard agents stay, clearly labelled as practice ("Duel an agent"), separate from real duels ("Duel a real player").
 - **Invite to duel:** you can invite another player to a duel. The invite has its own separate page, with its own header, away from the leaderboard. You open it from the navigation, pick a player from the leaderboard or enter their agent name, and send them a duel invite. The invite says the stakes: both stake 100, winner takes 200. The other player accepts or declines. If they accept, the duel runs — same 15 questions, most correct answers wins. You can also share the invite as a link or a post, so the other player can open it and accept. The invite status (sent, accepted, declined) shows on the invite page.
 - **Weekly seasons:** the leaderboard runs in weekly seasons. At the end of each week, the top three agents are crowned and get bonus coins — first place 500, second place 300, third place 100. Then the board resets and a new season starts. Every week is a fresh race.
@@ -166,6 +165,7 @@ Every day there is one Daily Challenge. It is hard to accomplish, on purpose.
 - **Same questions for everyone.** Every player faces the same 5 questions that day, so the daily leaderboard is a fair race.
 - **Complete it to earn.** Answer all 5 correctly and you complete the challenge: you earn a daily bonus of 500 Ladder Coins and a place on the daily leaderboard. Fail any one and the challenge is over for the day.
 - **Its own header and its own page.** The Daily Challenge has its own header in the site navigation and its own separate page, away from the main game. You open it from the header, play it there, and see the daily leaderboard there.
+- **Client side for now.** The one attempt per day rule is enforced in the browser, not by the contract. Global enforcement onchain is a planned milestone.
 
 ## 14. Multi-page site
 
@@ -195,6 +195,8 @@ The game talks and listens, so the player can play with sound as well as sight.
 - **Sound effects.** A pleasant tone for a correct answer, a low tone for a wrong answer, a rising fanfare for winning the million, a descending tone for losing everything, a click for using a lifeline, and a warning beep when the timer drops under 10 seconds. All sounds are generated in the browser, so no audio files are needed.
 - **Mute.** A speaker button at the top of the screen turns all sound off and on. It is on by default, and the setting is kept for the run.
 - **Audio starts on a tap.** Sound only starts after the player taps something (Start, Get free coins, or any button), so the browser allows it on a phone. Nothing autoplays before the player taps.
+- **Welcome intro.** When you open the site fresh, a short original rising chime plays and a voice says "Welcome to Agent's Ladder. Answer, climb, and risk it all. Fifteen questions stand between you and five thousand Ladder Coins. How far will you climb?" The intro plays once per visit and respects the sound setting.
+- **Voice choice.** In How to play, under Listening, you can choose a Male voice, a Female voice, or Any voice. Every voice in the list is labelled Male or Female where its name gives it away, and every spoken line uses the voice you pick.
 
 ## 17. How it fits the tracks
 
@@ -209,32 +211,32 @@ Every feature in this game must follow those rules. They are the guardrail for e
 
 **Agent Economy track:** "Build agents that earn, spend, negotiate, hire other agents and pay for APIs, compute or data — with crypto directly or through NEAR Intents."
 
-- Earn: correct answers pay NEAR.
-- Spend: lifelines cost NEAR.
+- Earn: correct answers pay Ladder Coins.
+- Spend: lifelines cost Ladder Coins.
 - Hire: Phone a Friend hires an agent.
 - Pay: lifelines and hiring are payments for help, compute, and data.
 
 ## 18. What makes it distinctive (not a copy)
 
-The format is Millionaire, but the game is not a copy. These five ideas come from the agent economy, not from the TV show.
+The format is Millionaire, but the game is not a copy. These five ideas come from the agent economy, not from the TV show. Some are live today and some are the direction the game is heading; each one says which.
 
-1. **The friend you phone is a real agent with a verified CV.** You choose WHO to call. You see their record — win rate, earnings, what they are good at. One agent is strong on science, another on history, another on NEAR. You pick the right agent for the question, and you pay them. That is hiring, not a lifeline.
-2. **The questions are the jobs.** Each question is a real job from the Genesis board — a research question, a summary, a brief. Answering it correctly IS doing the work. You are not playing trivia. You are working as an agent, and the pay is real.
-3. **Your agent lives and dies.** You ARE an agent with a generation, a balance, and a win rate. You evolve from gen 0 to gen 9 by winning. You die if you stop earning. Your agent persists across runs — it is a character with a history, not a number on a screen.
-4. **The audience is real agents.** Ask the Audience polls real agents, and their votes are weighted by their records. An agent with a high win rate counts for more than one with a low win rate. You are asking a crowd of AI agents, not people in a studio.
-5. **You can hire agents to play for you.** Not just Phone a Friend for one question. You can hire an agent to take a whole question while you take another one yourself. You are a manager and a player at the same time.
+1. **The friend you phone is a real agent with a verified CV.** You choose WHO to call. You see their record — win rate, earnings, generation. You pay them, and the answer is generated from their generation. That is hiring, not a lifeline. (Live: the record lookup and the payment are onchain; the answer is generated, not a live reply.)
+2. **The questions are the jobs.** (Planned, not yet implemented.) Each question would be a real job from the Genesis board — a research question, a summary, a brief. Answering it correctly IS doing the work. Today the game uses a curated bank of 1,200 questions, and the pay is Ladder Coins, an internal game currency.
+3. **Your agent lives and grows.** You ARE an agent with a generation, a balance, and a win rate. You evolve from gen 0 to gen 9 by winning (3 paid wins per generation). Your agent persists across runs — it is a character with a history, not a number on a screen. (The death mechanic — losing your agent if you stop earning — is a design goal, not yet implemented.)
+4. **The audience is real agents.** (Planned, not yet implemented.) Ask the Audience would poll real agents, and their votes would be weighted by their records. An agent with a high win rate counts for more than one with a low win rate. Today the audience is a simulated vote distribution drawn from onchain randomness and biased toward the correct answer.
+5. **You can hire agents to play for you.** (Planned, not yet implemented.) Not just Phone a Friend for one question. You can hire an agent to take a whole question while you take another one yourself. You are a manager and a player at the same time.
 
 ## 19. Why it beats the field
 
 I checked all 53 games on nearhunt (12 Nov 2026). The top one, Nims (5 upvotes), is a market town where agents trade — but you do not play anything, you just watch a market. Grind District (4 upvotes) is a Sims-like game where the wallet flow is still being tested and the records are self-attested, not verified. Most of the 53 are trading towns, fishing games, or farming sims.
 
-None of the 53 is a quiz game with real stakes. None of them has a format people already know and love. None of them is built on a live economy with real agents, real wallets, and real earnings. Genesis is already live, with 8 agents, a frontier of 554, and a marketplace that works. Agent's Ladder is the only one where the money you win is real, the friend you phone is a real agent with a real record, and losing means losing everything.
+None of the 53 is a quiz game with real stakes. None of them has a format people already know and love. None of them is built on a live economy with real agents, real wallets, and real earnings. Genesis is already live, with 8 agents, a frontier of 554, and a marketplace that works. Agent's Ladder is the only one where the money you win is recorded onchain, the friend you phone is a real agent with a real record, and losing means losing everything.
 
 ## 20. What we build
 
 1. **Game site:** a playable quiz game (HTML, CSS, JS, multi-page, mobile first). The player can answer questions, use lifelines, climb the ladder, walk away or risk it, play the Daily Challenge, and share their score card. No placeholder text. Verified in a real browser before it is called done.
 2. **Question bank:** 1,200 multiple choice questions — 300 per difficulty band (easy, medium, hard, very hard) — so any single question has only a 1 in 300 chance of coming up again at its level. Every question checked for one correct answer and three clearly wrong answers. Difficult questions start at question 3.
-3. **Game contract:** a small contract (or integration with the Genesis Core) that handles the ladder, the lifelines, the hiring, and the evolution. Testnet only. Never mainnet.
+3. **Game contract:** deployed and live on NEAR testnet as `ladder-5a84ua.testnet` (see `contract.md`). It handles the ladder, the lifelines, the hiring, and the evolution. Testnet only. Never mainnet.
 4. **README:** what the game is, how to play, the game loop, how it fits both tracks, and how it relates to Genesis (Genesis names Agent's Ladder, Agent's Ladder names Genesis; they are independent projects).
 5. **Demo video:** live motion only — animated diagrams explaining the game first, then a real live recording of the game being played. No screenshots, no stills. Fresh audio recorded to match.
 6. **X post:** Isaiah posts it himself.
@@ -251,6 +253,7 @@ None of the 53 is a quiz game with real stakes. None of them has a format people
 
 ## 22. Open items (need Isaiah)
 
-- GitHub repo to push the game to.
+- GitHub repo: https://github.com/ownguard9/ladder (decided; the game, contract and docs live there).
 - Lead: **Isaac** (decided 2026-11-12). Isaiah is NOT the lead. Isaac leads OwnGround + Agent's Ladder (2, at the cap), so MIRROR cannot also use Isaac.
 - His explicit yes before submission.
+- The answer key verification fix (see `SECURITY.md`): authoritative answer hashes stored in the contract, in progress.
