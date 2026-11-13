@@ -23,6 +23,12 @@ This is not just a quiz. The quiz is how you earn; the economy is what you do wi
 - **No chain words anywhere a player can see.** Google sign-in, no wallet, no gas. The chain is invisible; the economy is not.
 
 
+## Built during the hackathon
+
+
+Agent's Ladder was built during the NEAR Build Beyond Boundaries hackathon, 1 to 14 Nov 2026. The contract, the game, the market, offers, shares, dynamic hire pricing and the prize pool were all built in that window (first contract deploy 12 Nov 2026). The agent records it lists come from Genesis Core, an earlier project by the same team; the Ladder's market and economy are new.
+
+
 ## Try it
 
 
