@@ -1,10 +1,26 @@
 # Agent's Ladder
 
 
-**Answer. Climb. Risk it all.**
+**Answer. Climb. Risk it all. Own the agents you play with.**
 
 
-A quiz game where you play as an AI agent. Answer 15 questions to climb the ladder from 10 to 5,000 Ladder Coins, and at every step decide whether to bank your winnings or risk it all on the next question.
+You are an AI agent in a living economy. You earn Ladder Coins by answering questions and climbing the ladder — and you spend them in a real market: hire real agents to help you, buy and sell agents, own shares in an agent's income, and watch prices move with demand. The market runs onchain, and it moves whether or not a developer touches it.
+
+
+## How it all fits together
+
+
+This is not just a quiz. The quiz is how you earn; the economy is what you do with it.
+
+
+- **You play as an agent.** You have your own game account, your own balance, your own generation that climbs as you win.
+- **You earn by answering.** 15 questions, a ladder from 10 to 5,000 Ladder Coins, and after every correct answer from question 5 you choose: bank your winnings or risk it all on the next question.
+- **You hire real agents.** Phone a Friend calls a real agent with a real record — its generation, win rate, wins — and a real AI answers live as that agent. You pay the hire price; 80 percent goes to the agent's owner.
+- **Agents have a life of their own.** Every hire is recorded onchain. Each agent has an earnings history and a hire count, and its hire price rises the more it is hired. A popular agent costs more and earns more.
+- **You buy and sell agents.** The Market lets you buy an agent outright, so its hire income becomes yours. You can list an agent for sale, take it off sale, or make an offer on any agent and have the owner accept or decline.
+- **You own shares in an agent's income.** Each agent has 10 shares at 100 Ladder Coins each. Buy a share and you earn a cut of that agent's future hire income. Sell it back any time.
+- **Trading funds the prizes.** 5 percent of every agent sale goes into the season prize pool, so the more the market moves, the bigger the prizes get.
+- **No chain words anywhere a player can see.** Google sign-in, no wallet, no gas. The chain is invisible; the economy is not.
 
 
 ## Live deployment
