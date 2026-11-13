@@ -1,0 +1,3302 @@
+[
+  {
+    "q": "Which vitamin helps the body absorb calcium?",
+    "a": [
+      "Vitamin D",
+      "Vitamin A",
+      "Vitamin K",
+      "Vitamin B12"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which animal is the largest land mammal?",
+    "a": [
+      "Giraffe",
+      "Hippopotamus",
+      "African elephant",
+      "White rhinoceros"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which insect produces honey?",
+    "a": [
+      "A bee",
+      "A moth",
+      "A butterfly",
+      "A wasp"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "What causes influenza?",
+    "a": [
+      "Bacteria",
+      "Virus",
+      "Fungus",
+      "Parasite"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "What makes up most of the Earth's atmosphere?",
+    "a": [
+      "Oxygen",
+      "Carbon dioxide",
+      "Nitrogen",
+      "Argon"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which metal is liquid at room temperature?",
+    "a": [
+      "Iron",
+      "Mercury",
+      "Copper",
+      "Zinc"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "What is the powerhouse of the cell?",
+    "a": [
+      "Ribosome",
+      "Golgi body",
+      "Mitochondria",
+      "Nucleus"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which planet is farthest from the Sun?",
+    "a": [
+      "Jupiter",
+      "Saturn",
+      "Neptune",
+      "Uranus"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which metal is used to make electrical wires because it conducts well?",
+    "a": [
+      "Copper",
+      "Tin",
+      "Nickel",
+      "Lead"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which element is used to fill balloons so they float?",
+    "a": [
+      "Carbon",
+      "Helium",
+      "Nitrogen",
+      "Oxygen"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which mineral is needed to make haemoglobin in red blood cells?",
+    "a": [
+      "Calcium",
+      "Zinc",
+      "Iron",
+      "Magnesium"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "What is the smallest planet in our solar system?",
+    "a": [
+      "Mars",
+      "Venus",
+      "Mercury",
+      "Pluto"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "What molecule carries genetic instructions in living things?",
+    "a": [
+      "DNA",
+      "ADP",
+      "RNA",
+      "ATP"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which organs filter waste from the blood to make urine?",
+    "a": [
+      "The heart",
+      "The liver",
+      "The lungs",
+      "The kidneys"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which animal is the largest in the world?",
+    "a": [
+      "Blue whale",
+      "Orca",
+      "Humpback whale",
+      "Great white shark"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Who discovered penicillin in 1928?",
+    "a": [
+      "Edward Jenner",
+      "Louis Pasteur",
+      "Alexander Fleming",
+      "Joseph Lister"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which planet is the hottest in the Solar System?",
+    "a": [
+      "Venus",
+      "Earth",
+      "Mercury",
+      "Mars"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which planet has the most prominent rings?",
+    "a": [
+      "Uranus",
+      "Neptune",
+      "Saturn",
+      "Jupiter"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "What is the longest bone in the human body?",
+    "a": [
+      "The tibia",
+      "The humerus",
+      "The femur",
+      "The radius"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which part of the blood fights infection?",
+    "a": [
+      "Plasma",
+      "Red blood cells",
+      "White blood cells",
+      "Platelets"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which part of the body controls balance and coordination in the cerebellum?",
+    "a": [
+      "The lungs",
+      "The heart",
+      "The brain",
+      "The stomach"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "In which year was the United States Declaration of Independence signed?",
+    "a": [
+      "1789",
+      "1812",
+      "1776",
+      "1804"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "In which year did the Titanic sink?",
+    "a": [
+      "1908",
+      "1912",
+      "1916",
+      "1920"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which country invented paper?",
+    "a": [
+      "China",
+      "Greece",
+      "Egypt",
+      "India"
+    ],
+    "c": 0,
+    "cat": "history"
+  },
+  {
+    "q": "Who was assassinated on the Ides of March in 44 BC?",
+    "a": [
+      "Nero",
+      "Julius Caesar",
+      "Augustus",
+      "Caligula"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which naval battle in 1805 was won by Admiral Nelson?",
+    "a": [
+      "The Battle of Hastings",
+      "The Battle of Waterloo",
+      "The Battle of Trafalgar",
+      "The Battle of Bosworth"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Who won the Battle of Hastings in 1066?",
+    "a": [
+      "Henry VIII",
+      "Richard the Lionheart",
+      "Edward I",
+      "William the Conqueror"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which battle ended Napoleon's rule in 1815?",
+    "a": [
+      "The Battle of Hastings",
+      "The Battle of Trafalgar",
+      "The Battle of Waterloo",
+      "The Battle of Agincourt"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "What is the longest wall in the world?",
+    "a": [
+      "Hadrian's Wall",
+      "Great Wall of China",
+      "Berlin Wall",
+      "Western Wall"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "In which year did World War II begin?",
+    "a": [
+      "1941",
+      "1939",
+      "1945",
+      "1943"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "In which year did the Berlin Wall fall?",
+    "a": [
+      "1991",
+      "1989",
+      "1979",
+      "1985"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Who was British Prime Minister when World War II ended in Europe?",
+    "a": [
+      "Neville Chamberlain",
+      "Harold Macmillan",
+      "Anthony Eden",
+      "Winston Churchill"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "In which year did World War II end?",
+    "a": [
+      "1943",
+      "1945",
+      "1946",
+      "1944"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Who was the last active ruler of ancient Egypt?",
+    "a": [
+      "Cleopatra",
+      "Isis",
+      "Nefertiti",
+      "Hatshepsut"
+    ],
+    "c": 0,
+    "cat": "history"
+  },
+  {
+    "q": "Which series of wars in England ended in 1485?",
+    "a": [
+      "The Spanish Armada",
+      "The Hundred Years War",
+      "The English Civil War",
+      "The War of the Roses"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Who was the British Prime Minister for most of World War II?",
+    "a": [
+      "Clement Attlee",
+      "Anthony Eden",
+      "Neville Chamberlain",
+      "Winston Churchill"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which English king was executed in 1649?",
+    "a": [
+      "Charles I",
+      "Henry VIII",
+      "Edward VI",
+      "James I"
+    ],
+    "c": 0,
+    "cat": "history"
+  },
+  {
+    "q": "Which document was sealed by King John in 1215?",
+    "a": [
+      "The Bill of Rights",
+      "The Domesday Book",
+      "The Magna Carta",
+      "The Act of Union"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which period saw the rise of factories in Britain in the 18th and 19th centuries?",
+    "a": [
+      "The Industrial Revolution",
+      "The French Revolution",
+      "The Reformation",
+      "The Renaissance"
+    ],
+    "c": 0,
+    "cat": "history"
+  },
+  {
+    "q": "Which term describes the rivalry between the United States and the Soviet Union after World War II?",
+    "a": [
+      "The Iron Curtain",
+      "The Cold War",
+      "The Berlin Wall",
+      "The Space Race"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "In which year did humans first walk on the Moon?",
+    "a": [
+      "1967",
+      "1969",
+      "1971",
+      "1973"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which British monarch reigned during the Crimean War?",
+    "a": [
+      "Queen Victoria",
+      "Queen Anne",
+      "Queen Elizabeth II",
+      "Queen Elizabeth I"
+    ],
+    "c": 0,
+    "cat": "history"
+  },
+  {
+    "q": "Which band released the album Sgt Pepper's Lonely Hearts Club Band?",
+    "a": [
+      "The Who",
+      "The Rolling Stones",
+      "The Beatles",
+      "The Kinks"
+    ],
+    "c": 2,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who directed the film Citizen Kane?",
+    "a": [
+      "Orson Welles",
+      "Alfred Hitchcock",
+      "Francis Ford Coppola",
+      "Stanley Kubrick"
+    ],
+    "c": 0,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who wrote the novel Middlemarch?",
+    "a": [
+      "Charles Dickens",
+      "George Eliot",
+      "William Thackeray",
+      "Thomas Hardy"
+    ],
+    "c": 1,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who wrote the novel Oliver Twist?",
+    "a": [
+      "Austen",
+      "Shakespeare",
+      "Bronte",
+      "Dickens"
+    ],
+    "c": 3,
+    "cat": "entertainment"
+  },
+  {
+    "q": "In which museum is the Mona Lisa displayed?",
+    "a": [
+      "The British Museum",
+      "The Prado",
+      "The Uffizi",
+      "The Louvre"
+    ],
+    "c": 3,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who wrote the novel Pride and Prejudice?",
+    "a": [
+      "Jane Austen",
+      "Emily Bronte",
+      "Mary Shelley",
+      "Charlotte Bronte"
+    ],
+    "c": 0,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who wrote the novel 1984?",
+    "a": [
+      "Aldous Huxley",
+      "H G Wells",
+      "Ray Bradbury",
+      "George Orwell"
+    ],
+    "c": 3,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who directed the film Psycho in 1960?",
+    "a": [
+      "Orson Welles",
+      "Stanley Kubrick",
+      "Alfred Hitchcock",
+      "Martin Scorsese"
+    ],
+    "c": 2,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who wrote Alice's Adventures in Wonderland?",
+    "a": [
+      "C S Lewis",
+      "Roald Dahl",
+      "Lewis Carroll",
+      "J R R Tolkien"
+    ],
+    "c": 2,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who wrote Romeo and Juliet?",
+    "a": [
+      "Geoffrey Chaucer",
+      "John Milton",
+      "Charles Dickens",
+      "William Shakespeare"
+    ],
+    "c": 3,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who wrote the play Hamlet?",
+    "a": [
+      "Christopher Marlowe",
+      "William Shakespeare",
+      "John Webster",
+      "Ben Jonson"
+    ],
+    "c": 1,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which novel is narrated by Scout Finch?",
+    "a": [
+      "The Great Gatsby",
+      "Jane Eyre",
+      "Pride and Prejudice",
+      "To Kill a Mockingbird"
+    ],
+    "c": 3,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who wrote the Three Laws of Robotics?",
+    "a": [
+      "Arthur C Clarke",
+      "Philip K Dick",
+      "Isaac Asimov",
+      "Robert Heinlein"
+    ],
+    "c": 2,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who painted The Starry Night?",
+    "a": [
+      "Pablo Picasso",
+      "Claude Monet",
+      "Vincent van Gogh",
+      "Salvador Dali"
+    ],
+    "c": 2,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which composer wrote The Marriage of Figaro?",
+    "a": [
+      "Beethoven",
+      "Bach",
+      "Handel",
+      "Mozart"
+    ],
+    "c": 3,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who wrote the Harry Potter series?",
+    "a": [
+      "Philip Pullman",
+      "J K Rowling",
+      "Stephenie Meyer",
+      "Suzanne Collins"
+    ],
+    "c": 1,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which actress won the most Academy Awards for acting with four wins?",
+    "a": [
+      "Ingrid Bergman",
+      "Meryl Streep",
+      "Katharine Hepburn",
+      "Judi Dench"
+    ],
+    "c": 2,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who created the detective Sherlock Holmes?",
+    "a": [
+      "Arthur Conan Doyle",
+      "Agatha Christie",
+      "Dorothy L Sayers",
+      "Edgar Allan Poe"
+    ],
+    "c": 0,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which novel features the character Atticus Finch?",
+    "a": [
+      "Moby Dick",
+      "To Kill a Mockingbird",
+      "The Catcher in the Rye",
+      "The Great Gatsby"
+    ],
+    "c": 1,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which actress starred in Breakfast at Tiffany's?",
+    "a": [
+      "Audrey Hepburn",
+      "Marilyn Monroe",
+      "Grace Kelly",
+      "Elizabeth Taylor"
+    ],
+    "c": 0,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Who painted the ceiling of the Sistine Chapel?",
+    "a": [
+      "Donatello",
+      "Michelangelo",
+      "Leonardo da Vinci",
+      "Raphael"
+    ],
+    "c": 1,
+    "cat": "entertainment"
+  },
+  {
+    "q": "What is the capital of New Zealand?",
+    "a": [
+      "Christchurch",
+      "Auckland",
+      "Hamilton",
+      "Wellington"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which river is the second longest in Africa?",
+    "a": [
+      "The Nile",
+      "The Congo",
+      "The Zambezi",
+      "The Niger"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which river has the largest drainage basin in the world?",
+    "a": [
+      "The Mississippi",
+      "The Yangtze",
+      "The Amazon",
+      "The Nile"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Which language has the most native speakers in the world?",
+    "a": [
+      "Bengali",
+      "Mandarin",
+      "Hindi",
+      "Cantonese"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "What is the highest mountain in Africa?",
+    "a": [
+      "Mount Kilimanjaro",
+      "Mount Elgon",
+      "Mount Kenya",
+      "Mount Meru"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "What is the capital of Sweden?",
+    "a": [
+      "Oslo",
+      "Stockholm",
+      "Helsinki",
+      "Copenhagen"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "What is the main language spoken in Egypt?",
+    "a": [
+      "Turkish",
+      "Persian",
+      "Arabic",
+      "Hebrew"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Which mountain range runs along the west coast of South America?",
+    "a": [
+      "The Alps",
+      "The Himalayas",
+      "The Rockies",
+      "The Andes"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country is the origin of coffee?",
+    "a": [
+      "Tanzania",
+      "Uganda",
+      "Ethiopia",
+      "Kenya"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country is home to the Blue Lagoon geothermal spa?",
+    "a": [
+      "Greenland",
+      "Iceland",
+      "Finland",
+      "Norway"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which ocean is the smallest?",
+    "a": [
+      "Pacific",
+      "Atlantic",
+      "Indian",
+      "Arctic"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "What is the largest island in the world?",
+    "a": [
+      "Iceland",
+      "Greenland",
+      "Madagascar",
+      "Borneo"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which Italian city is built on a lagoon?",
+    "a": [
+      "Naples",
+      "Florence",
+      "Milan",
+      "Venice"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which river flows through the Amazon rainforest?",
+    "a": [
+      "The Amazon",
+      "The Danube",
+      "The Rhine",
+      "The Nile"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "What is the capital of Norway?",
+    "a": [
+      "Oslo",
+      "Trondheim",
+      "Stavanger",
+      "Bergen"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "What is the largest ocean on Earth?",
+    "a": [
+      "Atlantic",
+      "Indian",
+      "Arctic",
+      "Pacific"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country is the largest in the world by land area?",
+    "a": [
+      "Brazil",
+      "Russia",
+      "Canada",
+      "China"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "What is the deepest lake in the world?",
+    "a": [
+      "Lake Victoria",
+      "Lake Tanganyika",
+      "Lake Baikal",
+      "Lake Superior"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country is home to the Maori people?",
+    "a": [
+      "Papua New Guinea",
+      "New Zealand",
+      "Australia",
+      "Fiji"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country was the centre of the Inca Empire?",
+    "a": [
+      "Chile",
+      "Peru",
+      "Colombia",
+      "Ecuador"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country has Bucharest as its capital?",
+    "a": [
+      "Poland",
+      "Romania",
+      "Hungary",
+      "Bulgaria"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "In which sport do fighters compete in weight classes and wear gloves?",
+    "a": [
+      "Judo",
+      "Karate",
+      "Wrestling",
+      "Boxing"
+    ],
+    "c": 3,
+    "cat": "sport"
+  },
+  {
+    "q": "What is the name of the cricket series between England and Australia?",
+    "a": [
+      "The Ashes",
+      "The World Cup",
+      "The Ryder Cup",
+      "The Davis Cup"
+    ],
+    "c": 0,
+    "cat": "sport"
+  },
+  {
+    "q": "Who is the world record holder for the marathon?",
+    "a": [
+      "Mo Farah",
+      "Eliud Kipchoge",
+      "Usain Bolt",
+      "Haile Gebrselassie"
+    ],
+    "c": 1,
+    "cat": "sport"
+  },
+  {
+    "q": "Which tennis player won 22 Grand Slam singles titles?",
+    "a": [
+      "Martina Navratilova",
+      "Serena Williams",
+      "Steffi Graf",
+      "Chris Evert"
+    ],
+    "c": 2,
+    "cat": "sport"
+  },
+  {
+    "q": "Which football competition is the oldest in the world?",
+    "a": [
+      "The Europa League",
+      "The FA Cup",
+      "The Champions League",
+      "The League Cup"
+    ],
+    "c": 1,
+    "cat": "sport"
+  },
+  {
+    "q": "Which tennis tournament is played on clay courts in Paris?",
+    "a": [
+      "Australian Open",
+      "US Open",
+      "Wimbledon",
+      "Roland Garros"
+    ],
+    "c": 3,
+    "cat": "sport"
+  },
+  {
+    "q": "Which sport has a format called Test matches lasting up to five days?",
+    "a": [
+      "Rugby",
+      "Cricket",
+      "Football",
+      "Hockey"
+    ],
+    "c": 1,
+    "cat": "sport"
+  },
+  {
+    "q": "Which tennis tournament is the oldest in the world?",
+    "a": [
+      "The Australian Open",
+      "The US Open",
+      "Wimbledon",
+      "The French Open"
+    ],
+    "c": 2,
+    "cat": "sport"
+  },
+  {
+    "q": "In which sport is a love score used?",
+    "a": [
+      "Volleyball",
+      "Badminton",
+      "Squash",
+      "Tennis"
+    ],
+    "c": 3,
+    "cat": "sport"
+  },
+  {
+    "q": "In which motorsport is the Monaco Grand Prix held?",
+    "a": [
+      "IndyCar",
+      "Formula 1",
+      "Rallying",
+      "NASCAR"
+    ],
+    "c": 1,
+    "cat": "sport"
+  },
+  {
+    "q": "In which sport would you score a century?",
+    "a": [
+      "Cricket",
+      "Hockey",
+      "Golf",
+      "Rugby"
+    ],
+    "c": 0,
+    "cat": "sport"
+  },
+  {
+    "q": "In which sport is the Super Bowl the championship game?",
+    "a": [
+      "Rugby league",
+      "Australian rules football",
+      "American football",
+      "Rugby union"
+    ],
+    "c": 2,
+    "cat": "sport"
+  },
+  {
+    "q": "Who holds the world record for the men's 100 metres?",
+    "a": [
+      "Carl Lewis",
+      "Michael Johnson",
+      "Jesse Owens",
+      "Usain Bolt"
+    ],
+    "c": 3,
+    "cat": "sport"
+  },
+  {
+    "q": "Which cycling race awards the yellow jersey to the leader?",
+    "a": [
+      "The Tour de France",
+      "The Vuelta a Espana",
+      "The Giro d'Italia",
+      "Paris Roubaix"
+    ],
+    "c": 0,
+    "cat": "sport"
+  },
+  {
+    "q": "What is the national sport of Japan?",
+    "a": [
+      "Kendo",
+      "Sumo wrestling",
+      "Judo",
+      "Karate"
+    ],
+    "c": 1,
+    "cat": "sport"
+  },
+  {
+    "q": "Which country hosted the first modern Olympic Games?",
+    "a": [
+      "England",
+      "Italy",
+      "Greece",
+      "France"
+    ],
+    "c": 2,
+    "cat": "sport"
+  },
+  {
+    "q": "In which sport do players score by shooting a ball through a hoop?",
+    "a": [
+      "Basketball",
+      "Hockey",
+      "Netball",
+      "Lacrosse"
+    ],
+    "c": 0,
+    "cat": "sport"
+  },
+  {
+    "q": "In which sport do players aim for treble 20?",
+    "a": [
+      "Bowls",
+      "Snooker",
+      "Pool",
+      "Darts"
+    ],
+    "c": 3,
+    "cat": "sport"
+  },
+  {
+    "q": "Which Olympic sport uses a bow and arrows?",
+    "a": [
+      "Fencing",
+      "Archery",
+      "Wrestling",
+      "Boxing"
+    ],
+    "c": 1,
+    "cat": "sport"
+  },
+  {
+    "q": "Which golf tournament is played at St Andrews in some years and is the oldest major?",
+    "a": [
+      "The PGA Championship",
+      "The US Open",
+      "The Open Championship",
+      "The Masters"
+    ],
+    "c": 2,
+    "cat": "sport"
+  },
+  {
+    "q": "Which sporting event uses the motto Faster Higher Stronger?",
+    "a": [
+      "The Olympics",
+      "The Commonwealth Games",
+      "The Asian Games",
+      "The World Cup"
+    ],
+    "c": 0,
+    "cat": "sport"
+  },
+  {
+    "q": "Which drink is traditionally served in a ceremony in Japan and China?",
+    "a": [
+      "Cocoa",
+      "Tea",
+      "Milk",
+      "Coffee"
+    ],
+    "c": 1,
+    "cat": "food"
+  },
+  {
+    "q": "Which herb is also known as cilantro in the United States?",
+    "a": [
+      "Cumin",
+      "Clove",
+      "Coriander",
+      "Cardamom"
+    ],
+    "c": 2,
+    "cat": "food"
+  },
+  {
+    "q": "Which cheese is traditionally used on pizza?",
+    "a": [
+      "Brie",
+      "Cheddar",
+      "Mozzarella",
+      "Gouda"
+    ],
+    "c": 2,
+    "cat": "food"
+  },
+  {
+    "q": "Which Japanese dish consists of noodles in broth?",
+    "a": [
+      "Udon",
+      "Ramen",
+      "Sushi",
+      "Tempura"
+    ],
+    "c": 1,
+    "cat": "food"
+  },
+  {
+    "q": "Which spice comes from the bark of a tree?",
+    "a": [
+      "Cinnamon",
+      "Saffron",
+      "Nutmeg",
+      "Cloves"
+    ],
+    "c": 0,
+    "cat": "food"
+  },
+  {
+    "q": "Which country is the origin of pizza?",
+    "a": [
+      "Portugal",
+      "Italy",
+      "France",
+      "Spain"
+    ],
+    "c": 1,
+    "cat": "food"
+  },
+  {
+    "q": "Which root is commonly used in Asian cooking and in ginger beer?",
+    "a": [
+      "Garlic",
+      "Ginger",
+      "Chilli",
+      "Turmeric"
+    ],
+    "c": 1,
+    "cat": "food"
+  },
+  {
+    "q": "Which legume is the main ingredient in hummus?",
+    "a": [
+      "Lentils",
+      "Black beans",
+      "Chickpeas",
+      "Kidney beans"
+    ],
+    "c": 2,
+    "cat": "food"
+  },
+  {
+    "q": "Which country is the origin of moussaka?",
+    "a": [
+      "Italy",
+      "Greece",
+      "France",
+      "Spain"
+    ],
+    "c": 1,
+    "cat": "food"
+  },
+  {
+    "q": "Which French region is famous for sparkling wine?",
+    "a": [
+      "Bordeaux",
+      "Champagne",
+      "Loire",
+      "Burgundy"
+    ],
+    "c": 1,
+    "cat": "food"
+  },
+  {
+    "q": "Which grain is used to make porridge in Scotland?",
+    "a": [
+      "Wheat",
+      "Rice",
+      "Oats",
+      "Corn"
+    ],
+    "c": 2,
+    "cat": "food"
+  },
+  {
+    "q": "Which food is made from curdled soya milk?",
+    "a": [
+      "Tofu",
+      "Tempeh",
+      "Seitan",
+      "Quorn"
+    ],
+    "c": 0,
+    "cat": "food"
+  },
+  {
+    "q": "Which spice is the most expensive by weight?",
+    "a": [
+      "Paprika",
+      "Turmeric",
+      "Saffron",
+      "Cumin"
+    ],
+    "c": 2,
+    "cat": "food"
+  },
+  {
+    "q": "Which bread originated in Italy and has a crisp crust?",
+    "a": [
+      "Sourdough",
+      "Rye",
+      "Pumpernickel",
+      "Ciabatta"
+    ],
+    "c": 3,
+    "cat": "food"
+  },
+  {
+    "q": "Which herb is the main ingredient in pesto sauce?",
+    "a": [
+      "Basil",
+      "Oregano",
+      "Parsley",
+      "Thyme"
+    ],
+    "c": 0,
+    "cat": "food"
+  },
+  {
+    "q": "Which flavour is made from orchid pods?",
+    "a": [
+      "Chocolate",
+      "Strawberry",
+      "Coffee",
+      "Vanilla"
+    ],
+    "c": 3,
+    "cat": "food"
+  },
+  {
+    "q": "What is the staple grain of Japan?",
+    "a": [
+      "Maize",
+      "Barley",
+      "Wheat",
+      "Rice"
+    ],
+    "c": 3,
+    "cat": "food"
+  },
+  {
+    "q": "Which long thin loaf is a symbol of France?",
+    "a": [
+      "Baguette",
+      "Pain au chocolat",
+      "Croissant",
+      "Brioche"
+    ],
+    "c": 0,
+    "cat": "food"
+  },
+  {
+    "q": "Which Spanish dish is made with rice, saffron and seafood?",
+    "a": [
+      "Gazpacho",
+      "Churros",
+      "Paella",
+      "Tapas"
+    ],
+    "c": 2,
+    "cat": "food"
+  },
+  {
+    "q": "Which green paste is served with sushi?",
+    "a": [
+      "Wasabi",
+      "Ginger",
+      "Miso",
+      "Soy sauce"
+    ],
+    "c": 0,
+    "cat": "food"
+  },
+  {
+    "q": "What is sushi traditionally wrapped in?",
+    "a": [
+      "Cabbage",
+      "Rice paper",
+      "Seaweed",
+      "Lettuce"
+    ],
+    "c": 2,
+    "cat": "food"
+  },
+  {
+    "q": "Which composer wrote the Ninth Symphony with the Ode to Joy?",
+    "a": [
+      "Beethoven",
+      "Mozart",
+      "Haydn",
+      "Handel"
+    ],
+    "c": 0,
+    "cat": "music"
+  },
+  {
+    "q": "Which Swedish pop group sang Dancing Queen?",
+    "a": [
+      "Led Zeppelin",
+      "ABBA",
+      "Queen",
+      "The Who"
+    ],
+    "c": 1,
+    "cat": "music"
+  },
+  {
+    "q": "Who sang the song Superstition in 1972?",
+    "a": [
+      "Elton John",
+      "Stevie Wonder",
+      "Phil Collins",
+      "Billy Joel"
+    ],
+    "c": 1,
+    "cat": "music"
+  },
+  {
+    "q": "Which singer released the album Ziggy Stardust in 1972?",
+    "a": [
+      "Freddie Mercury",
+      "Elton John",
+      "David Bowie",
+      "George Michael"
+    ],
+    "c": 2,
+    "cat": "music"
+  },
+  {
+    "q": "Which band released the album Led Zeppelin IV?",
+    "a": [
+      "Led Zeppelin",
+      "Deep Purple",
+      "Pink Floyd",
+      "The Rolling Stones"
+    ],
+    "c": 0,
+    "cat": "music"
+  },
+  {
+    "q": "Who was the lead singer of Queen?",
+    "a": [
+      "Freddie Mercury",
+      "Paul McCartney",
+      "Elton John",
+      "David Bowie"
+    ],
+    "c": 0,
+    "cat": "music"
+  },
+  {
+    "q": "Which singer released the album 21 in 2011?",
+    "a": [
+      "Rihanna",
+      "Lady Gaga",
+      "Beyonce",
+      "Adele"
+    ],
+    "c": 3,
+    "cat": "music"
+  },
+  {
+    "q": "Which singer performed I Will Always Love You in the film The Bodyguard?",
+    "a": [
+      "Mariah Carey",
+      "Madonna",
+      "Whitney Houston",
+      "Celine Dion"
+    ],
+    "c": 2,
+    "cat": "music"
+  },
+  {
+    "q": "Which Beatle wrote the song Hey Jude?",
+    "a": [
+      "George Harrison",
+      "Ringo Starr",
+      "John Lennon",
+      "Paul McCartney"
+    ],
+    "c": 3,
+    "cat": "music"
+  },
+  {
+    "q": "Which singer was known as the King of Rock and Roll?",
+    "a": [
+      "Frank Sinatra",
+      "Buddy Holly",
+      "Elvis Presley",
+      "Johnny Cash"
+    ],
+    "c": 2,
+    "cat": "music"
+  },
+  {
+    "q": "Which composer wrote the Unfinished Symphony?",
+    "a": [
+      "Schubert",
+      "Beethoven",
+      "Bach",
+      "Mozart"
+    ],
+    "c": 0,
+    "cat": "music"
+  },
+  {
+    "q": "Which band sang the song Let It Be?",
+    "a": [
+      "The Rolling Stones",
+      "Queen",
+      "Pink Floyd",
+      "The Beatles"
+    ],
+    "c": 3,
+    "cat": "music"
+  },
+  {
+    "q": "Who wrote the song Blowin in the Wind?",
+    "a": [
+      "Bob Dylan",
+      "Leonard Cohen",
+      "Neil Young",
+      "Paul Simon"
+    ],
+    "c": 0,
+    "cat": "music"
+  },
+  {
+    "q": "Which Beatle wrote the song Yesterday?",
+    "a": [
+      "John Lennon",
+      "Ringo Starr",
+      "George Harrison",
+      "Paul McCartney"
+    ],
+    "c": 3,
+    "cat": "music"
+  },
+  {
+    "q": "Which band released the album Abbey Road?",
+    "a": [
+      "Queen",
+      "The Rolling Stones",
+      "Pink Floyd",
+      "The Beatles"
+    ],
+    "c": 3,
+    "cat": "music"
+  },
+  {
+    "q": "Which singer released the album 25 in 2015?",
+    "a": [
+      "Adele",
+      "Ed Sheeran",
+      "Dua Lipa",
+      "Sam Smith"
+    ],
+    "c": 0,
+    "cat": "music"
+  },
+  {
+    "q": "Who composed the Messiah?",
+    "a": [
+      "Telemann",
+      "Handel",
+      "Bach",
+      "Vivaldi"
+    ],
+    "c": 1,
+    "cat": "music"
+  },
+  {
+    "q": "Who is known as the king of reggae?",
+    "a": [
+      "Bob Marley",
+      "Peter Tosh",
+      "Burning Spear",
+      "Jimmy Cliff"
+    ],
+    "c": 0,
+    "cat": "music"
+  },
+  {
+    "q": "Which artist released the album Thriller in 1982?",
+    "a": [
+      "Elton John",
+      "Prince",
+      "Madonna",
+      "Michael Jackson"
+    ],
+    "c": 3,
+    "cat": "music"
+  },
+  {
+    "q": "Which band released the album Exile on Main St in 1972?",
+    "a": [
+      "The Who",
+      "The Beatles",
+      "The Kinks",
+      "The Rolling Stones"
+    ],
+    "c": 3,
+    "cat": "music"
+  },
+  {
+    "q": "Which composer wrote The Magic Flute?",
+    "a": [
+      "Mozart",
+      "Haydn",
+      "Handel",
+      "Bach"
+    ],
+    "c": 0,
+    "cat": "music"
+  },
+  {
+    "q": "Which United Nations agency focuses on education, science and culture?",
+    "a": [
+      "UNICEF",
+      "World Food Programme",
+      "World Health Organization",
+      "UNESCO"
+    ],
+    "c": 3,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Which political union uses the euro as its main currency?",
+    "a": [
+      "Commonwealth",
+      "NATO",
+      "European Union",
+      "ASEAN"
+    ],
+    "c": 2,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Which international agreement aims to limit global warming to well below 2 degrees Celsius?",
+    "a": [
+      "Geneva Convention",
+      "Montreal Protocol",
+      "Paris Agreement",
+      "Kyoto Protocol"
+    ],
+    "c": 2,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Which organisation lends money to countries facing financial difficulties?",
+    "a": [
+      "The International Monetary Fund",
+      "The World Trade Organization",
+      "The United Nations",
+      "The World Bank"
+    ],
+    "c": 0,
+    "cat": "current affairs"
+  },
+  {
+    "q": "In which city is the headquarters of the World Health Organization?",
+    "a": [
+      "Brussels",
+      "Strasbourg",
+      "Vienna",
+      "Geneva"
+    ],
+    "c": 3,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Which court is based in The Hague and tries individuals for war crimes?",
+    "a": [
+      "The International Court of Justice",
+      "The World Trade Organization",
+      "The International Criminal Court",
+      "The European Court of Human Rights"
+    ],
+    "c": 2,
+    "cat": "current affairs"
+  },
+  {
+    "q": "In which city is the International Court of Justice based?",
+    "a": [
+      "New York",
+      "The Hague",
+      "Vienna",
+      "Geneva"
+    ],
+    "c": 1,
+    "cat": "current affairs"
+  },
+  {
+    "q": "In which city is the headquarters of the European Union's main institutions?",
+    "a": [
+      "London",
+      "Brussels",
+      "Luxembourg",
+      "Paris"
+    ],
+    "c": 1,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Which country hosted the 2024 Summer Olympics?",
+    "a": [
+      "Japan",
+      "France",
+      "Italy",
+      "Spain"
+    ],
+    "c": 1,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Which organisation was founded in 1945 to promote peace between nations?",
+    "a": [
+      "NATO",
+      "The African Union",
+      "The United Nations",
+      "The Arab League"
+    ],
+    "c": 0,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Which organisation has its headquarters in New York City?",
+    "a": [
+      "World Bank",
+      "International Monetary Fund",
+      "World Trade Organization",
+      "United Nations"
+    ],
+    "c": 3,
+    "cat": "current affairs"
+  },
+  {
+    "q": "What material is most commonly used to make computer chips?",
+    "a": [
+      "Iron",
+      "Silicon",
+      "Copper",
+      "Aluminium"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which technology connects devices over short distances without cables?",
+    "a": [
+      "USB",
+      "Bluetooth",
+      "Wi Fi",
+      "Ethernet"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Who co founded Apple with Steve Wozniak?",
+    "a": [
+      "Bill Gates",
+      "Elon Musk",
+      "Jeff Bezos",
+      "Steve Jobs"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "Which language is used to structure content on a web page?",
+    "a": [
+      "HTML",
+      "HTTP",
+      "CSS",
+      "URL"
+    ],
+    "c": 0,
+    "cat": "technology"
+  },
+  {
+    "q": "What is a URL?",
+    "a": [
+      "A type of computer",
+      "A web browser",
+      "A file format",
+      "A domain name"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "What does encryption do?",
+    "a": [
+      "To copy data",
+      "To compress data",
+      "To protect data by converting it into code",
+      "To delete data"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Which company created the Chrome web browser?",
+    "a": [
+      "Meta",
+      "Microsoft",
+      "Apple",
+      "Google"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "Which programming language is named after a comedy group?",
+    "a": [
+      "Python",
+      "Java",
+      "Ruby",
+      "C plus plus"
+    ],
+    "c": 0,
+    "cat": "technology"
+  },
+  {
+    "q": "What is biometric authentication used for?",
+    "a": [
+      "To speed up a computer",
+      "To store passwords",
+      "To block adverts",
+      "To identify a user by fingerprint or face"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "Which device is used to point and click on a computer screen?",
+    "a": [
+      "A mouse",
+      "A printer",
+      "A monitor",
+      "A keyboard"
+    ],
+    "c": 0,
+    "cat": "technology"
+  },
+  {
+    "q": "Which number system uses only 0 and 1?",
+    "a": [
+      "Decimal",
+      "Binary",
+      "Hexadecimal",
+      "Octal"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Who invented the World Wide Web?",
+    "a": [
+      "Larry Page",
+      "Marc Andreessen",
+      "Tim Berners Lee",
+      "Vint Cerf"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Which company was founded by Jeff Bezos in 1994?",
+    "a": [
+      "Alibaba",
+      "Amazon",
+      "eBay",
+      "Etsy"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "In which year was the first website published?",
+    "a": [
+      "1989",
+      "1991",
+      "1995",
+      "2001"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "What is the main purpose of a software update?",
+    "a": [
+      "To make a computer faster",
+      "To delete files",
+      "To fix errors and improve security",
+      "To change the screen colour"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Which computer component is especially important for training large AI models?",
+    "a": [
+      "A central processing unit",
+      "A hard drive",
+      "A graphics processing unit",
+      "A motherboard"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Who co founded Facebook in 2004?",
+    "a": [
+      "Bill Gates",
+      "Steve Jobs",
+      "Mark Zuckerberg",
+      "Larry Page"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Which company owns the Android operating system?",
+    "a": [
+      "Microsoft",
+      "Google",
+      "Apple",
+      "Amazon"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "In which year did the World Wide Web become publicly available?",
+    "a": [
+      "1993",
+      "1983",
+      "1989",
+      "1998"
+    ],
+    "c": 0,
+    "cat": "technology"
+  },
+  {
+    "q": "Which early computer was used at Bletchley Park to break codes?",
+    "a": [
+      "UNIVAC",
+      "EDVAC",
+      "Colossus",
+      "ENIAC"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Who is often credited as the first computer programmer?",
+    "a": [
+      "Grace Hopper",
+      "Ada Lovelace",
+      "Katherine Johnson",
+      "Marie Curie"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Who coined the term artificial intelligence in 1956?",
+    "a": [
+      "Marvin Minsky",
+      "Geoffrey Hinton",
+      "John McCarthy",
+      "Alan Turing"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "What is ChatGPT best described as?",
+    "a": [
+      "A video game",
+      "A search engine",
+      "A chatbot",
+      "A spreadsheet"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "What do AI models learn from?",
+    "a": [
+      "Water",
+      "Data",
+      "Electricity",
+      "Paper"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "Which computer program beat Lee Sedol at the board game Go in 2016?",
+    "a": [
+      "AlphaGo",
+      "Watson",
+      "Siri",
+      "Deep Blue"
+    ],
+    "c": 0,
+    "cat": "ai"
+  },
+  {
+    "q": "What is a neural network mainly used for?",
+    "a": [
+      "To cool a computer",
+      "To store large files",
+      "To translate languages",
+      "To recognise patterns in data"
+    ],
+    "c": 3,
+    "cat": "ai"
+  },
+  {
+    "q": "What is the Turing test designed to assess?",
+    "a": [
+      "A test of robot strength",
+      "A test of machine intelligence",
+      "A test of internet speed",
+      "A test of computer memory"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "What is computer vision mainly used for?",
+    "a": [
+      "To play music",
+      "To send emails",
+      "To print documents",
+      "To recognise images"
+    ],
+    "c": 3,
+    "cat": "ai"
+  },
+  {
+    "q": "Which chess champion was beaten by IBM Deep Blue in 1997?",
+    "a": [
+      "Garry Kasparov",
+      "Magnus Carlsen",
+      "Anatoly Karpov",
+      "Bobby Fischer"
+    ],
+    "c": 0,
+    "cat": "ai"
+  },
+  {
+    "q": "What type of computing system is inspired by the human brain?",
+    "a": [
+      "Neural network",
+      "Firewall",
+      "Database",
+      "Spreadsheet"
+    ],
+    "c": 0,
+    "cat": "ai"
+  },
+  {
+    "q": "Who is often called the father of computer science?",
+    "a": [
+      "John von Neumann",
+      "Alan Turing",
+      "Ada Lovelace",
+      "Charles Babbage"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "Which type of machine learning learns by trial and error with rewards?",
+    "a": [
+      "Unsupervised learning",
+      "Deep learning",
+      "Supervised learning",
+      "Reinforcement learning"
+    ],
+    "c": 3,
+    "cat": "ai"
+  },
+  {
+    "q": "What is GPT in the context of modern AI?",
+    "a": [
+      "A programming language",
+      "A computer virus",
+      "A type of robot",
+      "A large language model"
+    ],
+    "c": 3,
+    "cat": "ai"
+  },
+  {
+    "q": "Which award is often called the Nobel Prize of computing?",
+    "a": [
+      "The Pulitzer Prize",
+      "The Turing Award",
+      "The Fields Medal",
+      "The Nobel Prize"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "Which substance is released by plants during photosynthesis?",
+    "a": [
+      "Methane",
+      "Water vapour",
+      "Carbon dioxide",
+      "Oxygen"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which band released the album Rumours in 1977?",
+    "a": [
+      "The Beatles",
+      "Fleetwood Mac",
+      "Queen",
+      "ABBA"
+    ],
+    "c": 1,
+    "cat": "music"
+  },
+  {
+    "q": "Which continent is the Sahara Desert on?",
+    "a": [
+      "Asia",
+      "South America",
+      "Africa",
+      "Australia"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Who directed the film Jaws?",
+    "a": [
+      "Martin Scorsese",
+      "Ridley Scott",
+      "George Lucas",
+      "Steven Spielberg"
+    ],
+    "c": 3,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which country is home to Machu Picchu?",
+    "a": [
+      "Argentina",
+      "Bolivia",
+      "Peru",
+      "Chile"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "What force keeps planets in orbit around the Sun?",
+    "a": [
+      "Friction",
+      "Magnetism",
+      "Inertia",
+      "Gravity"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "What colour do you get by mixing blue and yellow paint?",
+    "a": [
+      "Orange",
+      "Green",
+      "Purple",
+      "Brown"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which planet is the brightest in the night sky?",
+    "a": [
+      "Earth",
+      "Mars",
+      "Venus",
+      "Mercury"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "In which year did Columbus first reach the Americas?",
+    "a": [
+      "1502",
+      "1482",
+      "1492",
+      "1512"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which organ in the human body produces insulin?",
+    "a": [
+      "Liver",
+      "Pancreas",
+      "Kidney",
+      "Spleen"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which planet is the largest in the Solar System?",
+    "a": [
+      "Saturn",
+      "Mars",
+      "Venus",
+      "Jupiter"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "What is the largest planet in our solar system?",
+    "a": [
+      "Saturn",
+      "Neptune",
+      "Jupiter",
+      "Uranus"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which ocean is the largest?",
+    "a": [
+      "Pacific Ocean",
+      "Arctic Ocean",
+      "Indian Ocean",
+      "Atlantic Ocean"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "What is ransomware?",
+    "a": [
+      "A virus",
+      "A type of malware that demands payment",
+      "A spam email",
+      "A firewall"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which substance do plants absorb from the air for photosynthesis?",
+    "a": [
+      "Hydrogen",
+      "Oxygen",
+      "Nitrogen",
+      "Carbon dioxide"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "What is the capital of Portugal?",
+    "a": [
+      "Barcelona",
+      "Porto",
+      "Lisbon",
+      "Madrid"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "What is the capital of Turkey?",
+    "a": [
+      "Istanbul",
+      "Antalya",
+      "Ankara",
+      "Izmir"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Which planet is known as the Morning Star?",
+    "a": [
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "What is the maximum total supply of Bitcoin?",
+    "a": [
+      "10 million",
+      "21 million",
+      "100 million",
+      "50 million"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Who published the Bitcoin white paper in 2008?",
+    "a": [
+      "Vitalik Buterin",
+      "Hal Finney",
+      "Satoshi Nakamoto",
+      "Adam Back"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How many satoshis make up one whole bitcoin?",
+    "a": [
+      "1 million",
+      "10 million",
+      "1 billion",
+      "100 million"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How long does it take on average for a new Bitcoin block to be added?",
+    "a": [
+      "1 minute",
+      "10 minutes",
+      "1 hour",
+      "30 seconds"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "After how many blocks does the Bitcoin mining reward halve?",
+    "a": [
+      "Every 10,000 blocks",
+      "Every 100,000 blocks",
+      "Every 210,000 blocks",
+      "Every 1 million blocks"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What was the Bitcoin block reward after the halving in 2024?",
+    "a": [
+      "3.125 bitcoin",
+      "6.25 bitcoin",
+      "12.5 bitcoin",
+      "1.5625 bitcoin"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "In roughly which year is the last bitcoin expected to be mined?",
+    "a": [
+      "2050",
+      "2100",
+      "2200",
+      "2140"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which hashing algorithm does Bitcoin use?",
+    "a": [
+      "Scrypt",
+      "SHA 256",
+      "Ethash",
+      "Blake2"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How often does the Bitcoin network adjust its mining difficulty?",
+    "a": [
+      "Every 100 blocks",
+      "Every 1,000 blocks",
+      "Every 2,016 blocks",
+      "Every 10,000 blocks"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How much bitcoin was paid for two pizzas on Bitcoin Pizza Day in 2010?",
+    "a": [
+      "10,000 bitcoin",
+      "100 bitcoin",
+      "1,000 bitcoin",
+      "1 bitcoin"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which was the first country to make Bitcoin legal tender?",
+    "a": [
+      "Panama",
+      "Paraguay",
+      "Brazil",
+      "El Salvador"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which consensus mechanism does Bitcoin use?",
+    "a": [
+      "Proof of stake",
+      "Proof of work",
+      "Delegated proof of stake",
+      "Proof of authority"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a satoshi?",
+    "a": [
+      "A type of mining rig",
+      "A Bitcoin exchange",
+      "The smallest unit of bitcoin",
+      "A Bitcoin wallet brand"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is Bitcoin mining?",
+    "a": [
+      "Solving cryptographic puzzles to add new blocks and earn a reward",
+      "Printing new coins without limit",
+      "Approving transactions through a central bank",
+      "Storing bitcoin in a bank vault"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does it mean to say Bitcoin is decentralised?",
+    "a": [
+      "It is run by one company",
+      "It is controlled by a central bank",
+      "It is run by a government",
+      "No single person or organisation controls it"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "In which year did the Taproot upgrade go live on Bitcoin?",
+    "a": [
+      "2021",
+      "2019",
+      "2023",
+      "2017"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What was the main purpose of the SegWit upgrade on Bitcoin?",
+    "a": [
+      "To raise the maximum supply",
+      "To separate signature data so more transactions fit in a block",
+      "To switch Bitcoin to proof of stake",
+      "To create a new coin"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a blockchain?",
+    "a": [
+      "A single computer that stores coins",
+      "A bank database",
+      "A shared ledger of records grouped into blocks and linked together",
+      "A type of wallet"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What links one block to the one before it in a blockchain?",
+    "a": [
+      "The hash of the previous block",
+      "The name of the miner",
+      "The time of day",
+      "The price of the coin"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a hash in blockchain terms?",
+    "a": [
+      "A password",
+      "A coin balance",
+      "A private key",
+      "A fixed length fingerprint produced from a piece of data"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does immutability mean for a blockchain?",
+    "a": [
+      "Anyone can edit old records",
+      "Records cannot be changed once they have been added",
+      "The chain can be paused at any time",
+      "Only one person can read the records"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is double spending?",
+    "a": [
+      "Paying a fee twice",
+      "Spending the same coins twice",
+      "Buying two coins at once",
+      "Sending coins to two wallets"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a node in a blockchain network?",
+    "a": [
+      "A computer that keeps a copy of the blockchain and checks the rules",
+      "A coin exchange",
+      "A mining company",
+      "A type of smart contract"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a consensus mechanism?",
+    "a": [
+      "A way to print more coins",
+      "A wallet recovery method",
+      "A marketing plan",
+      "The way a network agrees on which transactions are valid"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a Merkle tree used for in a block?",
+    "a": [
+      "To store private keys",
+      "To summarise all the transactions in the block in a single hash",
+      "To set the coin price",
+      "To choose the next miner"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a hard fork?",
+    "a": [
+      "A wallet update",
+      "A change to the rules that splits the chain into two separate chains",
+      "A temporary network outage",
+      "A new exchange listing"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Why is it so hard to change an old block in a blockchain?",
+    "a": [
+      "Changing it would change the hash of every block that follows it",
+      "Old blocks are deleted",
+      "Only the creator can edit blocks",
+      "Blocks are stored on paper"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a smart contract?",
+    "a": [
+      "A legal paper contract",
+      "A self executing agreement written in code on a blockchain",
+      "A contract signed by a bank",
+      "A promise made on social media"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Who first proposed Ethereum?",
+    "a": [
+      "Satoshi Nakamoto",
+      "Charles Hoskinson",
+      "Gavin Wood",
+      "Vitalik Buterin"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "In which year did the Ethereum network launch?",
+    "a": [
+      "2013",
+      "2014",
+      "2015",
+      "2017"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the native currency of Ethereum called?",
+    "a": [
+      "Ether",
+      "Bitcoin",
+      "Litecoin",
+      "Ripple"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is gas on Ethereum?",
+    "a": [
+      "A type of coin",
+      "A fee paid for the computation needed to run a transaction or contract",
+      "A mining rig",
+      "A wallet feature"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "In which currency is Ethereum gas paid?",
+    "a": [
+      "Bitcoin",
+      "US dollars",
+      "Litecoin",
+      "Ether"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a gwei?",
+    "a": [
+      "A smart contract bug",
+      "A mining pool",
+      "A tiny unit of ether used to price gas",
+      "A type of block"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is Solidity?",
+    "a": [
+      "The main programming language for writing Ethereum smart contracts",
+      "A Bitcoin wallet",
+      "An Ethereum mining machine",
+      "A type of consensus mechanism"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the Ethereum Virtual Machine?",
+    "a": [
+      "A physical computer in a data centre",
+      "The software that runs smart contracts across the Ethereum network",
+      "A wallet app",
+      "A mining pool"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a decentralised application?",
+    "a": [
+      "A bank app",
+      "A social media app",
+      "A government website",
+      "An app that runs on a blockchain network rather than a single server"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What was The Merge on Ethereum?",
+    "a": [
+      "A merger of two exchanges",
+      "A wallet upgrade",
+      "The switch from proof of work to proof of stake",
+      "A new coin launch"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "In which year did Ethereum complete The Merge?",
+    "a": [
+      "2022",
+      "2020",
+      "2021",
+      "2023"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How much ether must a person stake to run an Ethereum validator?",
+    "a": [
+      "1 ether",
+      "32 ether",
+      "100 ether",
+      "1,000 ether"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is slashing in proof of stake?",
+    "a": [
+      "Cutting the coin supply",
+      "Reducing transaction fees",
+      "Splitting a block in two",
+      "A penalty that removes part of a validator stake for bad behaviour"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does a validator do in proof of stake?",
+    "a": [
+      "Prints new coins",
+      "Runs an exchange",
+      "Locks up coins to propose and check new blocks",
+      "Sells mining machines"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the main purpose of a crypto wallet?",
+    "a": [
+      "To print paper money for spending",
+      "To store private keys and manage crypto assets",
+      "To insure bank deposits against theft",
+      "To mine new coins from the network"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a seed phrase?",
+    "a": [
+      "A username for a trading account",
+      "A code printed on a bank card",
+      "A list of words that can restore a wallet",
+      "A password set by an exchange"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the main difference between a hot wallet and a cold wallet?",
+    "a": [
+      "A cold wallet is not connected to the internet",
+      "A cold wallet can only hold NFTs",
+      "A hot wallet needs no password",
+      "A hot wallet holds only Bitcoin"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is MetaMask best described as?",
+    "a": [
+      "A centralised bank",
+      "A stablecoin issuer",
+      "A mining company",
+      "A browser based crypto wallet"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a custodial wallet?",
+    "a": [
+      "A wallet that can only store one coin",
+      "A wallet with no internet connection",
+      "A wallet where a third party holds your private keys",
+      "A wallet built into a mining machine"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What usually happens if you lose your seed phrase and have no backup?",
+    "a": [
+      "You can recover it with your email",
+      "Your wallet is frozen for 30 days",
+      "The exchange resets it for you",
+      "Your funds are permanently lost"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a stablecoin usually pegged to?",
+    "a": [
+      "The price of gold only",
+      "The price of oil",
+      "A fiat currency such as the US dollar",
+      "A single stock"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which company issues USDT?",
+    "a": [
+      "Coinbase",
+      "Binance",
+      "Circle",
+      "Tether"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which company issues USDC?",
+    "a": [
+      "Circle",
+      "MakerDAO",
+      "Kraken",
+      "Tether"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What backs DAI?",
+    "a": [
+      "Government bonds only",
+      "Shares in a bank",
+      "Crypto collateral locked in a protocol",
+      "Gold stored in a vault"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which stablecoin lost its peg and collapsed in 2022?",
+    "a": [
+      "PayPal USD",
+      "DAI",
+      "USDC",
+      "TerraUSD"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which animal inspired Dogecoin?",
+    "a": [
+      "A cat",
+      "A Shiba Inu dog",
+      "A panda",
+      "A frog"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Who created Dogecoin?",
+    "a": [
+      "Satoshi Nakamoto and Hal Finney",
+      "Vitalik Buterin and Gavin Wood",
+      "Changpeng Zhao and Brian Armstrong",
+      "Billy Markus and Jackson Palmer"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the ticker for the Shiba Inu token?",
+    "a": [
+      "PEPE",
+      "BONK",
+      "SHIB",
+      "DOGE"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which cartoon frog inspired the PEPE token?",
+    "a": [
+      "Kermit the Frog",
+      "The Frog Prince",
+      "Pepe the Frog",
+      "Frogger"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What are memecoins best known for?",
+    "a": [
+      "Government backing",
+      "Guaranteed interest payments",
+      "Extremely high price volatility",
+      "Very stable prices"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "In which year did the Cardano blockchain mainnet launch?",
+    "a": [
+      "2017",
+      "2020",
+      "2022",
+      "2018"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is SOL mainly used to pay for on the Solana blockchain?",
+    "a": [
+      "Bank transfer fees",
+      "Stock trading commissions",
+      "Physical postage",
+      "Transaction fees and network services"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is Binance best described as?",
+    "a": [
+      "A decentralised lending protocol",
+      "A stablecoin issuer only",
+      "A hardware wallet maker",
+      "A centralised crypto exchange"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which crypto exchange became a listed public company in the United States in 2021?",
+    "a": [
+      "Coinbase",
+      "Bitstamp",
+      "Kraken",
+      "Binance"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "In which year was Kraken founded?",
+    "a": [
+      "2018",
+      "2011",
+      "2015",
+      "2021"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a decentralised exchange?",
+    "a": [
+      "An exchange where users trade directly without a central intermediary",
+      "An exchange owned by a government",
+      "An exchange run by a single bank",
+      "An exchange that only sells stablecoins"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which of these is a leading decentralised exchange?",
+    "a": [
+      "Kraken",
+      "Uniswap",
+      "Binance",
+      "Coinbase"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "On which network did PancakeSwap first become popular?",
+    "a": [
+      "Solana",
+      "Cardano",
+      "Avalanche",
+      "BNB Chain"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is an order book on an exchange?",
+    "a": [
+      "A list of banned users",
+      "A record of wallet passwords",
+      "A list of buy and sell orders at different prices",
+      "A guide to mining coins"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does DeFi stand for?",
+    "a": [
+      "Defined finance",
+      "Decentralised finance",
+      "Digital fiat",
+      "Delegated funding"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which protocol is best known for crypto lending and borrowing?",
+    "a": [
+      "Uniswap",
+      "Aave",
+      "Ledger",
+      "OpenSea"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is yield farming?",
+    "a": [
+      "Mining coins with farm equipment",
+      "Selling NFTs at auction",
+      "Growing crops with crypto payments",
+      "Earning rewards by providing crypto to a DeFi protocol"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a liquidity pool?",
+    "a": [
+      "A pool of funds that lets users trade without a traditional order book",
+      "A swimming pool paid for in crypto",
+      "A bank savings account",
+      "A collection of hardware wallets"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does total value locked measure in DeFi?",
+    "a": [
+      "The total number of wallets created",
+      "The total fees paid to miners",
+      "The total value of assets deposited in a protocol",
+      "The total supply of Bitcoin"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What makes an NFT different from a fungible token?",
+    "a": [
+      "Each NFT has exactly the same value",
+      "NFTs can be split into equal parts",
+      "Each NFT is unique and cannot be exchanged one for one",
+      "NFTs are issued by central banks"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which NFT collection launched in 2017 and features pixel art characters?",
+    "a": [
+      "CryptoPunks",
+      "Azuki",
+      "Doodles",
+      "Bored Ape Yacht Club"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the Bored Ape Yacht Club?",
+    "a": [
+      "A crypto exchange in the Bahamas",
+      "A collection of 10,000 unique ape NFTs",
+      "A stablecoin backed by art",
+      "A wallet for storing apes"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which marketplace became famous for buying and selling NFTs?",
+    "a": [
+      "OpenSea",
+      "CoinMarketCap",
+      "Binance Futures",
+      "Ledger Live"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does minting an NFT mean?",
+    "a": [
+      "Deleting an NFT forever",
+      "Creating a new NFT on a blockchain",
+      "Selling an NFT for cash",
+      "Copying an NFT image"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Who is credited with writing the Bitcoin whitepaper?",
+    "a": [
+      "Elon Musk",
+      "Satoshi Nakamoto",
+      "Changpeng Zhao",
+      "Vitalik Buterin"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "In which year was the Bitcoin whitepaper published?",
+    "a": [
+      "2015",
+      "2010",
+      "2008",
+      "2012"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What was famously bought with 10,000 Bitcoin in 2010?",
+    "a": [
+      "Two pizzas",
+      "A car",
+      "A house",
+      "A gold bar"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "In which year did Ethereum launch?",
+    "a": [
+      "2020",
+      "2015",
+      "2017",
+      "2013"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which major crypto exchange collapsed in 2014 after losing customer Bitcoin?",
+    "a": [
+      "Kraken",
+      "FTX",
+      "Coinbase",
+      "Mt Gox"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which crypto exchange collapsed in 2022?",
+    "a": [
+      "Kraken",
+      "FTX",
+      "Bitstamp",
+      "Gemini"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is proof of work?",
+    "a": [
+      "A system where miners solve puzzles to agree on new blocks",
+      "A system where coin holders vote on prices",
+      "A system run by a central bank",
+      "A system where miners print unlimited coins"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the hash rate of a blockchain network?",
+    "a": [
+      "The number of coins in circulation",
+      "The total computing power used to secure a proof of work network",
+      "The price of a mining machine",
+      "The size of a block"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a mining pool?",
+    "a": [
+      "A bank for miners",
+      "A wallet for storing coins",
+      "A group of miners who share computing power and split the rewards",
+      "A type of coin"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the block reward in proof of work mining?",
+    "a": [
+      "A fine paid to the network",
+      "A tax on coin holders",
+      "A bonus paid by an exchange",
+      "Newly created coins plus transaction fees paid to the miner of a block"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What problem does proof of work mainly solve?",
+    "a": [
+      "It lets a network agree on valid transactions without a central authority",
+      "It raises the price of coins",
+      "It creates new wallets",
+      "It hides all transactions from view"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the main criticism of proof of work?",
+    "a": [
+      "It is too fast",
+      "It uses a large amount of electricity",
+      "It has no miners",
+      "It cannot process any transactions"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is mining difficulty?",
+    "a": [
+      "How many coins a miner owns",
+      "A measure of how hard it is to find a valid block hash",
+      "The size of a wallet",
+      "The speed of the internet"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  }
+]

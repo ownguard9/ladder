@@ -1,0 +1,3302 @@
+[
+  {
+    "q": "Which vitamin helps blood to clot?",
+    "a": [
+      "Vitamin A",
+      "Vitamin C",
+      "Vitamin K",
+      "Vitamin D"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which organ in the human body is the largest?",
+    "a": [
+      "Liver",
+      "Brain",
+      "Skin",
+      "Heart"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the name for the study of weather?",
+    "a": [
+      "Climatology",
+      "Geology",
+      "Meteorology",
+      "Oceanography"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the chemical symbol for sodium?",
+    "a": [
+      "So",
+      "N",
+      "Na",
+      "Sd"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which enzyme unwinds the double helix during DNA replication?",
+    "a": [
+      "Polymerase",
+      "Primase",
+      "Topoisomerase",
+      "Helicase"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which field of science studies the history of the Earth as recorded in rocks?",
+    "a": [
+      "Astronomy",
+      "Botany",
+      "Mythology",
+      "Geology"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which gland produces adrenaline in the human body?",
+    "a": [
+      "Pancreas",
+      "Thyroid gland",
+      "Adrenal gland",
+      "Pituitary gland"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which dwarf planet is the largest object in the asteroid belt?",
+    "a": [
+      "Ceres",
+      "Pluto",
+      "Haumea",
+      "Eris"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which constellation contains the North Star?",
+    "a": [
+      "Orion",
+      "Cassiopeia",
+      "Ursa Minor",
+      "Ursa Major"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the deepest ocean trench in the world?",
+    "a": [
+      "Mariana Trench",
+      "Puerto Rico Trench",
+      "Tonga Trench",
+      "Java Trench"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which type of blood vessel carries blood away from the heart?",
+    "a": [
+      "Artery",
+      "Capillary",
+      "Lymph vessel",
+      "Vein"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which element is named after Poland?",
+    "a": [
+      "Germanium",
+      "Francium",
+      "Polonium",
+      "Ruthenium"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which element has the highest density at room temperature?",
+    "a": [
+      "Platinum",
+      "Gold",
+      "Iridium",
+      "Osmium"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the deepest lake in the world?",
+    "a": [
+      "Lake Superior",
+      "Lake Baikal",
+      "Lake Tanganyika",
+      "Caspian Sea"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the hardest naturally occurring substance on Earth?",
+    "a": [
+      "Corundum",
+      "Quartz",
+      "Diamond",
+      "Topaz"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which organ in the human body produces bile?",
+    "a": [
+      "Gallbladder",
+      "Pancreas",
+      "Spleen",
+      "Liver"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which element is the lightest of all?",
+    "a": [
+      "Helium",
+      "Hydrogen",
+      "Lithium",
+      "Oxygen"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the fastest fish in the ocean?",
+    "a": [
+      "Tuna",
+      "Sailfish",
+      "Marlin",
+      "Shark"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which element has the chemical symbol Sn?",
+    "a": [
+      "Silver",
+      "Tin",
+      "Strontium",
+      "Silicon"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which subatomic particle was predicted by Paul Dirac and discovered in cosmic rays in 1932?",
+    "a": [
+      "Positron",
+      "Electron",
+      "Muon",
+      "Proton"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which scientist first proposed that continents drift across the surface of the Earth?",
+    "a": [
+      "James Hutton",
+      "Edward Suess",
+      "Charles Darwin",
+      "Alfred Wegener"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Who was crowned Holy Roman Emperor on Christmas Day in the year 800?",
+    "a": [
+      "Charlemagne",
+      "Otto I",
+      "Charles V",
+      "Frederick Barbarossa"
+    ],
+    "c": 0,
+    "cat": "history"
+  },
+  {
+    "q": "Which leader is best known for leading India to independence through nonviolent resistance?",
+    "a": [
+      "Sardar Patel",
+      "Mahatma Gandhi",
+      "Subhas Chandra Bose",
+      "Jawaharlal Nehru"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which president of the United States was assassinated in 1865?",
+    "a": [
+      "Ulysses S Grant",
+      "Andrew Johnson",
+      "Abraham Lincoln",
+      "James Garfield"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which queen ruled England from 1558 to 1603?",
+    "a": [
+      "Anne Boleyn",
+      "Victoria",
+      "Mary I",
+      "Elizabeth I"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which explorer completed the first circumnavigation of the Earth after Magellan died during the voyage?",
+    "a": [
+      "Francis Drake",
+      "Ferdinand Magellan",
+      "Juan Sebastian Elcano",
+      "Vasco da Gama"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which civilisation built the Parthenon in Athens?",
+    "a": [
+      "Ancient Romans",
+      "Ancient Egyptians",
+      "Ancient Persians",
+      "Ancient Greeks"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which ancient wonder was located in Babylon?",
+    "a": [
+      "Temple of Artemis",
+      "Hanging Gardens",
+      "Colossus of Rhodes",
+      "Lighthouse of Alexandria"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which country built the first transcontinental railway, completed in 1869?",
+    "a": [
+      "India",
+      "United States",
+      "Canada",
+      "Russia"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which dynasty ruled Russia until 1917?",
+    "a": [
+      "House of Windsor",
+      "House of Habsburg",
+      "House of Bourbon",
+      "House of Romanov"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which spacecraft first landed humans on the Moon?",
+    "a": [
+      "Apollo 8",
+      "Gemini 4",
+      "Apollo 13",
+      "Apollo 11"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which company was founded by Bill Gates and Paul Allen?",
+    "a": [
+      "Microsoft",
+      "Hewlett Packard",
+      "IBM",
+      "Apple"
+    ],
+    "c": 0,
+    "cat": "history"
+  },
+  {
+    "q": "Which explorer reached the Americas in 1492?",
+    "a": [
+      "John Cabot",
+      "Ferdinand Magellan",
+      "Christopher Columbus",
+      "Amerigo Vespucci"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which ancient civilisation is credited with inventing the wheel?",
+    "a": [
+      "Egyptians",
+      "Greeks",
+      "Sumerians",
+      "Romans"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which peace settlement ended the Thirty Years War in 1648?",
+    "a": [
+      "Congress of Vienna",
+      "Peace of Westphalia",
+      "Treaty of Utrecht",
+      "Treaty of Paris"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which ancient Greek city state was most famous for its military strength?",
+    "a": [
+      "Athens",
+      "Sparta",
+      "Thebes",
+      "Corinth"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which British prime minister was known as the Iron Lady?",
+    "a": [
+      "Angela Merkel",
+      "Indira Gandhi",
+      "Margaret Thatcher",
+      "Golda Meir"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which empire was ruled by Julius Caesar?",
+    "a": [
+      "Byzantine Empire",
+      "Ottoman Empire",
+      "Persian Empire",
+      "Roman Empire"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which king of England sealed Magna Carta in 1215?",
+    "a": [
+      "Richard I",
+      "Henry III",
+      "King John",
+      "Edward I"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which president of the United States delivered the Gettysburg Address?",
+    "a": [
+      "Abraham Lincoln",
+      "Andrew Johnson",
+      "Jefferson Davis",
+      "Ulysses S Grant"
+    ],
+    "c": 0,
+    "cat": "history"
+  },
+  {
+    "q": "Which Chinese dynasty began the building of the Great Wall?",
+    "a": [
+      "Han dynasty",
+      "Qin dynasty",
+      "Ming dynasty",
+      "Zhou dynasty"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which ancient city was home to the Hanging Gardens?",
+    "a": [
+      "Delhi",
+      "Agra",
+      "Jaipur",
+      "Babylon"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which company developed the Windows operating system?",
+    "a": [
+      "Microsoft",
+      "Oracle",
+      "IBM",
+      "Apple"
+    ],
+    "c": 0,
+    "cat": "technology"
+  },
+  {
+    "q": "In which year was the first telephone call made?",
+    "a": [
+      "1876",
+      "1886",
+      "1896",
+      "1906"
+    ],
+    "c": 0,
+    "cat": "technology"
+  },
+  {
+    "q": "Which inventor created the World Wide Web?",
+    "a": [
+      "Vint Cerf",
+      "Marc Andreessen",
+      "Tim Berners Lee",
+      "Larry Page"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "In which year was the first email sent by Ray Tomlinson?",
+    "a": [
+      "1965",
+      "1979",
+      "1983",
+      "1971"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "Who is regarded as the first computer programmer?",
+    "a": [
+      "Ada Lovelace",
+      "Alan Turing",
+      "Grace Hopper",
+      "Charles Babbage"
+    ],
+    "c": 0,
+    "cat": "technology"
+  },
+  {
+    "q": "Which programming language was created by Rasmus Lerdorf?",
+    "a": [
+      "JavaScript",
+      "Perl",
+      "PHP",
+      "Ruby"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "In which year did the first iPhone go on sale?",
+    "a": [
+      "2006",
+      "2007",
+      "2008",
+      "2005"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which company released the Apple II personal computer in 1977?",
+    "a": [
+      "IBM",
+      "Atari",
+      "Apple",
+      "Commodore"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Which was the first artificial satellite launched into space?",
+    "a": [
+      "Explorer 1",
+      "Telstar 1",
+      "Sputnik 1",
+      "Vostok 1"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Which inventor demonstrated a practical incandescent light bulb in 1879?",
+    "a": [
+      "Nikola Tesla",
+      "Humphry Davy",
+      "Joseph Swan",
+      "Thomas Edison"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "Which satellite was the first to be placed in geostationary orbit?",
+    "a": [
+      "Sputnik 1",
+      "Syncom 2",
+      "Explorer 1",
+      "Telstar 1"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which university built ENIAC, one of the first general purpose electronic computers?",
+    "a": [
+      "Cambridge",
+      "University of Pennsylvania",
+      "MIT",
+      "Stanford"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which inventor is credited with the first practical telephone exchange?",
+    "a": [
+      "Alexander Graham Bell",
+      "Thomas Edison",
+      "Elisha Gray",
+      "Tivadar Puskas"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "Which company makes the PlayStation console?",
+    "a": [
+      "Sony",
+      "Microsoft",
+      "Nintendo",
+      "Sega"
+    ],
+    "c": 0,
+    "cat": "technology"
+  },
+  {
+    "q": "Which company makes the Xbox console?",
+    "a": [
+      "Nintendo",
+      "Sony",
+      "Microsoft",
+      "Sega"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Which company developed the first commercial microprocessor, the Intel 4004?",
+    "a": [
+      "IBM",
+      "Motorola",
+      "Intel",
+      "Texas Instruments"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Which language is used to structure content on web pages?",
+    "a": [
+      "CSS",
+      "HTML",
+      "Python",
+      "JavaScript"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which company created the first smartphone, the Simon, in 1994?",
+    "a": [
+      "Apple",
+      "Nokia",
+      "Motorola",
+      "IBM"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "Which inventor created the first practical automobile?",
+    "a": [
+      "Henry Ford",
+      "Karl Benz",
+      "Gottlieb Daimler",
+      "Rudolf Diesel"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which protocol secures web browsing with encryption?",
+    "a": [
+      "HTTP",
+      "FTP",
+      "HTTPS",
+      "SMTP"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Which material is the main semiconductor used in computer chips?",
+    "a": [
+      "Copper",
+      "Gallium arsenide",
+      "Silicon",
+      "Germanium"
+    ],
+    "c": 2,
+    "cat": "technology"
+  },
+  {
+    "q": "Which DeepMind leader shared the 2024 Nobel Prize in Chemistry for protein structure prediction?",
+    "a": [
+      "Geoffrey Hinton",
+      "Demis Hassabis",
+      "David Baker",
+      "John Jumper"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "Which company built the Watson system that won Jeopardy in 2011?",
+    "a": [
+      "IBM",
+      "Google",
+      "Amazon",
+      "Microsoft"
+    ],
+    "c": 0,
+    "cat": "ai"
+  },
+  {
+    "q": "Which language model was released by Meta in 2023?",
+    "a": [
+      "Claude",
+      "LLaMA",
+      "GPT 4",
+      "Gemini"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "Which company created the Gemini model?",
+    "a": [
+      "Microsoft",
+      "Google",
+      "OpenAI",
+      "Amazon"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "Which test was proposed by Alan Turing in 1950 to judge machine intelligence?",
+    "a": [
+      "Lovelace test",
+      "Winograd test",
+      "Turing test",
+      "Voight Kampff test"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "Which DeepMind system learned to play Atari games from pixels alone in 2013?",
+    "a": [
+      "Siri",
+      "Deep Q Network",
+      "Watson",
+      "AlphaGo"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "Which is the strongest open source chess engine in the world?",
+    "a": [
+      "Leela Chess Zero",
+      "AlphaZero",
+      "Stockfish",
+      "Komodo"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "Which computer defeated Garry Kasparov in a chess match in 1997?",
+    "a": [
+      "AlphaZero",
+      "Watson",
+      "Deep Thought",
+      "Deep Blue"
+    ],
+    "c": 3,
+    "cat": "ai"
+  },
+  {
+    "q": "Which humanoid robot was granted citizenship by Saudi Arabia in 2017?",
+    "a": [
+      "Atlas",
+      "Sophia",
+      "Pepper",
+      "Ameca"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "Which company created the Claude model?",
+    "a": [
+      "Meta",
+      "OpenAI",
+      "Google",
+      "Anthropic"
+    ],
+    "c": 3,
+    "cat": "ai"
+  },
+  {
+    "q": "Which Google model introduced bidirectional transformers for language in 2018?",
+    "a": [
+      "GPT",
+      "ELMo",
+      "BERT",
+      "XLNet"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "Which system defeated human champions at the video game Dota 2 in 2019?",
+    "a": [
+      "Libratus",
+      "Deep Blue",
+      "AlphaStar",
+      "OpenAI Five"
+    ],
+    "c": 3,
+    "cat": "ai"
+  },
+  {
+    "q": "What does NLP stand for in computing?",
+    "a": [
+      "Network link protocol",
+      "Natural language processing",
+      "Neural language programming",
+      "Network learning protocol"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "Which company developed AlphaFold?",
+    "a": [
+      "Microsoft",
+      "OpenAI",
+      "DeepMind",
+      "Meta"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "Which technique allows a model to learn from labelled examples?",
+    "a": [
+      "Transfer learning",
+      "Unsupervised learning",
+      "Supervised learning",
+      "Reinforcement learning"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "Which system defeated top professional poker players at Texas hold em in 2017?",
+    "a": [
+      "Deep Blue",
+      "AlphaGo",
+      "Libratus",
+      "Watson"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "Who coined the term artificial intelligence at the Dartmouth workshop in 1956?",
+    "a": [
+      "John McCarthy",
+      "Alan Turing",
+      "Herbert Simon",
+      "Marvin Minsky"
+    ],
+    "c": 0,
+    "cat": "ai"
+  },
+  {
+    "q": "Which system defeated Lee Sedol at the board game Go in 2016?",
+    "a": [
+      "Watson",
+      "Deep Blue",
+      "AlphaGo",
+      "Libratus"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "Which researcher shared the 2024 Nobel Prize in Physics for work on neural networks?",
+    "a": [
+      "Fei Fei Li",
+      "Geoffrey Hinton",
+      "Yann LeCun",
+      "Demis Hassabis"
+    ],
+    "c": 1,
+    "cat": "ai"
+  },
+  {
+    "q": "In which year did the Dartmouth workshop coin the term artificial intelligence?",
+    "a": [
+      "1950",
+      "1962",
+      "1956",
+      "1972"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "Which IBM system defeated champions Ken Jennings and Brad Rutter on Jeopardy in 2011?",
+    "a": [
+      "AlphaGo",
+      "Deep Blue",
+      "Siri",
+      "Watson"
+    ],
+    "c": 3,
+    "cat": "ai"
+  },
+  {
+    "q": "Which is the largest desert in Asia?",
+    "a": [
+      "Kalahari Desert",
+      "Arabian Desert",
+      "Gobi Desert",
+      "Sahara Desert"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the largest ocean in the world?",
+    "a": [
+      "Arctic Ocean",
+      "Pacific Ocean",
+      "Indian Ocean",
+      "Atlantic Ocean"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which desert is the largest in the world?",
+    "a": [
+      "Sahara",
+      "Gobi",
+      "Kalahari",
+      "Antarctic desert"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country has the most active volcanoes in the world?",
+    "a": [
+      "Italy",
+      "Indonesia",
+      "Japan",
+      "Mexico"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the largest island country in the world?",
+    "a": [
+      "Indonesia",
+      "New Zealand",
+      "Philippines",
+      "Japan"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the largest country in South America by land area?",
+    "a": [
+      "Peru",
+      "Brazil",
+      "Colombia",
+      "Argentina"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country contains the summit of Mount Everest?",
+    "a": [
+      "China",
+      "Pakistan",
+      "Nepal",
+      "India"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country has more pyramids than Egypt?",
+    "a": [
+      "Sudan",
+      "Ethiopia",
+      "Mexico",
+      "Peru"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "Which river is generally regarded as the longest in the world?",
+    "a": [
+      "Nile River",
+      "Mississippi River",
+      "Yangtze River",
+      "Amazon River"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the smallest country in South America by land area?",
+    "a": [
+      "Guyana",
+      "Paraguay",
+      "Suriname",
+      "Uruguay"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country is crossed by both the equator and the Tropic of Capricorn?",
+    "a": [
+      "Kenya",
+      "Indonesia",
+      "Brazil",
+      "Colombia"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the longest river in South America?",
+    "a": [
+      "Orinoco River",
+      "Amazon River",
+      "Parana River",
+      "Sao Francisco River"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the capital of Turkey?",
+    "a": [
+      "Ankara",
+      "Bursa",
+      "Istanbul",
+      "Izmir"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country has the largest population in the world as of 2024?",
+    "a": [
+      "United States",
+      "India",
+      "China",
+      "Indonesia"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the smallest country in the world by land area?",
+    "a": [
+      "San Marino",
+      "Liechtenstein",
+      "Monaco",
+      "Vatican City"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which mountain range separates Europe from Asia?",
+    "a": [
+      "Ural Mountains",
+      "Alps",
+      "Carpathian Mountains",
+      "Caucasus Mountains"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the tallest waterfall in the world?",
+    "a": [
+      "Angel Falls",
+      "Iguazu Falls",
+      "Niagara Falls",
+      "Victoria Falls"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the driest desert in the world?",
+    "a": [
+      "Atacama Desert",
+      "Namib Desert",
+      "Sahara Desert",
+      "Gobi Desert"
+    ],
+    "c": 0,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country has the most islands in the world?",
+    "a": [
+      "Finland",
+      "Canada",
+      "Indonesia",
+      "Sweden"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the longest mountain range in the world?",
+    "a": [
+      "Atlas Mountains",
+      "Himalayas",
+      "Rockies",
+      "Andes"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the longest river in North America?",
+    "a": [
+      "Yukon River",
+      "Colorado River",
+      "Mississippi River",
+      "Missouri River"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country hosted the FIFA World Cup in 2014?",
+    "a": [
+      "South Africa",
+      "Brazil",
+      "Germany",
+      "Russia"
+    ],
+    "c": 1,
+    "cat": "sport"
+  },
+  {
+    "q": "Which country won the first Cricket World Cup in 1975?",
+    "a": [
+      "Australia",
+      "England",
+      "Pakistan",
+      "West Indies"
+    ],
+    "c": 3,
+    "cat": "sport"
+  },
+  {
+    "q": "Which athlete has won the most Olympic medals overall?",
+    "a": [
+      "Larisa Latynina",
+      "Michael Phelps",
+      "Usain Bolt",
+      "Mark Spitz"
+    ],
+    "c": 1,
+    "cat": "sport"
+  },
+  {
+    "q": "Which city hosted the Winter Olympics in 2014?",
+    "a": [
+      "Sochi",
+      "Vancouver",
+      "Pyeongchang",
+      "Turin"
+    ],
+    "c": 0,
+    "cat": "sport"
+  },
+  {
+    "q": "Which country won the UEFA Euro 2024 football championship?",
+    "a": [
+      "France",
+      "Germany",
+      "England",
+      "Spain"
+    ],
+    "c": 3,
+    "cat": "sport"
+  },
+  {
+    "q": "Which team won the first FIFA World Cup in 1930?",
+    "a": [
+      "Argentina",
+      "Italy",
+      "Uruguay",
+      "Brazil"
+    ],
+    "c": 2,
+    "cat": "sport"
+  },
+  {
+    "q": "In which sport is the Davis Cup contested?",
+    "a": [
+      "Tennis",
+      "Football",
+      "Rugby",
+      "Cricket"
+    ],
+    "c": 0,
+    "cat": "sport"
+  },
+  {
+    "q": "Which tennis player has won the most Grand Slam singles titles among men?",
+    "a": [
+      "Roger Federer",
+      "Rafael Nadal",
+      "Novak Djokovic",
+      "Andy Murray"
+    ],
+    "c": 2,
+    "cat": "sport"
+  },
+  {
+    "q": "Which footballer has scored the most goals in World Cup finals history?",
+    "a": [
+      "Miroslav Klose",
+      "Pele",
+      "Ronaldo Nazario",
+      "Gerd Muller"
+    ],
+    "c": 0,
+    "cat": "sport"
+  },
+  {
+    "q": "Which team won the Cricket World Cup in 2023?",
+    "a": [
+      "India",
+      "Australia",
+      "England",
+      "Pakistan"
+    ],
+    "c": 1,
+    "cat": "sport"
+  },
+  {
+    "q": "Which athlete is known as the fastest man in history?",
+    "a": [
+      "Carl Lewis",
+      "Usain Bolt",
+      "Tyson Gay",
+      "Maurice Greene"
+    ],
+    "c": 1,
+    "cat": "sport"
+  },
+  {
+    "q": "Which Olympic sport involves a pommel horse?",
+    "a": [
+      "Fencing",
+      "Rowing",
+      "Gymnastics",
+      "Weightlifting"
+    ],
+    "c": 2,
+    "cat": "sport"
+  },
+  {
+    "q": "Which director directed the film Citizen Kane?",
+    "a": [
+      "Frank Capra",
+      "John Ford",
+      "Alfred Hitchcock",
+      "Orson Welles"
+    ],
+    "c": 3,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which actor played James Bond in Casino Royale?",
+    "a": [
+      "Sean Connery",
+      "Roger Moore",
+      "Daniel Craig",
+      "Pierce Brosnan"
+    ],
+    "c": 2,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which actor played Hannibal Lecter in The Silence of the Lambs?",
+    "a": [
+      "Brian Cox",
+      "Anthony Hopkins",
+      "Jodie Foster",
+      "Scott Glenn"
+    ],
+    "c": 1,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which film won Best Picture at the Academy Awards ceremony held in 2024?",
+    "a": [
+      "Oppenheimer",
+      "Poor Things",
+      "Killers of the Flower Moon",
+      "Barbie"
+    ],
+    "c": 0,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which streaming service created the series Stranger Things?",
+    "a": [
+      "Netflix",
+      "Disney Plus",
+      "Hulu",
+      "Amazon Prime Video"
+    ],
+    "c": 0,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which film was the first to win 11 Academy Awards?",
+    "a": [
+      "The Lord of the Rings The Return of the King",
+      "Ben Hur",
+      "Titanic",
+      "West Side Story"
+    ],
+    "c": 1,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which author created Sherlock Holmes?",
+    "a": [
+      "Arthur Conan Doyle",
+      "Agatha Christie",
+      "Charles Dickens",
+      "Edgar Allan Poe"
+    ],
+    "c": 0,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which film won Best Picture at the Academy Awards ceremony held in 2023?",
+    "a": [
+      "Everything Everywhere All at Once",
+      "The Banshees of Inisherin",
+      "Avatar The Way of Water",
+      "Top Gun Maverick"
+    ],
+    "c": 0,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which director made the films Jaws and E T?",
+    "a": [
+      "Ridley Scott",
+      "Martin Scorsese",
+      "Steven Spielberg",
+      "George Lucas"
+    ],
+    "c": 2,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which film was the first animated feature to be nominated for Best Picture at the Academy Awards?",
+    "a": [
+      "The Lion King",
+      "Beauty and the Beast",
+      "Snow White",
+      "Aladdin"
+    ],
+    "c": 1,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which film won Best Picture at the Academy Awards ceremony held in 2020?",
+    "a": [
+      "Once Upon a Time in Hollywood",
+      "Parasite",
+      "1917",
+      "Joker"
+    ],
+    "c": 1,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which television series features the Iron Throne?",
+    "a": [
+      "Breaking Bad",
+      "The Walking Dead",
+      "The Crown",
+      "Game of Thrones"
+    ],
+    "c": 3,
+    "cat": "entertainment"
+  },
+  {
+    "q": "Which composer wrote The Four Seasons?",
+    "a": [
+      "Johann Sebastian Bach",
+      "George Frideric Handel",
+      "Arcangelo Corelli",
+      "Antonio Vivaldi"
+    ],
+    "c": 3,
+    "cat": "music"
+  },
+  {
+    "q": "Which band released Bohemian Rhapsody in 1975?",
+    "a": [
+      "Queen",
+      "Led Zeppelin",
+      "The Rolling Stones",
+      "The Beatles"
+    ],
+    "c": 0,
+    "cat": "music"
+  },
+  {
+    "q": "Which singer is known as the Queen of Soul?",
+    "a": [
+      "Diana Ross",
+      "Aretha Franklin",
+      "Whitney Houston",
+      "Tina Turner"
+    ],
+    "c": 1,
+    "cat": "music"
+  },
+  {
+    "q": "Which composer wrote the Ode to Joy?",
+    "a": [
+      "Mozart",
+      "Schubert",
+      "Beethoven",
+      "Haydn"
+    ],
+    "c": 2,
+    "cat": "music"
+  },
+  {
+    "q": "Which composer wrote the opera La Boheme?",
+    "a": [
+      "Georges Bizet",
+      "Richard Wagner",
+      "Giacomo Puccini",
+      "Giuseppe Verdi"
+    ],
+    "c": 2,
+    "cat": "music"
+  },
+  {
+    "q": "Which composer wrote The Nutcracker?",
+    "a": [
+      "Brahms",
+      "Mozart",
+      "Tchaikovsky",
+      "Rachmaninoff"
+    ],
+    "c": 2,
+    "cat": "music"
+  },
+  {
+    "q": "Which singer released the album Thriller in 1982?",
+    "a": [
+      "Madonna",
+      "Prince",
+      "Elvis Presley",
+      "Michael Jackson"
+    ],
+    "c": 3,
+    "cat": "music"
+  },
+  {
+    "q": "Which composer wrote the Moonlight Sonata?",
+    "a": [
+      "Chopin",
+      "Bach",
+      "Mozart",
+      "Beethoven"
+    ],
+    "c": 3,
+    "cat": "music"
+  },
+  {
+    "q": "Which artist released the album 1989?",
+    "a": [
+      "Taylor Swift",
+      "Dua Lipa",
+      "Adele",
+      "Billie Eilish"
+    ],
+    "c": 0,
+    "cat": "music"
+  },
+  {
+    "q": "Which spice is made from the dried stigmas of the crocus flower?",
+    "a": [
+      "Saffron",
+      "Turmeric",
+      "Paprika",
+      "Cardamom"
+    ],
+    "c": 0,
+    "cat": "food"
+  },
+  {
+    "q": "Which country is the origin of tacos?",
+    "a": [
+      "Mexico",
+      "Argentina",
+      "Spain",
+      "Chile"
+    ],
+    "c": 0,
+    "cat": "food"
+  },
+  {
+    "q": "Which fruit has its seeds on the outside?",
+    "a": [
+      "Raspberry",
+      "Banana",
+      "Strawberry",
+      "Blueberry"
+    ],
+    "c": 2,
+    "cat": "food"
+  },
+  {
+    "q": "Which herb is the main ingredient in pesto?",
+    "a": [
+      "Coriander",
+      "Parsley",
+      "Basil",
+      "Mint"
+    ],
+    "c": 2,
+    "cat": "food"
+  },
+  {
+    "q": "Who won the Nobel Prize in Literature in 2024?",
+    "a": [
+      "Abdulrazak Gurnah",
+      "Han Kang",
+      "Annie Ernaux",
+      "Jon Fosse"
+    ],
+    "c": 1,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Which country hosted the COP29 climate conference in 2024?",
+    "a": [
+      "Brazil",
+      "Azerbaijan",
+      "India",
+      "Egypt"
+    ],
+    "c": 1,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Who won the United States presidential election in 2024?",
+    "a": [
+      "Joe Biden",
+      "Donald Trump",
+      "Kamala Harris",
+      "Ron DeSantis"
+    ],
+    "c": 1,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Which city hosted the Eurovision Song Contest in 2024?",
+    "a": [
+      "Malmo",
+      "Stockholm",
+      "Oslo",
+      "Copenhagen"
+    ],
+    "c": 0,
+    "cat": "current affairs"
+  },
+  {
+    "q": "Which term describes an intelligence that can perform any intellectual task a human can?",
+    "a": [
+      "Narrow intelligence",
+      "Machine learning",
+      "Expert system",
+      "Artificial general intelligence"
+    ],
+    "c": 3,
+    "cat": "ai"
+  },
+  {
+    "q": "In which year was the first iPad released?",
+    "a": [
+      "2011",
+      "2012",
+      "2008",
+      "2010"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "Which dynasty founded the Ottoman Empire?",
+    "a": [
+      "House of Osman",
+      "House of Bourbon",
+      "House of Habsburg",
+      "House of Romanov"
+    ],
+    "c": 0,
+    "cat": "history"
+  },
+  {
+    "q": "Which ancient Greek poet is credited with writing the Iliad?",
+    "a": [
+      "Homer",
+      "Sappho",
+      "Hesiod",
+      "Virgil"
+    ],
+    "c": 0,
+    "cat": "history"
+  },
+  {
+    "q": "Which compound is responsible for the heat of chilli peppers?",
+    "a": [
+      "Capsaicin",
+      "Allicin",
+      "Piperine",
+      "Menthol"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which country was formerly known as Persia?",
+    "a": [
+      "Turkey",
+      "Iraq",
+      "Iran",
+      "Afghanistan"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which planet has a hexagonal storm at its north pole?",
+    "a": [
+      "Saturn",
+      "Uranus",
+      "Jupiter",
+      "Neptune"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which engineer built the Z3, the first programmable computer?",
+    "a": [
+      "Alan Turing",
+      "Charles Babbage",
+      "John von Neumann",
+      "Konrad Zuse"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "Which country has the greatest number of natural lakes in the world?",
+    "a": [
+      "Finland",
+      "Brazil",
+      "Russia",
+      "Canada"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which company owns Instagram?",
+    "a": [
+      "Twitter",
+      "Meta",
+      "Google",
+      "ByteDance"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which is the longest river in Europe?",
+    "a": [
+      "Rhine River",
+      "Volga River",
+      "Danube River",
+      "Dnieper River"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which metal is the best conductor of electricity?",
+    "a": [
+      "Gold",
+      "Copper",
+      "Aluminium",
+      "Silver"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "In which year was the World Wide Web first proposed by Tim Berners Lee?",
+    "a": [
+      "1993",
+      "1989",
+      "1985",
+      "1991"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which country launched the first artificial satellite?",
+    "a": [
+      "United States",
+      "France",
+      "United Kingdom",
+      "Soviet Union"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which particle carries the strong nuclear force between quarks?",
+    "a": [
+      "Gluon",
+      "Electron",
+      "Photon",
+      "Neutrino"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the longest river in Africa?",
+    "a": [
+      "Niger River",
+      "Nile River",
+      "Zambezi River",
+      "Congo River"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "In which year did the American Civil War begin?",
+    "a": [
+      "1865",
+      "1870",
+      "1859",
+      "1861"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which is the highest mountain in South America?",
+    "a": [
+      "Mount Huascaran",
+      "Mount Cotopaxi",
+      "Aconcagua",
+      "Mount Chimborazo"
+    ],
+    "c": 2,
+    "cat": "geography"
+  },
+  {
+    "q": "Which researcher led the creation of the ImageNet dataset?",
+    "a": [
+      "Geoffrey Hinton",
+      "Yann LeCun",
+      "Fei Fei Li",
+      "Andrew Ng"
+    ],
+    "c": 2,
+    "cat": "ai"
+  },
+  {
+    "q": "Which is the main function of red blood cells?",
+    "a": [
+      "Clot blood",
+      "Fight infection",
+      "Produce hormones",
+      "Carry oxygen"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the smallest ocean in the world?",
+    "a": [
+      "Indian Ocean",
+      "Southern Ocean",
+      "Atlantic Ocean",
+      "Arctic Ocean"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which explorer was the first to reach the South Pole?",
+    "a": [
+      "Robert Scott",
+      "Ernest Shackleton",
+      "Edmund Hillary",
+      "Roald Amundsen"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which mountain is the tallest in Africa?",
+    "a": [
+      "Mount Meru",
+      "Mount Stanley",
+      "Mount Kenya",
+      "Mount Kilimanjaro"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which country has the most time zones in the world?",
+    "a": [
+      "Russia",
+      "France",
+      "United States",
+      "Australia"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which is the only continent with no permanent human population?",
+    "a": [
+      "Africa",
+      "Antarctica",
+      "South America",
+      "Australia"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which technique trains models on large amounts of text without human labels?",
+    "a": [
+      "Self supervised learning",
+      "Reinforcement learning",
+      "Transfer learning",
+      "Supervised learning"
+    ],
+    "c": 0,
+    "cat": "ai"
+  },
+  {
+    "q": "Which is the capital of Japan?",
+    "a": [
+      "Osaka",
+      "Nagoya",
+      "Kyoto",
+      "Tokyo"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which programming language was created by James Gosling?",
+    "a": [
+      "Python",
+      "C++",
+      "C",
+      "Java"
+    ],
+    "c": 3,
+    "cat": "technology"
+  },
+  {
+    "q": "Which organelle is the site of photosynthesis in plant cells?",
+    "a": [
+      "Chloroplast",
+      "Ribosome",
+      "Nucleus",
+      "Mitochondrion"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which base pairs with adenine in DNA?",
+    "a": [
+      "Cytosine",
+      "Uracil",
+      "Guanine",
+      "Thymine"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which organisation sets the standards for the World Wide Web?",
+    "a": [
+      "W3C",
+      "IEEE",
+      "ISO",
+      "IETF"
+    ],
+    "c": 0,
+    "cat": "technology"
+  },
+  {
+    "q": "Which animal has three hearts?",
+    "a": [
+      "Cuttlefish",
+      "Squid",
+      "Octopus",
+      "Nautilus"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which metal remains liquid at room temperature?",
+    "a": [
+      "Caesium",
+      "Gallium",
+      "Rubidium",
+      "Mercury"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which civilisation invented paper during the Han dynasty?",
+    "a": [
+      "Roman",
+      "Greek",
+      "Egyptian",
+      "Chinese"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which company created the iPhone?",
+    "a": [
+      "Motorola",
+      "Apple",
+      "Samsung",
+      "Nokia"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "In which year did Isaac Newton publish his Principia, setting out the laws of motion?",
+    "a": [
+      "1666",
+      "1687",
+      "1690",
+      "1704"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which is the only planet not named after a god?",
+    "a": [
+      "Jupiter",
+      "Earth",
+      "Venus",
+      "Mars"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which planet rotates on its side?",
+    "a": [
+      "Saturn",
+      "Uranus",
+      "Venus",
+      "Neptune"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "What is the largest moon of Jupiter?",
+    "a": [
+      "Europa",
+      "Io",
+      "Callisto",
+      "Ganymede"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "What is the chemical symbol for tungsten?",
+    "a": [
+      "Tu",
+      "Tn",
+      "W",
+      "Tg"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which brothers made the first sustained powered aeroplane flight in 1903?",
+    "a": [
+      "Glenn Curtiss",
+      "Wright brothers",
+      "Alberto Santos Dumont",
+      "Charles Lindbergh"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which moon is the largest in the solar system?",
+    "a": [
+      "Europa",
+      "Titan",
+      "Callisto",
+      "Ganymede"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the largest hot desert in the world?",
+    "a": [
+      "Gobi Desert",
+      "Kalahari Desert",
+      "Mojave Desert",
+      "Sahara Desert"
+    ],
+    "c": 3,
+    "cat": "geography"
+  },
+  {
+    "q": "Which microscopic animal can survive the vacuum of space?",
+    "a": [
+      "Nematode",
+      "Rotifer",
+      "Amoeba",
+      "Tardigrade"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which blood cells fight infection in the human body?",
+    "a": [
+      "Red blood cells",
+      "Plasma cells",
+      "Platelets",
+      "White blood cells"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the smallest continent by land area?",
+    "a": [
+      "Europe",
+      "Australia",
+      "South America",
+      "Antarctica"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which Mughal emperor ordered the building of the Taj Mahal?",
+    "a": [
+      "Akbar",
+      "Aurangzeb",
+      "Shah Jahan",
+      "Babur"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which explorer was the first to sail around the Cape of Good Hope?",
+    "a": [
+      "Ferdinand Magellan",
+      "Henry the Navigator",
+      "Bartolomeu Dias",
+      "Vasco da Gama"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which treaty formally ended the American Revolutionary War?",
+    "a": [
+      "Treaty of Versailles",
+      "Treaty of Ghent",
+      "Treaty of Paris",
+      "Treaty of Utrecht"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which protein stores oxygen in muscle tissue?",
+    "a": [
+      "Haemoglobin",
+      "Ferritin",
+      "Myoglobin",
+      "Albumin"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which element has the highest melting point of all metals?",
+    "a": [
+      "Osmium",
+      "Tungsten",
+      "Rhenium",
+      "Tantalum"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the smallest bone in the human body?",
+    "a": [
+      "Hyoid",
+      "Malleus",
+      "Stapes",
+      "Incus"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "Which company acquired Android Inc in 2005?",
+    "a": [
+      "Apple",
+      "Google",
+      "Samsung",
+      "Microsoft"
+    ],
+    "c": 1,
+    "cat": "technology"
+  },
+  {
+    "q": "Which Roman emperor ordered the wall built across northern Britain?",
+    "a": [
+      "Claudius",
+      "Trajan",
+      "Constantine",
+      "Hadrian"
+    ],
+    "c": 3,
+    "cat": "history"
+  },
+  {
+    "q": "Which fish can generate electric shocks to stun its prey?",
+    "a": [
+      "Catfish",
+      "Electric eel",
+      "Pufferfish",
+      "Stingray"
+    ],
+    "c": 1,
+    "cat": "science"
+  },
+  {
+    "q": "Which element is the main component of the core of the Earth?",
+    "a": [
+      "Iron",
+      "Magnesium",
+      "Nickel",
+      "Silicon"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the largest desert in the world overall?",
+    "a": [
+      "Gobi Desert",
+      "Sahara Desert",
+      "Arabian Desert",
+      "Antarctic Desert"
+    ],
+    "c": 3,
+    "cat": "science"
+  },
+  {
+    "q": "Which is the hottest planet in the solar system?",
+    "a": [
+      "Venus",
+      "Mercury",
+      "Mars",
+      "Jupiter"
+    ],
+    "c": 0,
+    "cat": "science"
+  },
+  {
+    "q": "Which term describes machines learning from rewards and penalties?",
+    "a": [
+      "Reinforcement learning",
+      "Deep learning",
+      "Supervised learning",
+      "Unsupervised learning"
+    ],
+    "c": 0,
+    "cat": "ai"
+  },
+  {
+    "q": "Which is the capital of Egypt?",
+    "a": [
+      "Alexandria",
+      "Cairo",
+      "Luxor",
+      "Giza"
+    ],
+    "c": 1,
+    "cat": "geography"
+  },
+  {
+    "q": "Which US state was the first to grant women the right to vote?",
+    "a": [
+      "Colorado",
+      "Wyoming",
+      "California",
+      "Utah"
+    ],
+    "c": 1,
+    "cat": "history"
+  },
+  {
+    "q": "Which inventor patented the telephone in 1876?",
+    "a": [
+      "Alexander Graham Bell",
+      "Guglielmo Marconi",
+      "Samuel Morse",
+      "Thomas Edison"
+    ],
+    "c": 0,
+    "cat": "technology"
+  },
+  {
+    "q": "Which empire fell in the year 476 AD?",
+    "a": [
+      "Holy Roman Empire",
+      "Persian Empire",
+      "Western Roman Empire",
+      "Eastern Roman Empire"
+    ],
+    "c": 2,
+    "cat": "history"
+  },
+  {
+    "q": "Which is the smallest unit of life?",
+    "a": [
+      "Atom",
+      "Molecule",
+      "Cell",
+      "Organelle"
+    ],
+    "c": 2,
+    "cat": "science"
+  },
+  {
+    "q": "What is the maximum size of a Bitcoin block in weight units?",
+    "a": [
+      "1,000,000 weight units",
+      "8,000,000 weight units",
+      "4,000,000 weight units",
+      "2,000,000 weight units"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How many blocks pass before Bitcoin mining difficulty adjusts?",
+    "a": [
+      "2,016 blocks",
+      "4,032 blocks",
+      "10,000 blocks",
+      "1,008 blocks"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How many satoshis make up one bitcoin?",
+    "a": [
+      "1,000,000 satoshis",
+      "100,000,000 satoshis",
+      "10,000,000 satoshis",
+      "1,000,000,000 satoshis"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "At which block height did Taproot activate on Bitcoin?",
+    "a": [
+      "709,632",
+      "840,000",
+      "630,000",
+      "481,824"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How many blocks must a coinbase reward wait before it can be spent?",
+    "a": [
+      "6 blocks",
+      "1,000 blocks",
+      "50 blocks",
+      "100 blocks"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the maximum data size of an OP_RETURN output in Bitcoin?",
+    "a": [
+      "256 bytes",
+      "40 bytes",
+      "80 bytes",
+      "20 bytes"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How large is a Bitcoin block header in bytes?",
+    "a": [
+      "80 bytes",
+      "64 bytes",
+      "128 bytes",
+      "32 bytes"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How many bits long is the nonce field in a Bitcoin block header?",
+    "a": [
+      "16 bits",
+      "32 bits",
+      "64 bits",
+      "256 bits"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which data structure commits to all transactions in a Bitcoin block header?",
+    "a": [
+      "Bloom filter",
+      "Merkle root",
+      "Hash chain",
+      "Patricia trie"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How often does the Bitcoin block reward halve, measured in blocks?",
+    "a": [
+      "100,000 blocks",
+      "210,000 blocks",
+      "420,000 blocks",
+      "1,000,000 blocks"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the total maximum supply of bitcoin ever to be mined?",
+    "a": [
+      "100 million",
+      "21 million",
+      "10 million",
+      "42 million"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which signature scheme did Taproot introduce to Bitcoin?",
+    "a": [
+      "EdDSA",
+      "RSA",
+      "Schnorr",
+      "ECDSA"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does SegWit separate from transaction data in Bitcoin?",
+    "a": [
+      "The Merkle root",
+      "The nonce",
+      "The witness data",
+      "The block header"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which address format starts with bc1q on Bitcoin?",
+    "a": [
+      "Bech32",
+      "Bech32m",
+      "Hex encoding",
+      "Base58Check"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What model does Bitcoin use to track spendable funds?",
+    "a": [
+      "Token model",
+      "Account model",
+      "UTXO model",
+      "Ledger model"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How many seconds long is one slot on the Ethereum beacon chain?",
+    "a": [
+      "6 seconds",
+      "24 seconds",
+      "12 seconds",
+      "32 seconds"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How much ETH must a validator stake to run on Ethereum?",
+    "a": [
+      "16 ETH",
+      "128 ETH",
+      "64 ETH",
+      "32 ETH"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which upgrade introduced the burning base fee on Ethereum?",
+    "a": [
+      "Berlin",
+      "Paris",
+      "London",
+      "Shanghai"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the name of Ethereum data availability sampling proposal?",
+    "a": [
+      "Verkle trees",
+      "Proto Danksharding",
+      "PeerDAS",
+      "Casper FFG"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which improvement proposal introduced blob transactions to Ethereum?",
+    "a": [
+      "EIP 3675",
+      "EIP 1559",
+      "EIP 4844",
+      "EIP 4895"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which hash function does Ethereum use for addresses and transactions?",
+    "a": [
+      "RIPEMD 160",
+      "SHA 256",
+      "BLAKE2",
+      "Keccak 256"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How many bits wide is a word in the Ethereum Virtual Machine?",
+    "a": [
+      "32 bits",
+      "64 bits",
+      "128 bits",
+      "256 bits"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which encoding does Ethereum use to serialise transaction data?",
+    "a": [
+      "JSON",
+      "Protobuf",
+      "RLP",
+      "CBOR"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the chain ID of the Ethereum main network?",
+    "a": [
+      "137",
+      "1",
+      "56",
+      "0"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which Ethereum upgrade was called The Merge?",
+    "a": [
+      "Paris",
+      "Cancun",
+      "London",
+      "Shanghai"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which Ethereum upgrade enabled validator withdrawals?",
+    "a": [
+      "Cancun",
+      "Shanghai",
+      "London",
+      "Paris"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What type of trie stores Ethereum account state?",
+    "a": [
+      "Merkle tree",
+      "Bloom filter",
+      "B tree",
+      "Merkle Patricia Trie"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How many epochs must pass for an Ethereum block to reach finality under normal conditions?",
+    "a": [
+      "3 epochs",
+      "2 epochs",
+      "1 epoch",
+      "4 epochs"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the target number of blobs per block after EIP 4844?",
+    "a": [
+      "6 blobs",
+      "3 blobs",
+      "1 blob",
+      "12 blobs"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What fraction of validators must attest for Ethereum finality?",
+    "a": [
+      "One half",
+      "Three quarters",
+      "Two thirds",
+      "Nine tenths"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the maximum share of faulty nodes that Byzantine fault tolerance can withstand?",
+    "a": [
+      "One half",
+      "One third",
+      "One quarter",
+      "Two thirds"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which consensus approach does Tendermint use?",
+    "a": [
+      "Proof of burn",
+      "Byzantine fault tolerant consensus",
+      "Proof of authority",
+      "Proof of work"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What problem describes nodes that must agree despite some acting maliciously?",
+    "a": [
+      "The halting problem",
+      "The double spend problem",
+      "The travelling salesman problem",
+      "The Byzantine Generals problem"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What attack lets a miner secretly mine a competing chain and then reveal it?",
+    "a": [
+      "Sybil attack",
+      "Eclipse attack",
+      "Selfish mining",
+      "Replay attack"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the name for an attack by a miner controlling over half of network hash power?",
+    "a": [
+      "Grinding attack",
+      "Sybil attack",
+      "Dust attack",
+      "51 percent attack"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which property means a blockchain keeps processing transactions despite faults?",
+    "a": [
+      "Liveness",
+      "Soundness",
+      "Finality",
+      "Safety"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which property means a blockchain never confirms conflicting transactions?",
+    "a": [
+      "Availability",
+      "Safety",
+      "Liveness",
+      "Finality"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does slashing do to a misbehaving proof of stake validator?",
+    "a": [
+      "It doubles its voting power",
+      "It destroys part of its stake",
+      "It moves it to another shard",
+      "It increases its rewards"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the nothing at stake problem in proof of stake?",
+    "a": [
+      "Validators can vote on multiple forks at no cost",
+      "Validators cannot earn any rewards",
+      "Validators must lock funds forever",
+      "Validators must run expensive hardware"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which consensus protocol uses verifiable random functions to select block proposers?",
+    "a": [
+      "Proof of authority",
+      "Tendermint",
+      "Algorand",
+      "Bitcoin"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does GHOST stand for in blockchain consensus?",
+    "a": [
+      "Generalised Hash Output Storage Technique",
+      "Graded Heaviest Ordered Subchain Theorem",
+      "Global Hash Ordered State Tree",
+      "Greedy Heaviest Observed Subtree"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which finality gadget does Ethereum use alongside proof of stake?",
+    "a": [
+      "Snowball",
+      "HotStuff",
+      "Casper FFG",
+      "Tendermint Core"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What term describes a validator proposing blocks on two competing chains?",
+    "a": [
+      "Equivocation",
+      "Front running",
+      "Double spending",
+      "Grinding"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which impossibility result says consensus is impossible with one faulty node in asynchronous networks?",
+    "a": [
+      "CAP theorem",
+      "FLP impossibility",
+      "Nakamoto consensus",
+      "Byzantine agreement"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the name of the sharding design used by the Ethereum blockchain?",
+    "a": [
+      "Snowflake",
+      "Moonbeam",
+      "Danksharding",
+      "Starlight"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What consensus mechanism does the Solana blockchain use?",
+    "a": [
+      "Proof of History",
+      "Tendermint",
+      "HotStuff",
+      "Ouroboros"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the name of the Ethereum compatible chain built on the Avalanche blockchain?",
+    "a": [
+      "Rainbow Bridge",
+      "Octopus Network",
+      "C Chain",
+      "P Chain"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What was the initial total supply of the SOL token?",
+    "a": [
+      "1 billion",
+      "500 million",
+      "10 billion",
+      "100 million"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the approximate annual inflation rate of the DOT token?",
+    "a": [
+      "1 percent",
+      "10 percent",
+      "5 percent",
+      "20 percent"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What form does a named Ethereum Name Service account take?",
+    "a": [
+      "alice.eth",
+      "alice@eth",
+      "alice/eth",
+      "alice:eth"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the minimum stake required to run a validator on the Ethereum blockchain?",
+    "a": [
+      "1 ETH",
+      "0.1 ETH",
+      "10 ETH",
+      "32 ETH"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How long is a validator epoch on the Cardano blockchain?",
+    "a": [
+      "5 days",
+      "6 hours",
+      "12 hours",
+      "24 hours"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How are block producers chosen on the Cardano blockchain?",
+    "a": [
+      "By auction based on stake",
+      "By lottery based on stake",
+      "By first come first served",
+      "By random selection"
+    ],
+    "c": 1,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How quickly does Avalanche typically reach finality?",
+    "a": [
+      "About 30 seconds",
+      "About 2 minutes",
+      "About 10 minutes",
+      "About 2 seconds"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which network does the Polygon bridge connect Ethereum to?",
+    "a": [
+      "Solana",
+      "Bitcoin",
+      "Cardano",
+      "Polygon"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the native token of the Avalanche C Chain?",
+    "a": [
+      "AVAX",
+      "ETH",
+      "AURORA",
+      "RAINBOW"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a public key on a blockchain?",
+    "a": [
+      "A 64 character hexadecimal string used to verify signatures",
+      "A username",
+      "An email address",
+      "A phone number"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What can a limited access key do on a blockchain?",
+    "a": [
+      "Transfer any amount",
+      "Delete the account",
+      "Create new validators",
+      "Call one specified contract method"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What do block producers create on a sharded blockchain?",
+    "a": [
+      "Full blocks for all shards",
+      "Smart contract code",
+      "Chunks for a shard",
+      "Validator keys"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which account model does the Ethereum blockchain use?",
+    "a": [
+      "UTXO model",
+      "Token based model",
+      "Account based model",
+      "Cell model"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What are the main uses of the SOL token?",
+    "a": [
+      "Paying for storage, gas and staking",
+      "Only paying exchange fees",
+      "Only buying NFTs",
+      "Only voting in DAOs"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What allows a sharded blockchain to add or remove shards as demand changes?",
+    "a": [
+      "Static partitioning",
+      "Manual forking",
+      "Layered rollups",
+      "Dynamic resharding"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What formula underpins a constant product automated market maker?",
+    "a": [
+      "x plus y equals k",
+      "x divided by y equals k",
+      "x times y equals k",
+      "x minus y equals k"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is impermanent loss in a liquidity pool?",
+    "a": [
+      "The loss compared with simply holding the assets",
+      "The fee paid to a miner",
+      "The loss from a failed transaction",
+      "The tax on a token sale"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a flash loan in decentralised finance?",
+    "a": [
+      "A loan borrowed for a year",
+      "A loan borrowed without collateral for a month",
+      "A loan borrowed and repaid in the same transaction",
+      "A loan borrowed only by validators"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "When does liquidation happen in a crypto lending protocol?",
+    "a": [
+      "When the price rises sharply",
+      "When the borrower repays early",
+      "When the loan term expires",
+      "When collateral value falls below the required threshold"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does concentrated liquidity in Uniswap v3 allow a liquidity provider to do?",
+    "a": [
+      "Choose a specific price range for their liquidity",
+      "Earn rewards without depositing assets",
+      "Borrow without collateral",
+      "Trade without paying any fee"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What type of assets is the Curve protocol mainly designed for?",
+    "a": [
+      "Volatile memecoins",
+      "Non fungible tokens",
+      "Stablecoins and similarly priced pegged assets",
+      "Real estate tokens"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is the purpose of the funding rate in perpetual futures markets?",
+    "a": [
+      "To pay exchange shareholders",
+      "To fund new token launches",
+      "To keep the futures price close to the spot price",
+      "To reward market makers only"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "On Aave, at what health factor does a position become eligible for liquidation?",
+    "a": [
+      "Below 1",
+      "Above 2",
+      "Exactly 1.5",
+      "Above 5"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does a liquid staking token represent?",
+    "a": [
+      "A token with no backing",
+      "A stablecoin pegged to the dollar",
+      "A governance vote only",
+      "A staked asset plus its accumulated rewards"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does restaking through EigenLayer allow?",
+    "a": [
+      "Staked ETH to be withdrawn instantly",
+      "Staked ETH to be converted to Bitcoin",
+      "Staked ETH to secure additional services as well",
+      "Staked ETH to avoid all slashing risk"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does a decentralised exchange aggregator do?",
+    "a": [
+      "Creates new tokens",
+      "Lends assets to borrowers",
+      "Finds the best price across multiple decentralised exchanges",
+      "Stores private keys for users"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is slippage in a crypto trade?",
+    "a": [
+      "The difference between the expected price and the executed price",
+      "The fee charged by a wallet",
+      "The time taken to confirm a block",
+      "The tax on a profitable trade"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How is the DAI stablecoin backed?",
+    "a": [
+      "By gold reserves only",
+      "By no collateral at all",
+      "By dollars held in a bank only",
+      "By crypto collateral deposited in MakerDAO vaults"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What backs the USDC stablecoin?",
+    "a": [
+      "Bitcoin reserves",
+      "Algorithmic minting only",
+      "Gold bars in a vault",
+      "Dollars and short term United States Treasury bills held in reserve"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which is the largest stablecoin by market capitalisation?",
+    "a": [
+      "USDT",
+      "USDC",
+      "DAI",
+      "BUSD"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which algorithmic stablecoin collapsed in May 2022?",
+    "a": [
+      "DAI",
+      "FRAX",
+      "UST",
+      "USDC"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "In which year was Dogecoin created?",
+    "a": [
+      "2009",
+      "2021",
+      "2017",
+      "2013"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How does a bonding curve launchpad such as pump.fun price a new memecoin?",
+    "a": [
+      "At a fixed price forever",
+      "By auction to the highest bidder only",
+      "By government regulation",
+      "By a price that rises as more people buy"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is meant by a stablecoin depeg?",
+    "a": [
+      "When a stablecoin loses its peg to the dollar",
+      "When a stablecoin gains a new listing",
+      "When a stablecoin is burned",
+      "When a stablecoin is audited"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does an order book on an exchange do?",
+    "a": [
+      "Stores user passwords",
+      "Lists new tokens only",
+      "Matches buy and sell orders by price",
+      "Calculates tax on trades"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does a market maker do on an exchange?",
+    "a": [
+      "Sets government policy",
+      "Mines new blocks",
+      "Audits smart contracts",
+      "Provides liquidity by quoting buy and sell prices"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "Which is the largest centralised crypto exchange by trading volume?",
+    "a": [
+      "Binance",
+      "Kraken",
+      "Gemini",
+      "Bitstamp"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does proof of reserves aim to show for a centralised exchange?",
+    "a": [
+      "That it has the most users",
+      "That it charges the lowest fees",
+      "That it lists the most tokens",
+      "That it holds enough assets to cover customer balances"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does a stop loss order do?",
+    "a": [
+      "Buys at the highest price",
+      "Cancels all open orders",
+      "Sells an asset when its price falls to a set level",
+      "Locks funds for one year"
+    ],
+    "c": 2,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How is the market capitalisation of a crypto asset calculated?",
+    "a": [
+      "Price multiplied by total supply only",
+      "Price plus circulating supply",
+      "Price divided by circulating supply",
+      "Price multiplied by circulating supply"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "How is the fully diluted valuation of a token calculated?",
+    "a": [
+      "Price multiplied by maximum supply",
+      "Price multiplied by circulating supply",
+      "Price divided by maximum supply",
+      "Price plus maximum supply"
+    ],
+    "c": 0,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What is a vesting cliff in tokenomics?",
+    "a": [
+      "A sudden price crash",
+      "A period when a token cannot be traded at all",
+      "A token burn event",
+      "An initial period before any allocated tokens unlock"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  },
+  {
+    "q": "What does BLS stand for in blockchain cryptography?",
+    "a": [
+      "Blockchain Light Security",
+      "Byzantine Link Scheme",
+      "Bitcoin Ledger Signature",
+      "Boneh Lynn Shacham"
+    ],
+    "c": 3,
+    "cat": "cryptocurrency"
+  }
+]
