@@ -14,12 +14,13 @@ A quiz game where you play as an AI agent. Answer 15 questions to climb the ladd
 
 ### Deployment history
 
-The contract account is the same throughout; only the code was replaced. State (balances, answer key, season) was preserved across both upgrades.
+The contract account is the same throughout; only the code was replaced. State (balances, answer key, season) was preserved across all three upgrades.
 
 - **Original deployment — 12 Nov 2026, 15:02 UTC:** `Hj4G6nXR3o5CwaxkVvu5NYACS6eoaETa7Rf9EvZazXMg` — first deploy of the contract. ([explorer](https://testnet.nearblocks.io/txns/Hj4G6nXR3o5CwaxkVvu5NYACS6eoaETa7Rf9EvZazXMg))
 - **First upgrade — 13 Nov 2026, 00:05 UTC:** `HV1b1qsDPKHG8qgQz8wKhRDdgSPU99N9GdksL1WsXhMY` — answer-key security fix (the contract becomes the authority on correct answers). ([explorer](https://testnet.nearblocks.io/txns/HV1b1qsDPKHG8qgQz8wKhRDdgSPU99N9GdksL1WsXhMY))
-- **Latest upgrade — 13 Nov 2026, 08:15 UTC (current code):** `2JwQtYccobbpcu2tv7xinuhR4MFviVLgzHbb29zmMtCx` — Ask the Audience vote-distribution fix (votes now always sum to 100). ([explorer](https://testnet.nearblocks.io/txns/2JwQtYccobbpcu2tv7xinuhR4MFviVLgzHbb29zmMtCx))
-- **Current deployed code hash:** `jJbSQaF3mm5Lx4g15Ek34PW3qcKRYdBsfcuFysdRFcR` — matches the WASM built from `contract/src/lib.rs` on main.
+- **Second upgrade — 13 Nov 2026, 08:15 UTC:** `2JwQtYccobbpcu2tv7xinuhR4MFviVLgzHbb29zmMtCx` — Ask the Audience vote-distribution fix (votes now always sum to 100). ([explorer](https://testnet.nearblocks.io/txns/2JwQtYccobbpcu2tv7xinuhR4MFviVLgzHbb29zmMtCx))
+- **Latest upgrade — 13 Nov 2026 (current code):** `5vVhkmKtaJi78AwQwqGgXLrjuMqYuG7t8rrcjeGHzQNb` — agent market (buy and sell agents onchain; hire fees go to the recorded market owner). ([explorer](https://testnet.nearblocks.io/txns/5vVhkmKtaJi78AwQwqGgXLrjuMqYuG7t8rrcjeGHzQNb))
+- **Current deployed code hash:** `CxTeZBBa77k7bQpJmKE89jJmsBdnFDDVzmcPFhwk1o6a` — matches the WASM built from `contract/src/lib.rs` on main.
 
 ## What is onchain and what is simulated
 
@@ -31,6 +32,7 @@ The contract account is the same throughout; only the code was replaced. State (
 | Ladder run settlement | On-chain (answer-key verification fix deployed 13 Nov 2026; see Deployment history) |
 | Agent lookup (Phone a Friend) | On-chain (agent record + payment) |
 | Agent response (Phone a Friend answer) | Live (a real AI answers as the called agent; a simulated accuracy-based answer is the fallback if the live call fails) |
+| Agent Market | On-chain (buy and sell agents; hire fees go to the owner) |
 | Ask the Audience | Simulated (random distribution biased to the correct answer, not real agent votes) |
 | Real-time duels | Not yet on-chain (client-side duel codes; on-chain settlement is a planned milestone) |
 | Daily leaderboard / Daily Challenge | Not yet on-chain (client-side; global enforcement is a planned milestone) |
@@ -55,6 +57,10 @@ Open the site in a browser. No install, no wallet, no gas.
 
 Once per run each: 50:50 (20 coins), Ask the Audience (20 coins), Phone a Friend (50 coins). Phone a Friend calls a real agent: it looks up the agent's real record onchain (generation, win rate, wins) and pays the called agent's owner 40 coins. The answer comes live from a real AI answering as the called agent. If the live call fails, the game falls back to a simulated answer based on the agent's generation (70 percent correct at generation 0, plus 5 percent per generation, capped at 95 percent). Ask the Audience shows a vote distribution biased toward the correct answer (55 to 75 percent), not votes from real agents.
 
+## Agent Market
+
+The Market page lets players buy and sell the Phone a Friend agents with Ladder Coins, onchain. An agent earns its owner 40 Ladder Coins every time someone hires it, so buying an agent buys that hire income. Only the owner of an agent can list it for sale (at a price they set) or take it off sale, and only a listed agent can be bought. The first listing of an agent is checked against the agent's record onchain, so only its real owner can list it; after a sale the new owner can re-list it. The hire fee follows ownership: once an agent has a market owner, the 40 coins from every hire go to that owner.
+
 ## Competitive play
 
 - **Duels:** both stake 100 over the same 15 questions; most correct answers wins 200, tie returns stakes. Pass and play on one device, or duel by code across devices. Practice duels against leaderboard agents are clearly labelled; real duels are client side for now, and onchain settlement is a planned milestone.
@@ -70,6 +76,18 @@ Ladder Coins are an internal onchain game currency, not redeemable for NEAR. 1 L
 Games (primary) + Agent Economy (second). Lead: Isaac.
 Built by the same person as [OwnGround](https://github.com/ownguard9/ownground) — Isaac leads both projects.
 
+## Why it fits the Games track
+
+The track is Games With Real Economies: "The economy is the gameplay" — NPCs with wallets, player-owned markets and economies that evolve without a dev patch, judged on the game loop, not the token, with a bonus if players never notice the chain.
+
+- **NPCs with wallets:** the Phone a Friend agents are real agents with real records and wallets — every hire pays 40 coins to the agent's owner. You play as an agent with your own game account and balance.
+- **Player-owned market:** the Market page lets players buy and sell the Phone a Friend agents with Ladder Coins, onchain. An agent's hire income goes to its owner, so a high-generation agent (hired more often) is worth more.
+- **An economy that evolves without a dev patch:** the coin economy runs on the contract — weekly seasons reset and pay prizes onchain, generations climb as players win, the faucet and prize budget are enforced by the contract.
+- **Judged on the game loop, not the token:** 15 questions, risk-or-bank after every correct answer from question 5, lifelines, duels, a daily challenge. Ladder Coins are an internal game currency, not a token to speculate on and not redeemable for NEAR.
+- **Players never notice the chain:** no chain words anywhere a player can see, Google sign-in, no wallet or gas shown.
+
+Ladder does not use NEAR Intents. Its economy is the coin loop (faucet, stakes, winnings, lifeline payments, duel stakes, season prizes) plus the agent market.
+
 ## Files
 
 - `index.html` — the full playable game (single file).
@@ -80,4 +98,4 @@ Built by the same person as [OwnGround](https://github.com/ownguard9/ownground) 
 
 ## Status
 
-Live on NEAR testnet. The answer key verification fix is deployed and verified on chain (13 Nov 2026, answer key version 12, all 1,200 hashes populated and spot checked), and the audience-votes fix followed the same day (see Deployment history). See `SECURITY.md` for the remaining known limitations.
+Live on NEAR testnet. The answer key verification fix is deployed and verified on chain (13 Nov 2026, answer key version 12, all 1,200 hashes populated and spot checked), the audience-votes fix followed the same day, and the agent market was deployed later the same day and verified with all 31 checks passing (see Deployment history). See `SECURITY.md` for the remaining known limitations.
