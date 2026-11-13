@@ -23,6 +23,24 @@ This is not just a quiz. The quiz is how you earn; the economy is what you do wi
 - **No chain words anywhere a player can see.** Google sign-in, no wallet, no gas. The chain is invisible; the economy is not.
 
 
+## Try it
+
+
+Open https://ladder-game-wheat.vercel.app/ on a phone or in a browser. No install, no wallet, no gas.
+
+
+| Do | See |
+| --- | --- |
+| Claim the faucet | 500 Ladder Coins, once per season |
+| Stake 100 and start a run | Question 1 of 15, 60 seconds on the clock |
+| Answer correctly to question 5, then walk away | 180 Ladder Coins banked (80 pot + 100 stake back) |
+| Use Phone a Friend and pick an agent | The hire price for that agent, and a live answer from a real AI as the agent |
+| Open the Market | "Season prize pool: 9,000 Ladder Coins", every agent's earnings and hire count, its hire price, and its shares |
+| Buy a share on any agent | "Your shares: 1" on that card, and a cut of its future hire income |
+| Make an offer on any agent | Your offer under "My offers" with a Withdraw button; the owner sees it under "Incoming offers" |
+| Buy a listed agent | The agent becomes yours, its hire income now goes to you, and you can list it for sale |
+
+
 ## Live deployment
 
 
